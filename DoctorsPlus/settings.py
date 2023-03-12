@@ -1,5 +1,4 @@
-
-
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,6 +17,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
+    'Accounts',
+    'Home',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +39,7 @@ ROOT_URLCONF = 'DoctorsPlus.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'Templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,3 +89,16 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+
+}
+
