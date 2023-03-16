@@ -57,3 +57,12 @@ In this context, Doctor'sPlus aims to provide a solution to these problems by of
 
 
 [SRS Document File Link](https://drive.google.com/file/d/14nk-Kn_QwZ1tkC7Jp8v6or0JtpStbwdU/view?usp=sharing)
+
+
+### External Interface Requirement:
+
+|User|Hardware|
+|---|---|
+| Patient | Patient can use mobile or computer and internet|
+| Doctor | Doctor can use mobile or computer and internet|
+| Admin| Need Computer and internet|
