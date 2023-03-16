@@ -1,6 +1,6 @@
 # _Doctor'sPlus_
 ## _Bringing Healthcare to Your Doorstep_
-![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)
+<!-- ![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png) -->
 ### Problem Statement
 Bangladesh is a densely populated country with a high percentage of rural areas where healthcare services are not easily accessible. The majority of the population residing in these areas are often unable to receive proper medical care due to the shortage of healthcare facilities and doctors. They often have to travel long distances to reach a healthcare facility, which is not only time-consuming but also expensive.
 
