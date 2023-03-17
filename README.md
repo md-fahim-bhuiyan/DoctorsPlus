@@ -1,6 +1,6 @@
-# _Doctor'sPlus_
-## _Bringing Healthcare to Your Doorstep_
-<!-- ![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png) -->
+# Doctor'sPlus
+## Bringing Healthcare to Your Doorstep
+Doctor'sPlus is a web-based platform that provides online medical consultations, online ordering of medicine, diagnostic services at your doorstep, and information on blood and organ donations. With Doctor'sPlus, you can easily access healthcare services, regardless of your location.
 ### Problem Statement
 Bangladesh is a densely populated country with a high percentage of rural areas where healthcare services are not easily accessible. The majority of the population residing in these areas are often unable to receive proper medical care due to the shortage of healthcare facilities and doctors. They often have to travel long distances to reach a healthcare facility, which is not only time-consuming but also expensive.
 
@@ -66,3 +66,11 @@ In this context, Doctor'sPlus aims to provide a solution to these problems by of
 | Patient | Patient can use mobile or computer and internet|
 | Doctor | Doctor can use mobile or computer and internet|
 | Admin| Need Computer and internet|
+
+### Technologies Used :
+
+```sh
+Backend Tchnologies: Python, Django
+Front-end Tchnologies: Html, CSS, JavaScript
+```
+
