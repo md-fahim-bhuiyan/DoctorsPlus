@@ -56,7 +56,7 @@ In this context, Doctor'sPlus aims to provide a solution to these problems by of
 | Support & Maintenance | The system must have a support and maintenance plan to provide ongoing technical support to users.|
 
 
-[SRS Document File Link](https://drive.google.com/file/d/14nk-Kn_QwZ1tkC7Jp8v6or0JtpStbwdU/view?usp=sharing)
+[Software Requirements Specification Document](https://drive.google.com/file/d/14nk-Kn_QwZ1tkC7Jp8v6or0JtpStbwdU/view?usp=sharing)
 
 
 ### External Interface Requirement:
@@ -69,8 +69,8 @@ In this context, Doctor'sPlus aims to provide a solution to these problems by of
 
 ### Technologies Used :
 
-```sh
-Backend Tchnologies: Python, Django
-Front-end Tchnologies: Html, CSS, JavaScript
-```
+- **Backend Tchnologies:** Python/Django
+- **Front-end Tchnologies:** Html/CSS/JavaScript
+- **Database:** SQL
+
 
