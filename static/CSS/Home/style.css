@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Kenia&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.nav1 {
+    height: 50px;
+    background-color: #1C3961;
+    display: flex;
+    padding-top: 25px;
+    padding-bottom: 50px;
+    font-size: 20px;
+}
+
+.part1 {
+    width: 30%;
+}
+
+.nav1 .part1 ul {
+    list-style: none;
+    text-align: center;
+}
+
+.nav1 .part1 li {
+    display: inline-block;
+}
+
+.nav1 .part1 .email a {
+    text-decoration: none;
+    color: white;
+}
+
+.part2 {
+    width: 50%;
+}
+
+.part2 ul {
+    list-style: none;
+    text-align: center;
+}
+
+.part2 li {
+    padding-left: 20px;
+    display: inline-block;
+}
+
+.part2 li a {
+    color: white;
+}
+
+.part3 {
+    width: 20%;
+}
+
+.part3 a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav2 {
+    height: 50px;
+    background-color: white;
+    display: flex;
+    font-size: 20px;
+}
+#bg{
+  background-size: 1800px 900px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
+}
+.title {
+    padding-top: 25px;
+    width: 40%;
+    font-family: 'Kenia', cursive;
+    text-align: center;
+    font-size: 30px;
+}
+
+.title a {
+    color: rgb(14, 13, 13);
+    text-decoration: none;
+}
+
+
+.link {
+    width: 60%;
+    padding-top: 30px;
+}
+
+.link ul li {
+    padding-left: 5%;
+    display: inline-block;
+    text-transform: uppercase;
+
+}
+
+.link ul li a {
+    font-family: 'Nerko One', cursive;
+    text-decoration: none;
+    color: black;
+}
+
+.title_card {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card_item:hover {
+    border: 1px solid green;
+}
+
+
+
+
+.text_part
+{
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    font-size: 20px;
+}
+
+.quary a
+{
+    text-decoration: none;
+    color: black;
+}
+
+.footer
+{
+    height: 400px;
+    background-color: black;
+    color: white;
+    /* text-transform: uppercase; */
+    display: flex;
+    margin: 0px 20px;
+    font-size: large;
+}
+
+.about
+{
+    width: 35%;
+    padding: 20px;
+    padding-left: 10%;
+}
+
+.about_hr
+{
+    width: 50px;
+    border: 2px solid white;
+
+}
+.normal_hr
+{
+    border: 1px solid white;
+}
+.about a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.about a:hover
+{
+    color: white;
+}
+
+.link_im
+{
+    width: 25%;
+    padding: 20px;
+    padding-left: 10%;
+}
+
+.link_hr
+{
+    width: 50%;
+    border: 2px solid white;
+}
+
+.link_im a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.contuct_us
+{
+    width: 40%;
+    padding: 20px;
+    padding-left: 10%;
+}
+.copyright
+{
+    height: 50px;
+    background-color: black;
+    color: white;
+    margin: 0px 20px;
+    font-size: large;
+}
+.copy_hr
+{
+    border: 1px solid white;
+}

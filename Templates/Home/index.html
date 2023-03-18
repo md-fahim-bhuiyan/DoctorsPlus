@@ -1,12 +1,141 @@
+{% load static %}
+{% static "images" as baseUrl %}
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor'sPlus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'CSS/Home/style.css'%}">
+    <title>Doctor'SPlus</title>
 </head>
 <body>
-    Home page
+    <div class="nav1">
+        <div class="part1">
+            <div class="email">
+                <ul>
+                    <li>
+                        <a href="mailto:fahimbhuiyan05@gmail.com" itemprop="email"><i class="fas fa-envelope"></i>
+                            fahimbhuiyan05@gmail.com</a>
+                    </li>
+                    <li style="padding-left: 5px;">
+                        <a href="tel:+8801517328176" itemprop="telephone"><i class="fas fa-phone"></i>
+                            +8801517328176</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="part2">
+            <ul>
+                <li><a href=""><i class="fab fa-viber"></i></a></li>
+                <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                <li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+                <li><a href=""><i class="fab fa-facebook-messenger"></i></a></li>
+                <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                <li><a href=""><i class="fab fa-skype"></i></a></li>
+            </ul>
+        </div>
+        <div class="part3">
+          {% if user.is_authenticated %}
+          <i class="fas fa-user" style="color:white"></i><a href='profile'> {{user.name  |upper}} </a>  &nbsp;
+          <i class="fas fa-sign-out-alt" style="color:white"></i><a href="logout">LOGOUT</a>
+          {%else%}
+          <i class="fas fa-sign-in-alt" style="color:white"></i><a href="login"> Login</a>&nbsp;
+          <i class="fas fa-user-plus"style="color:white"></i><a href="register"> Register</a>
+          {%endif%}
+        </div>
+    </div>
+
+    <div class="nav2" id="bg" style="background-image: url('{% static "image/Nav1.png"%}')";>
+        <div class="title">
+            <a href="home">Doctor'SPlus   </a>
+        </div>
+        <div class="link">
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><a href="index">Flight</a></li>
+                <li><a href="hotel">Hotel</a></li>
+                <li><a href="aboutus">About</a></li>
+                <li><a href="contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="quary">
+        <div class="text_part">
+            Any Queries? Ask us a question at 
+            <a href="tel:+8801517328176" itemprop="telephone"><i class="fas fa-phone"></i> +8801517328176 </a>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="about">
+            About
+            <hr class="about_hr">
+            <p><samp class="title">GoAnywhere</samp> is a Online Travel Agency. </p>
+            <hr class="normal_hr">
+            <a href="tel:+8801517328176" itemprop="telephone"><i class="fas fa-phone"></i>
+                +8801517328176</a>
+            <hr class="normal_hr">
+            <a href="mailto:fahimbhuiyan05@gmail.com" itemprop="email"><i class="fas fa-envelope"></i>
+                fahimbhuiyan05@gmail.com</a>
+                <hr class="normal_hr">
+                <i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh
+        </div>
+        <div class="link_im">
+            Importent Link
+            <hr class="link_hr">
+            <ul type="square">
+                <li><a href="home">Home</a></li>
+                <li><a href="index">Flight</a></li>
+                <li><a href="hotel">Hotel</a></li>
+                <li><a href="flight/bookings">My Booking</a></li>
+                <li><a href="aboutus">About Us</a></li>
+                <li><a href="privacy-policy">Privacy Policy</a></li>
+                <li><a href="terms-and-conditions">Terms & Conditions</a></li>
+                <li><a href="contuct">Contuct Us</a></li>
+            </ul>
+        </div>
+        <div class="contuct_us">
+            Contuct Us 
+            <hr class="about_hr">
+            <div>
+                <div class="contact-form-wrapper d-flex">
+                  <form action="contact" class="contact-form" method="POST">
+                    {% csrf_token %}
+                    <div>
+                      <input type="text" class="form-control rounded border-white mb-3 form-input" name="name" id="name"
+                        placeholder="Name" required>
+                    </div>
+                    <div>
+                      <input type="email" class="form-control rounded border-white mb-3 form-input" name="email" placeholder="Email"
+                        required>
+                    </div>
+                    <div>
+                      <textarea id="message" class="form-control rounded border-white mb-3 form-text-area" name="message" rows="5"
+                        cols="30" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="submit-button-wrapper">
+                      <input class="form-control rounded border-white mb-3 form-input" type="submit" value="Send">
+                    </div>
+                  </form>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <div class="copyright" style="text-align: center; padding:5px;">
+      <p style="margin: 10px 0; font-size: .8em;">&#169; {{current_year}} GoAnywhere. All rights reserved.</p>
+    </div>
+    <!-- footer -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
