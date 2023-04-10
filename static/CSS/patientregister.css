@@ -1,0 +1,42 @@
+body {
+    background: #F0F0F0;
+  }
+  
+  .container {
+    margin-top: 100px;
+    margin-bottom:30px;
+  }
+  
+  .card-header {
+    background-color: #2C3E50;
+    color: #FFF;
+    text-align: center;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    margin-bottom: 0;
+    color: red;
+  }
+  
+  .btn-primary {
+    background-color: #2C3E50;
+    border-color: #2C3E50;
+  }
+  
+  .btn-primary:hover {
+    background-color: #34495E;
+    border-color: #34495E;
+  }
+  
+  .checkbox label {
+    padding-left: 0;
+  }
+  
+  .float-right {
+    float: right;
+  }
+  
