@@ -1,5 +1,5 @@
 {% load static %}
-{% static "images" as baseUrl %}
+{% static "image" as baseUrl %}
 
 
 <!DOCTYPE html>
@@ -75,7 +75,7 @@
         </div>
         <div class="part3">
           {% if user.is_authenticated %}
-          <i class="fas fa-user" style="color:white"></i><a href='profile'> {{user.name  |upper}} </a>  &nbsp;
+          <i class="fas fa-user" style="color:white"></i><a href='profile'> {{user.username  |upper}} </a>  &nbsp;
           <i class="fas fa-sign-out-alt" style="color:white"></i><a href="logout">LOGOUT</a>
           {%else%}
           <i class="fas fa-sign-in-alt" style="color:white"></i>
@@ -98,7 +98,6 @@
           {%endif%}
         </div>
     </div>
-<div id="bg" style="background-image: url('{% static "image/Nav1.png"%}')";>
 
 
     <div class="nav2" >
@@ -123,4 +122,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js" integrity="sha512-m+U43rCfYauEXWlRO8RvF63z4Z4GllZjdbWyq3wv2Q1EYZSj+dtMyt9a8JcwsZb/kF/yH35+rQWVKu90wVhJdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </html>
-
