@@ -1,82 +1,51 @@
-{%load static%}
+{% load static %}
 {% load widget_tweaks %}
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-      
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
- 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-
-    <!-- Main CSS-->
-    <link href="{% static "css/main.css" %}"rel="stylesheet" media="all">
-    <style>
-
-    </style>
-  </head>
-  <body>
-    {% include "blood/navbar.html" %}
-
-
-
-
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <br><br><br>
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Patient Login</h2>
+<html lang="en"  dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Patient Login || Doctor'SPlus</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'CSS/patientlogin.css'%}">
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <header class="card-header">
+            <h4 class="card-title mt-2" style="color: white;">Patient Login</h4>
+          </header>
+          <article class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+              <div class="form-group">
+                <label>User Name</label>
+                {% render_field form.username|attr:'required:true'|add_class:"form-control" placeholder="User Name"%}
+              </div>
+              <div class="form-group">
+                <a class="float-right" href="#">Forgot Password?</a>
+                <label>Password</label>
+                {% render_field form.password|attr:"required:true"|add_class:"form-control" placeholder="************" %}
+              </div>
+              <div class="form-group">
+                <div class="checkbox">
+                  <label> <input type="checkbox"> Save password </label>
                 </div>
-                <div class="card-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="name">Username</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field form.username class="input--style-5"%}
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Password</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field form.password class="input--style-5" %}
-                                </div>
-                            </div>
-                        </div>
-
-
-                        
-
-                        <div>
-                            <button class="btn btn--radius-2 btn-danger" type="submit">Login</button>
-                        </div>
-                    </form>
-                    <br>
-                    <p style="text-align: center;">Does not have an account ? <a style="text-decoration: none;" href="/patient/patientsignup">Click here to register</a></p>
-
-                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                <div class="mt-2">
+              Don't have an account? <a href="/patient/patientsignup">Create new account</a>
             </div>
+              </div>
+            </form>
+          </article>
         </div>
+      </div>
     </div>
-
-{% include "blood/footer.html" %}
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-  </body>
+  </div> 
+</body>
 </html>
-<!--
-developed By : sumit kumar
-facebook : fb.com/sumit.luv
-youtube : youtube.com/lazycoders
--->

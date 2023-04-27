@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User
 # from blood import forms as bforms
 # from blood import models as bmodels
-
+from django.contrib.auth import authenticate, login
 
 def patient_signup_view(request):
     userForm=forms.PatientUserForm()
@@ -29,8 +29,17 @@ def patient_signup_view(request):
             print("save")
             my_patient_group = Group.objects.get_or_create(name='PATIENT')
             my_patient_group[0].user_set.add(user)
-        return HttpResponseRedirect('patientlogin')
+            # Log in the user and redirect to home page
+            user = authenticate(username=userForm.cleaned_data['username'],
+                                password=userForm.cleaned_data['password'])
+            login(request, user)
+            return redirect('home')
     return render(request,'patient/patientsignup.html',context=mydict)
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
 
 def patient_dashboard_view(request):
    return render(request,'patient/success.html')

@@ -1,0 +1,84 @@
+
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Tether CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/css/tether.min.css">
+
+    <link rel="stylesheet" href="{% static 'CSS/patientnav.css'%}">
+
+
+  
+</head>
+
+<body>
+{% block content %}
+  <!-- Your page content here -->
+  <div id="wrapper">
+    <div class="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+      <ul class="nav sidebar-nav">
+        <div class="sidebar-header">
+          <div class="sidebar-brand">
+            <a href="#">Doctor'sPlus</a>
+          </div>
+        </div>
+        <li><a href="#dashboard">DashBoard</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#editprofile">Edit Profile</a></li>
+        <li><a href="#doctor">Doctor</a></li>
+        <li><a href="#dagnosticSvices">Diagnostic Services</a></li>
+        <li><a href="#bloodBnk">Blood Bank</a></li>
+        <li><a href="#Medicine">Madical History</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#logout">Logout</a></li>
+      </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+      </button>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+{% endblock %}
+  <!-- /#wrapper -->
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+  <!-- Tether JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
+
+<script src="{% static 'JS/patientnav.js' %}"></script>
+</body>
+
+</html>
