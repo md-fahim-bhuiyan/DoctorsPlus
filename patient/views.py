@@ -2,23 +2,17 @@ from django.shortcuts import render,redirect,reverse
 from . import forms,models
 from django.db.models import Sum,Q
 from django.contrib.auth.models import Group
-from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
-from django.conf import settings
-from datetime import date, timedelta
-from django.core.mail import send_mail
-from django.contrib.auth.models import User
+from datetime import date
 from .models import Patient
 from .forms import PatientForm
 import datetime
+from django.contrib.auth import authenticate, login
+
 
 today = datetime.date.today()
 formatted_date = today.strftime('%Y-%m-%d')
 
-
-# from blood import forms as bforms
-# from blood import models as bmodels
-from django.contrib.auth import authenticate, login
 
 def patient_signup_view(request):
     userForm=forms.PatientUserForm()
