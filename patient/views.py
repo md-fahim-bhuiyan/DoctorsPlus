@@ -8,6 +8,14 @@ from django.conf import settings
 from datetime import date, timedelta
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+from .models import Patient
+from .forms import PatientForm
+import datetime
+
+today = datetime.date.today()
+formatted_date = today.strftime('%Y-%m-%d')
+
+
 # from blood import forms as bforms
 # from blood import models as bmodels
 from django.contrib.auth import authenticate, login
@@ -36,29 +44,47 @@ def patient_signup_view(request):
             return redirect('home')
     return render(request,'patient/patientsignup.html',context=mydict)
 
+
+def is_patient(user):
+    return user.is_authenticated and hasattr(user, 'patient')
+
+
+def calculate_age(born):
+    today = date.today()
+    age = today.year - born.year - \
+        ((today.month, today.day) < (born.month, born.day))
+    return age
+
+
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    user = request.user
+    patient = Patient.objects.get(user=user)
+    age = calculate_age(patient.date_of_birth)
+    context = {'mobile': patient.mobile, 'gender': patient.gender,'address':patient.address, 'age': age}
+    return render(request, 'profile.html', context)
+    # return render(request, 'profile.html')
+
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    patient = Patient.objects.get(user=user)
+
+    if request.method == 'POST':
+        patient_form = PatientForm(request.POST, instance=patient)
+
+        if patient_form.is_valid():
+            patient_form.save()
+            return redirect('profile')
+
+    else:
+        patient_form = PatientForm(instance=patient)
+
+    context = {'patient_form': patient_form}
+    return render(request, 'patient/edit_profile.html', context)
 
 
 def patient_dashboard_view(request):
    return render(request,'patient/success.html')
 
-
-# def make_request_view(request):
-#     request_form=bforms.RequestForm()
-#     if request.method=='POST':
-#         request_form=bforms.RequestForm(request.POST)
-#         if request_form.is_valid():
-#             blood_request=request_form.save(commit=False)
-#             blood_request.bloodgroup=request_form.cleaned_data['bloodgroup']
-#             patient= models.Patient.objects.get(user_id=request.user.id)
-#             blood_request.request_by_patient=patient
-#             blood_request.save()
-#             return HttpResponseRedirect('my-request')  
-#     return render(request,'patient/makerequest.html',{'request_form':request_form})
-
-# def my_request_view(request):
-#     patient= models.Patient.objects.get(user_id=request.user.id)
-#     blood_request=bmodels.BloodRequest.objects.all().filter(request_by_patient=patient)
-#     return render(request,'patient/my_request.html',{'blood_request':blood_request})

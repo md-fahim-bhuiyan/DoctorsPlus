@@ -82,7 +82,7 @@
           <div class="dropdown">
             <button class="dropbtn">Login</button>
             <div class="dropdown-content">
-              <a href="patientlogin">Patient</a>
+              <a href="{% url 'patientlogin' %}">Patient</a>
               <a href="#">Doctor</a>
               <a href="#">Admin</a>
             </div>
@@ -91,7 +91,7 @@
           <i class="fas fa-user-plus"style="color:white"></i><div class="dropdown">
             <button class="dropbtn">Register</button>
             <div class="dropdown-content">
-              <a href="patientregister">Patient Register</a>
+              <a href="{% url 'patientsignup' %}">Patient</a>
               <a href="#">Doctor</a>
             </div>
           </div>
@@ -107,10 +107,10 @@
         <div class="link">
             <ul>
                 <li><a href="home">Home</a></li>
-                <li><a href="index">Flight</a></li>
-                <li><a href="hotel">Hotel</a></li>
-                <li><a href="aboutus">About</a></li>
-                <li><a href="contact">Contact</a></li>
+                <li><a href="#">Flight</a></li>
+                <li><a href="#">Hotel</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </div>
     </div>       

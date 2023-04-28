@@ -15,5 +15,12 @@ class PatientForm(forms.ModelForm):
     
     class Meta:
         model=models.Patient
-        fields=['mobile']
+        fields = ['mobile', 'date_of_birth','address','gender']
+
+        widgets = {
+            'mobile': forms.TextInput(attrs={'class': 'form-control', 'id': 'mobile-field'}),
+            'date_of_birth': forms.DateInput(attrs={'class': 'form-control', 'id': 'dob-field'}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'id': 'address-field'}),
+            'gender': forms.Select(attrs={'class': 'form-control', 'id': 'gender-field'}),
+        }
 

@@ -1,26 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from .forms import PatientRegister
-
+from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'Home/index.html')
 
-# def patientregister(request):
-#     if request.method == 'POST':
-#         form = PatientRegister(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return render(request, 'success.html')
-#     else:
-#         form = PatientRegister()
-#         context = {'form': form}
-#         return render(request, 'patientregister.html', context)
+@login_required
+def profile(request):
+    return render(request, 'patient/success.html')
 
 
-# def patientlogin(request):
-#     return render (request, 'patientlogin.html')
-
+@login_required
 def logout(request):
     auth.logout(request)
     return redirect('home')

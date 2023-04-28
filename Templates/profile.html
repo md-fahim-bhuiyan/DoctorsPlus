@@ -8,7 +8,6 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Patient Profile</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="style.css">
 
       <style>
         body {
@@ -100,11 +99,11 @@
                   <h4>{{ user.first_name |upper }} {{ user.last_name |upper }}</h4>
                   <div class="row">
                   <div class="col-5 text-left"> <h6>Age:</h6></div>
-                  <div class="col-7 text-left"> <h6>21</h6></div>
+                  <div class="col-7 text-left"> <h6>{{age}}</h6></div>
                   </div>
                   <div class="row">
                   <div class="col-5 text-left"> <h6>Gender:</h6></div>
-                  <div class="col-7 text-left"> <h6>Male</h6></div>
+                  <div class="col-7 text-left"> <h6>{{gender}}</h6></div>
                   </div>
                   <div class="row">
                   <div class="col-5 text-left"> <h6>Email:</h6></div>
@@ -112,14 +111,14 @@
                   </div>
                   <div class="row">
                   <div class="col-5 text-left"> <h6>Phone:</h6></div>
-                  <div class="col-7 text-left"> <h6>+8801517328176</h6></div>
+                  <div class="col-7 text-left"> <h6>{{ mobile }}</h6></div>
                   </div>
                   <div class="row">
                   <div class="col-5 text-left"> <h6>Address:</h6></div>
-                  <div class="col-7 text-left"> <h6>123 Main St, Anytown USA</h6></div>
+                  <div class="col-7 text-left"> <h6>{{address}}</h6></div>
                   </div>
                   <br>
-                  <a href="#" class="btn btn-primary">Edit Profile</a>
+                  <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
                 </div>
               </article> <!-- card-body end .// -->
             </div> <!-- card.// -->

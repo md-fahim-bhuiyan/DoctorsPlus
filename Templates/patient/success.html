@@ -8,5 +8,11 @@
 </head>
 <body>
     <h1>Login Successful...................</h1>
+
+    <script>
+        setTimeout(function () {
+            window.location.href = "{% url 'profile' %}";
+        }, 100);
+    </script>
 </body>
 </html>
