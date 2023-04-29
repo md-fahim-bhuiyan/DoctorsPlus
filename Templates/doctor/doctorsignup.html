@@ -1,150 +1,97 @@
 {%load static%}
 {% load widget_tweaks %}
-<!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-      
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
- 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/patientregister.css'%}">
+</head>
 
-    <!-- Main CSS-->
-
-    <link href="{% static "CSS/main.css" %}"rel="stylesheet" media="all">
-    <style>
-
-    </style>
-  </head>
-  <body>
-
-
-
-
-
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <br><br><br>
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Donor Signup</h2>
-                </div>
-                <div class="card-body">
-                    <form method="POST" autocomplete="off" enctype="multipart/form-data">
-                        {% csrf_token %}
-
-                        <div class="form-row">
-                            <div class="name">First Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.first_name|attr:'required:true'  class="input--style-5"  %}
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <header class="card-header">
+                        <h4 class="card-title mt-2">Doctor Registration Form</h4>
+                    </header>
+                    <article class="card-body">
+                        <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                {% render_field userForm.email|attr:'required:true'|add_class:"form-control" placeholder="Email"%}
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">User Name</label>
+                                {% render_field userForm.username|attr:'required:true'|add_class:"form-control" placeholder="User Name"%}
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Mobile Number</label>
+                                {% render_field doctorForm.mobile|attr:'required:true'|add_class:"form-control" placeholder="Mobile Number"%}
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>First Name</label>
+                                    {% render_field userForm.first_name|attr:"required:true"|add_class:"form-control" placeholder="First Name" %}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Last Name</label>
+                                    {% render_field userForm.last_name|attr:"required:true"|add_class:"form-control" placeholder="Last Name" %}
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-row">
-                            <div class="name">Last Name</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.last_name|attr:'required:true'  class="input--style-5"  %}
+
+                            <div class="form-group">
+                                <label>BM&amp;DC Registration Number</label>
+                                {% render_field doctorForm.bmdc|attr:'required:true'|add_class:"form-control" placeholder="BM&DC Registration Number"%}
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date Of Birth</label>
+                                {% render_field doctorForm.date_of_birth|attr:"required:true"|add_class:"form-control" placeholder="YYYY-MM-DD" %}
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password</label>
+                                {% render_field userForm.password|attr:"required:true"|add_class:"form-control" placeholder="************" %}
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="********" name="confirm_password" required>
+                            </div>
+                            <input type="hidden" name="{{ doctorForm.address.name }}" value="Bangladesh">
+                            <input type="hidden" name="{{ patientForm.gender.name }}" value="Male">
+                            <div class="form-group">
+                                <button type="submit" value="Send" class="btn btn-primary btn-block"> Register </button>
+                                <div class="mt-2">
+                                    Already have an account? <a href="/doctor/doctorlogin">Login</a>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Username</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.username|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-  
-                        <div class="form-row">
-                            <div class="name">Password</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field userForm.password|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="form-row">
-                            <div class="name">Blood Group</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="bloodgroup">
-                                            <option disabled="disabled" selected="selected">Choose option</option>
-                                            <option>O+</option>
-                                            <option>O-</option>
-                                            <option>A+</option>
-                                            <option>A-</option>
-                                            <option>B+</option>
-                                            <option>B-</option>
-                                            <option>AB+</option>
-                                            <option>AB-</option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-row">
-                            <div class="name">Address</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field doctorForm.address|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Mobile</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field doctorForm.mobile|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="name">Profile Pic</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    {% render_field doctorForm.profile_pic|attr:'required:true'  class="input--style-5"  %}
-                                </div>
-                            </div>
-                        </div>
-  
-  
-
-                        <div>
-                            <button class="btn btn--radius-2 btn-danger" type="submit">Register</button>
-                        </div>
-                    </form>
-                    <br>
-                    <p style="text-align: center;">Already have an account ? <a style="text-decoration: none;" href="/donor/donorlogin">Click here to login</a></p>
-
+                        </form>
+                    </article>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        const passwordField = document.querySelector('input[name="password"]');
+        const confirmPasswordField = document.querySelector('input[name="confirm_password"]');
 
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        confirmPasswordField.addEventListener('input', () => {
+            if (passwordField.value !== confirmPasswordField.value) {
+                confirmPasswordField.setCustomValidity("Passwords don't match");
+            } else {
+                confirmPasswordField.setCustomValidity('');
+            }
+        });
+    </script>
+</body>
 
-  </body>
 </html>

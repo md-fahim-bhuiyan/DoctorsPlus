@@ -1,0 +1,12 @@
+{% extends 'patient/base.html' %}
+
+{% block content %}
+<h1>Edit Profile</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ doctor_form.as_p }}
+
+    <button type="submit">Save Changes</button>
+</form>
+{% endblock %}

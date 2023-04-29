@@ -7,7 +7,7 @@ from . import models
 class DoctorUserForm(forms.ModelForm):
     class Meta:
         model=User
-        fields=['first_name','last_name','username','password']
+        fields = ['first_name', 'last_name', 'username', 'password', 'email']
         widgets = {
         'password': forms.PasswordInput()
         }
@@ -15,4 +15,7 @@ class DoctorUserForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model=models.Doctor
-        fields=['bloodgroup','address','mobile','profile_pic']
+        fields = ['address', 'mobile', 'bmdc',
+                  'date_of_birth', 'consultation_fee']
+
+        

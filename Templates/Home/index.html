@@ -75,7 +75,15 @@
         </div>
         <div class="part3">
           {% if user.is_authenticated %}
-          <i class="fas fa-user" style="color:white"></i><a href='profile'> {{user.username  |upper}} </a>  &nbsp;
+          <i class="fas fa-user" style="color:white">
+          </i>
+          {% if user.patient %}
+          <a href="{% url 'profile' %}">{{user.username |upper}}</a>
+          {% elif user.doctor %}
+          <a href="{% url 'docProfile' %}">{{user.username |upper}}</a>
+          {% endif %}
+          
+          &nbsp;
           <i class="fas fa-sign-out-alt" style="color:white"></i><a href="logout">LOGOUT</a>
           {%else%}
           <i class="fas fa-sign-in-alt" style="color:white"></i>
@@ -83,16 +91,15 @@
             <button class="dropbtn">Login</button>
             <div class="dropdown-content">
               <a href="{% url 'patientlogin' %}">Patient</a>
-              <a href="#">Doctor</a>
+              <a href="{% url 'doctorlogin' %}">Doctor</a>
               <a href="#">Admin</a>
             </div>
-          </div>
-&nbsp;
+          </div>&nbsp;
           <i class="fas fa-user-plus"style="color:white"></i><div class="dropdown">
             <button class="dropbtn">Register</button>
             <div class="dropdown-content">
               <a href="{% url 'patientsignup' %}">Patient</a>
-              <a href="#">Doctor</a>
+              <a href="{% url 'doctorsignup' %}">Doctor</a>
             </div>
           </div>
           {%endif%}

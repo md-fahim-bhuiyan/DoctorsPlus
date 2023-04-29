@@ -3,15 +3,23 @@ from django.contrib.auth.models import User
 
 class Doctor(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    profile_pic= models.ImageField(upload_to='profile_pic/Doctor/',null=True,blank=True)
+    bmdc = models.CharField(max_length=10, null=False, unique=True, default='')
+    address = models.CharField(max_length=40, default='')
+    mobile = models.CharField(max_length=20, null=False, unique=True, default='')
+    date_of_birth = models.DateField(null=True, blank=True)
+    specialist = models.CharField(max_length=40, default='')
+    experience = models.CharField(max_length=2, default='')
+    hospital = models.CharField(max_length=40, null=True, blank=True)
+    consultation_fee = models.CharField(max_length=40, default='')
+    bio = models.CharField(max_length=200, default='')
+    gender_choices = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('Other', 'Other'),
+    )
+    gender = models.CharField(
+        max_length=6, choices=gender_choices, null=True, blank=True)
 
-    
-    bloodgroup = models.CharField(max_length=10, null=True, blank=True, default='O+')
-    
-
-    address = models.CharField(max_length=40)
-    mobile = models.CharField(max_length=20,null=False)
-   
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name

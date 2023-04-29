@@ -39,7 +39,7 @@ def patient_signup_view(request):
     return render(request,'patient/patientsignup.html',context=mydict)
 
 
-def is_patient(user):
+def patient(user):
     return user.is_authenticated and hasattr(user, 'patient')
 
 
@@ -51,6 +51,7 @@ def calculate_age(born):
 
 
 @login_required
+@user_passes_test(Patient)
 def profile(request):
     user = request.user
     patient = Patient.objects.get(user=user)
@@ -61,6 +62,7 @@ def profile(request):
 
 
 @login_required
+@user_passes_test(Patient)
 def edit_profile(request):
     user = request.user
     patient = Patient.objects.get(user=user)
@@ -77,6 +79,12 @@ def edit_profile(request):
 
     context = {'patient_form': patient_form}
     return render(request, 'patient/edit_profile.html', context)
+
+
+@login_required
+@user_passes_test(Patient)
+def doctor_search(request):
+    return render(request, 'patient/doctor_search.html')
 
 
 def patient_dashboard_view(request):

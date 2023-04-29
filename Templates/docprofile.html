@@ -1,0 +1,127 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Doctor Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/docprofile.css'%}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <header class="card-header">
+                        <h4 class="card-title mt-2">Doctor Profile</h4>
+                    </header>
+                    <article class="card-body">
+                        <div class="profile-photo">
+                            <img src="https://via.placeholder.com/150" alt="Profile Photo">
+                        </div>
+                        <div class="profile-info">
+                            <h4>DR. {{ user.first_name |upper }} {{ user.last_name |upper }}</h4>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Specialist:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{specialist}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>BM&amp;DC Reg No:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{bmdc}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Age:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{age}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Gender:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{gender}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Email:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{user.email}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Phone:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{mobile}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Experience:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{experience}} Years</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Hospital:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{hospital}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Address:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>{{address}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Consultation Fee:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <h6>৳ {{fee}}</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-left">
+                                    <h6>Bio:</h6>
+                                </div>
+                                <div class="col-7 text-left">
+                                    <p>{{bio}}</p>
+                                </div>
+                            </div>
+                            <br>
+                            <a href="#" class="btn btn-primary">Edit Profile</a>
+                        </div>
+                    </article> <!-- card-body end .// -->
+                </div> <!-- card.// -->
+            </div> <!-- col.//-->
+        </div> <!-- row.//-->
+    </div>
+</body>
+
+</html>

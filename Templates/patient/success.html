@@ -9,10 +9,19 @@
 <body>
     <h1>Login Successful...................</h1>
 
-    <script>
-        setTimeout(function () {
-            window.location.href = "{% url 'profile' %}";
-        }, 100);
-    </script>
+{% if request.user.patient %}
+<script>
+    setTimeout(function () {
+        window.location.href = "{% url 'profile' %}";
+    }, 100);
+</script>
+{% elif request.user.doctor %}
+<script>
+    setTimeout(function () {
+        window.location.href = "{% url 'docProfile' %}";
+    }, 100);
+</script>
+{% endif %}
+
 </body>
 </html>
