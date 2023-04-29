@@ -1,6 +1,7 @@
 {% load static %}
+{% load widget_tweaks %}
 
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
@@ -20,32 +21,35 @@
                         <h4 class="card-title mt-2" style="color: white;">Patient Login</h4>
                     </header>
                     <article class="card-body">
-                        <form method="post" action="{% url 'patientlogin' %}">
+                        <form method="POST">
+                            {% csrf_token %}
                             <div class="form-group">
-                                <label>Email address</label>
-                                <input type="email" class="form-control" placeholder="Email" required>
-                            </div> <!-- form-group// -->
+                                <label>User Name</label>
+                                {% render_field form.username|attr:'required:true'|add_class:"form-control"
+                                placeholder="User Name"%}
+                            </div>
                             <div class="form-group">
                                 <a class="float-right" href="#">Forgot Password?</a>
                                 <label>Password</label>
-                                <input type="password" class="form-control" placeholder="********" required>
-                            </div> <!-- form-group// -->
+                                {% render_field form.password|attr:"required:true"|add_class:"form-control"
+                                placeholder="************" %}
+                            </div>
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label> <input type="checkbox"> Save password </label>
-                                </div> <!-- checkbox .// -->
-                            </div> <!-- form-group// -->
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block"> Login </button>
                                 <div class="mt-2">
-                                    Don't have an account? <a href="patientregister">Create new account</a>
+                                    Don't have an account? <a href="/doctor/doctorsignup">Create new account</a>
                                 </div>
-                            </div> <!-- form-group// -->
+                            </div>
                         </form>
-                    </article> <!-- card-body end .// -->
-                </div> <!-- card.// -->
-            </div> <!-- col.//-->
-        </div> <!-- row.//-->
+                    </article>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

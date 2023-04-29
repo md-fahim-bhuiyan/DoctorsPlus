@@ -1,0 +1,90 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'CSS/patientregister.css'%}">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <header class="card-header">
+            <h4 class="card-title mt-2">Doctor Registration Form</h4>
+          </header>
+          <article class="card-body">
+            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <label>Email Address</label>
+                {% render_field userForm.email|attr:'required:true'|add_class:"form-control" placeholder="Email"%}
+              </div>
+              <div class="form-group">
+                <label for="phone">User Name</label>
+                {% render_field userForm.username|attr:'required:true'|add_class:"form-control" placeholder="User Name"%}
+              </div>
+              <div class="form-group">
+                <label for="phone">Mobile Number</label>
+                {% render_field patientForm.mobile|attr:'required:true'|add_class:"form-control" placeholder="Mobile Number"%}
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>First Name</label>
+                    {% render_field userForm.first_name|attr:"required:true"|add_class:"form-control" placeholder="First Name" %}
+                  </div>
+                <div class="form-group col-md-6">
+                  <label>Last Name</label>
+                  {% render_field userForm.last_name|attr:"required:true"|add_class:"form-control" placeholder="Last Name" %}
+                </div>
+              </div>
+
+                            <div class="form-group">
+                              <label>Date Of Birth</label>
+                              {% render_field patientForm.date_of_birth|attr:"required:true"|add_class:"form-control" placeholder="YYYY-MM-DD" %}
+                            </div>
+
+              <div class="form-group">
+                <label>Password</label>
+                {% render_field userForm.password|attr:"required:true"|add_class:"form-control" placeholder="************" %}
+              </div>
+              <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="********" name="confirm_password" required>
+              </div>
+            <input type="hidden" name="{{ patientForm.address.name }}" value="Bangladesh">
+            <input type="hidden" name="{{ patientForm.gender.name }}" value="Male">
+              <div class="form-group">
+                <button type="submit" value="Send" class="btn btn-primary btn-block"> Register </button>
+                <div class="mt-2">
+                  Already have an account? <a href="/doctor/doctorlogin">Login</a>
+                </div>
+              </div>
+            </form>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const passwordField = document.querySelector('input[name="password"]');
+    const confirmPasswordField = document.querySelector('input[name="confirm_password"]');
+
+    confirmPasswordField.addEventListener('input', () => {
+      if (passwordField.value !== confirmPasswordField.value) {
+        confirmPasswordField.setCustomValidity("Passwords don't match");
+      } else {
+        confirmPasswordField.setCustomValidity('');
+      }
+    });
+  </script>
+</body>
+
+</html>
