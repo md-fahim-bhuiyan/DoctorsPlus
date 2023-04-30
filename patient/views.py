@@ -82,24 +82,23 @@ def edit_profile(request):
     context = {'patient_form': patient_form}
     return render(request, 'patient/edit_profile.html', context)
 
-
+@login_required
+@user_passes_test(Patient)
 def search_results(request):
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
             search_query = form.cleaned_data['search_query']
             doctors = Doctor.objects.filter(specialist__icontains=search_query)
+            print(doctors)
             return render(request, 'patient/search_results.html', {'doctors': doctors})
     else:
         form = SearchForm()
     return render(request, 'patient/search.html', {'form': form})
 
-@login_required
-@user_passes_test(Patient)
-def doctor_search(request):
-    return render(request, 'patient/doctor_search.html')
+
 
 
 def patient_dashboard_view(request):
-   return render(request,'patient/success.html')
+   return render(request,'success.html')
 

@@ -27,4 +27,4 @@ class Doctor(models.Model):
     def get_instance(self):
         return self
     def __str__(self):
-        return self.user.first_name
+        return self.user.first_name + " "+self.user.last_name

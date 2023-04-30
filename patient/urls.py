@@ -9,7 +9,6 @@ urlpatterns = [
     # path('patient/success/', views.patient_success_view, name='patient_success'),
     path('accounts/profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
-    path('doctor_search', views.doctor_search, name='doctor_search'),
     path('search/', views.search_results, name='search_results'),
 
     # path('accounts/profile/<int:pk>/', profile, name='profile'),

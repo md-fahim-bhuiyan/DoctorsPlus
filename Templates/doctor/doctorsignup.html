@@ -66,8 +66,13 @@
                                 <label>Confirm Password</label>
                                 <input type="password" class="form-control" placeholder="********" name="confirm_password" required>
                             </div>
-                            <input type="hidden" name="{{ doctorForm.address.name }}" value="Bangladesh">
-                            <input type="hidden" name="{{ patientForm.gender.name }}" value="Male">
+                            <input type="hidden" name="{{ doctorForm.address.name }}" value="None">
+                            <input type="hidden" name="{{ doctorForm.gender.name }}" value="Male">
+                            <input type="hidden" name="{{ doctorForm.bio.name }}" value="None">
+                            <input type="hidden" name="{{ doctorForm.consultation_fee.name }}" value="0">
+                            <input type="hidden" name="{{ doctorForm.specialist.name }}" value="None">
+                            <input type="hidden" name="{{ doctorForm.experience.name }}" value="0">
+                            <input type="hidden" name="{{ doctorForm.hospital.name }}" value="none">
                             <div class="form-group">
                                 <button type="submit" value="Send" class="btn btn-primary btn-block"> Register </button>
                                 <div class="mt-2">
