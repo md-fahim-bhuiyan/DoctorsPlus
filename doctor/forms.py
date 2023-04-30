@@ -16,6 +16,6 @@ class DoctorForm(forms.ModelForm):
     class Meta:
         model=models.Doctor
         fields = ['address', 'mobile', 'bmdc',
-                  'date_of_birth', 'consultation_fee']
+                  'date_of_birth', 'consultation_fee', 'specialist', 'experience', 'hospital', 'bio', 'gender']
 
         

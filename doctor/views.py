@@ -44,7 +44,7 @@ def docProfile(request):
     doctor = Doctor.objects.get(user=user)
     age = calculate_age(doctor.date_of_birth)
     context = {'mobile': doctor.mobile, 'specialist': doctor.specialist,
-               'bmdc': doctor.bmdc, 'gender': doctor.gender, 'address': doctor.address,'hospital': doctor.hospital, 'fee':doctor.consultation_fee, 'bio':doctor.bio, 'age': age}
+               'bmdc': doctor.bmdc, 'gender': doctor.gender, 'address': doctor.address, 'hospital': doctor.hospital, 'experience':doctor.experience, 'fee': doctor.consultation_fee, 'bio': doctor.bio, 'age': age}
     return render(request, 'docprofile.html', context)
 
 

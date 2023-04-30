@@ -24,3 +24,6 @@ class PatientForm(forms.ModelForm):
             'gender': forms.Select(attrs={'class': 'form-control', 'id': 'gender-field'}),
         }
 
+
+class SearchForm(forms.Form):
+    search_query = forms.CharField(label='Search Query', max_length=100)

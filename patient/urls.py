@@ -10,8 +10,10 @@ urlpatterns = [
     path('accounts/profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('doctor_search', views.doctor_search, name='doctor_search'),
-    # path('accounts/profile/<int:pk>/', profile, name='profile'),
+    path('search/', views.search_results, name='search_results'),
 
+    # path('accounts/profile/<int:pk>/', profile, name='profile'),
+    # path('search/', views.search_doctors, name='search_doctors'),
     path('patient-dashboard', views.patient_dashboard_view,name='patient-dashboard'),
     # path('logout', views.logout, name='logout'),
     # path('make-request', views.make_request_view,name='make-request'),

@@ -1,3 +1,4 @@
+from .forms import SearchForm
 from django.shortcuts import render,redirect,reverse
 from . import forms,models
 from django.db.models import Sum,Q
@@ -8,7 +9,8 @@ from .models import Patient
 from .forms import PatientForm
 import datetime
 from django.contrib.auth import authenticate, login
-
+from doctor.models import Doctor
+from django.http import HttpResponse
 
 today = datetime.date.today()
 formatted_date = today.strftime('%Y-%m-%d')
@@ -80,6 +82,17 @@ def edit_profile(request):
     context = {'patient_form': patient_form}
     return render(request, 'patient/edit_profile.html', context)
 
+
+def search_results(request):
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            search_query = form.cleaned_data['search_query']
+            doctors = Doctor.objects.filter(specialist__icontains=search_query)
+            return render(request, 'patient/search_results.html', {'doctors': doctors})
+    else:
+        form = SearchForm()
+    return render(request, 'patient/search.html', {'form': form})
 
 @login_required
 @user_passes_test(Patient)
