@@ -8,7 +8,7 @@ urlpatterns = [
     path('patientsignup', views.patient_signup_view,name='patientsignup'),
     # path('patient/success/', views.patient_success_view, name='patient_success'),
     path('accounts/profile/', views.profile, name='profile'),
-    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/edit/', views.patient_edit_profile,name='patient_edit_profile'),
     path('search/', views.search_results, name='search_results'),
 
     # path('accounts/profile/<int:pk>/', profile, name='profile'),

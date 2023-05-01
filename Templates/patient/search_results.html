@@ -39,6 +39,7 @@
 </div>
 {% empty %}
 <p>No doctors found.</p>
+<a href="{% url 'search_results'%}" class="btn btn-primary">Search Again</a>
 {% endfor %}
 
 </ul>

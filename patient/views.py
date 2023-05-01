@@ -65,7 +65,7 @@ def profile(request):
 
 @login_required
 @user_passes_test(Patient)
-def edit_profile(request):
+def patient_edit_profile(request):
     user = request.user
     patient = Patient.objects.get(user=user)
 
