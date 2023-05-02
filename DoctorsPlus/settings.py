@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'patient',
     'doctor',
     'prescription',
+    'bloodbank',
 ]
 
 MIDDLEWARE = [
@@ -104,4 +105,3 @@ REST_FRAMEWORK = {
     ),
 
 }
-
