@@ -24,8 +24,6 @@ INSTALLED_APPS = [
     'Home',
     'patient',
     'doctor',
-    'prescription',
-    'bloodbank',
 ]
 
 MIDDLEWARE = [
