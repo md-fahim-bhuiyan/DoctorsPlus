@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
+from doctor.models import Doctor
 
 class Patient(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE, unique=True)
@@ -21,3 +23,12 @@ class Patient(models.Model):
         return self.user.first_name+" "+self.user.last_name
     def __str__(self):
         return self.user.first_name+" "+self.user.last_name
+
+
+class Appointment(models.Model):
+    appointment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    patient_name = models.CharField(max_length=100)
+    appointment_date = models.DateField()
+    appointment_time = models.TimeField()
+    # fee = models.IntegerField()

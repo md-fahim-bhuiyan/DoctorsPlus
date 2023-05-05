@@ -1,0 +1,54 @@
+{% extends 'patient/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="text-center">Book Appointment</h1>
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="{{ form.appointment_date.id_for_label }}">Appointment Date:</label>
+                {% render_field form.appointment_date|add_class:"form-control"|attr:"required:true" placeholder="YYYY-MM-DD" %}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.appointment_time.id_for_label }}">Appointment Time:</label>
+                {% render_field form.appointment_time|add_class:"form-control"|attr:"required:true" %}
+              </div>
+              <div class="row">
+                
+              
+              <div class="form-group col-md-6">
+                <label for="{{ form.doctor.id_for_label }}">Doctor: {{ form.doctor.value }}</label>
+                {% render_field form.doctor|add_class:"form-control" %}
+              </div>
+                </div>
+
+              <div class="form-group">
+                <label for="{{ form.patient_name.id_for_label }}">Patient Name:</label>
+                {% render_field form.patient_name|add_class:"form-control" %}
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Payment Process</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
+
+<style>
+  label {
+    font-weight: bold;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+</style>

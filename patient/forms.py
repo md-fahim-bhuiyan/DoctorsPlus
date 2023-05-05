@@ -27,3 +27,15 @@ class PatientForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search_query = forms.CharField(label='Search Query', max_length=100)
+
+class AppointmentForm(forms.Form):
+    appointment_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    appointment_time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'))
+    doctor = forms.CharField(widget=forms.HiddenInput())
+    patient_name = forms.CharField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'initial' in kwargs:
+            initial = kwargs['initial']
+            self.fields['doctor'].initial = initial['doctor']

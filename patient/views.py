@@ -11,6 +11,8 @@ import datetime
 from django.contrib.auth import authenticate, login
 from doctor.models import Doctor
 from django.http import HttpResponse
+from .forms import AppointmentForm
+from .models import Appointment
 
 today = datetime.date.today()
 formatted_date = today.strftime('%Y-%m-%d')
@@ -102,3 +104,24 @@ def search_results(request):
 def patient_dashboard_view(request):
    return render(request,'success.html')
 
+from django.contrib import messages
+
+def book_appointment(request, doctor_pk, doctor_name):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            appointment_date = form.cleaned_data['appointment_date']
+            appointment_time = form.cleaned_data['appointment_time']
+            patient_name = form.cleaned_data['patient_name']
+            doctor = Doctor.objects.get(pk=doctor_pk)
+            appointment = Appointment(appointment_date=appointment_date, appointment_time=appointment_time, doctor=doctor, patient_name=patient_name)
+            appointment.save()
+            messages.success(request, 'Appointment has been booked successfully!')
+            return redirect('payment')
+    else:
+        form = AppointmentForm(initial={'doctor': doctor_name})
+    return render(request, 'patient/book_appointment.html', {'form': form})
+
+
+def payment(request):
+    return render(request, 'patient/appointment.html')
