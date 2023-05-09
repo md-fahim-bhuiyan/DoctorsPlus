@@ -125,3 +125,7 @@ def book_appointment(request, doctor_pk, doctor_name):
 
 def payment(request):
     return render(request, 'patient/appointment.html')
+
+
+def bloodbank(request):
+    return render(request, 'bloodbank/index.html')
