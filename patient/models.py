@@ -48,6 +48,7 @@ BLOOD_GROUPS = [
 ]
 
 class DonationRequest(models.Model):
+    doner_name = models.CharField(max_length=50, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     blood_group = models.CharField(max_length=3, choices=BLOOD_GROUPS)
     units_required = models.PositiveIntegerField()

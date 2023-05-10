@@ -45,10 +45,11 @@ class AppointmentForm(forms.Form):
 class DonationRequestForm(forms.ModelForm):
     class Meta:
         model = DonationRequest
-        fields = ['blood_group', 'units_required', 'location', 'contact_number']
+        fields = ['doner_name','blood_group', 'units_required', 'location', 'contact_number']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['doner_name'].widget.attrs.update({'class': 'form-control'})
         self.fields['blood_group'].widget.attrs.update({'class': 'form-control'})
         self.fields['units_required'].widget.attrs.update({'class': 'form-control'})
         self.fields['location'].widget.attrs.update({'class': 'form-control'})
