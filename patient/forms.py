@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
+from .models import DonationRequest
 
 
 class PatientUserForm(forms.ModelForm):
@@ -39,3 +40,16 @@ class AppointmentForm(forms.Form):
         if 'initial' in kwargs:
             initial = kwargs['initial']
             self.fields['doctor'].initial = initial['doctor']
+
+
+class DonationRequestForm(forms.ModelForm):
+    class Meta:
+        model = DonationRequest
+        fields = ['blood_group', 'units_required', 'location', 'contact_number']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['blood_group'].widget.attrs.update({'class': 'form-control'})
+        self.fields['units_required'].widget.attrs.update({'class': 'form-control'})
+        self.fields['location'].widget.attrs.update({'class': 'form-control'})
+        self.fields['contact_number'].widget.attrs.update({'class': 'form-control'})

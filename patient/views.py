@@ -13,6 +13,9 @@ from doctor.models import Doctor
 from django.http import HttpResponse
 from .forms import AppointmentForm
 from .models import Appointment
+from django.contrib import messages
+from .forms import DonationRequestForm
+from .models import DonationRequest
 
 today = datetime.date.today()
 formatted_date = today.strftime('%Y-%m-%d')
@@ -99,12 +102,10 @@ def search_results(request):
     return render(request, 'patient/search.html', {'form': form})
 
 
-
-
 def patient_dashboard_view(request):
    return render(request,'success.html')
 
-from django.contrib import messages
+
 
 def book_appointment(request, doctor_pk, doctor_name):
     if request.method == 'POST':
@@ -129,3 +130,39 @@ def payment(request):
 
 def bloodbank(request):
     return render(request, 'bloodbank/index.html')
+
+
+
+@login_required
+def create_donation_request(request):
+    if request.method == 'POST':
+        form = DonationRequestForm(request.POST)
+        if form.is_valid():
+            donation_request = form.save(commit=False)
+            donation_request.user = request.user
+            donation_request.save()
+            messages.success(request, 'Your donation request has been submitted.')
+            return redirect('home')
+    else:
+        form = DonationRequestForm()
+    return render(request, 'bloodbank/create_donation_request.html', {'form': form})
+
+@login_required
+def view_donation_requests(request):
+    donation_requests = DonationRequest.objects.all().order_by('-created_at')
+    return render(request, 'bloodbank/view_donation_requests.html', {'donation_requests': donation_requests})
+
+@login_required
+def approve_donation_request(request, pk):
+    donation_request = DonationRequest.objects.get(pk=pk)
+    donation_request.is_approved = True
+    donation_request.save()
+    messages.success(request, 'Donation request has been approved.')
+    return redirect('view_donation_requests')
+
+@login_required
+def reject_donation_request(request, pk):
+    donation_request = DonationRequest.objects.get(pk=pk)
+    donation_request.delete()
+    messages.success(request, 'Donation request has been rejected.')
+    return redirect('view_donation_requests')

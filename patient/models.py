@@ -32,3 +32,26 @@ class Appointment(models.Model):
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
     # fee = models.IntegerField()
+
+
+
+
+BLOOD_GROUPS = [
+    ('A+', 'A+'),
+    ('A-', 'A-'),
+    ('B+', 'B+'),
+    ('B-', 'B-'),
+    ('AB+', 'AB+'),
+    ('AB-', 'AB-'),
+    ('O+', 'O+'),
+    ('O-', 'O-')
+]
+
+class DonationRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blood_group = models.CharField(max_length=3, choices=BLOOD_GROUPS)
+    units_required = models.PositiveIntegerField()
+    location = models.CharField(max_length=200)
+    contact_number = models.CharField(max_length=20)
+    is_approved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)

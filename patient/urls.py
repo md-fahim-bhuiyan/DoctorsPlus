@@ -13,5 +13,9 @@ urlpatterns = [
     path('payment', views.payment, name='payment'),
     path('patient-dashboard', views.patient_dashboard_view,name='patient-dashboard'),
     path('bloodbank', views.bloodbank, name='bloodbank'),
+    path('donation/request/', views.create_donation_request, name='create_donation_request'),
+    path('donation/requests/', views.view_donation_requests, name='view_donation_requests'),
+    path('donation/requests/<int:pk>/approve/', views.approve_donation_request, name='approve_donation_request'),
+    path('donation/requests/<int:pk>/reject/', views.reject_donation_request, name='reject_donation_request'),
 
 ]
