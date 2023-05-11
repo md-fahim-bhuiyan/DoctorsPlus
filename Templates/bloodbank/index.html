@@ -1,9 +1,8 @@
 {% load static %}
 {% static "Image" as baseUrl %}
-
-<!DOCTYPE html>
+{% if request.user.patient %}
 <html lang="en">
-
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,3 +43,7 @@
 </body>
 
 </html>
+
+{% else %}
+{% include "patient/404.html" %}
+{% endif %}

@@ -147,10 +147,12 @@ def create_donation_request(request):
         form = DonationRequestForm()
     return render(request, 'bloodbank/create_donation_request.html', {'form': form})
 
+
 @login_required
 def view_donation_requests(request):
     donation_requests = DonationRequest.objects.all().order_by('-created_at')
-    return render(request, 'bloodbank/view_donation_requests.html', {'donation_requests': donation_requests})
+    return render(request, 'bloodbank/view_donation_requests.html', {'requests': donation_requests})
+
 
 @login_required
 def approve_donation_request(request, pk):

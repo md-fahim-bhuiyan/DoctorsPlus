@@ -1,9 +1,20 @@
-{% extends "patient/base.html" %}
 
-{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Doner Request</title>
+</head>
+<body>
+    
+
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="card">
         <div class="card-header bg-primary text-white">
           <h2 class="text-center">Donation Requests</h2>
@@ -12,36 +23,24 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Patient Name</th>
+                <th scope="col">Doner Name</th>
                 <th scope="col">Blood Type</th>
                 <th scope="col">Quantity (ml)</th>
+                <th scope="col">Location </th>
                 <th scope="col">Requested on</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {% for request in requests %}
               <tr>
-                <td>{{ request.patient_name }}</td>
-                <td>{{ request.blood_type }}</td>
-                <td>{{ request.quantity }}</td>
-                <td>{{ request.requested_on }}</td>
-                <td>{{ request.get_status_display }}</td>
-                <td>
-                  {% if request.status == 'pending' %}
-                  <form action="{% url 'patient:request_action' request.id %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="approve">
-                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                  </form>
-                  <form action="{% url 'patient:request_action' request.id %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="reject">
-                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                  </form>
-                  {% endif %}
-                </td>
+                <td>{{ request.doner_name }}</td>
+                <td>{{ request.blood_group }}</td>
+                <td>{{ request.units_required }}</td>
+                <td>{{request.location}}</td>
+                <td>{{ request.created_at }}</td>
+                <td>{{ request.is_approved }}</td>
+
               </tr>
               {% empty %}
               <tr>
@@ -55,4 +54,6 @@
     </div>
   </div>
 </div>
-{% endblock %}
+
+</body>
+</html>
