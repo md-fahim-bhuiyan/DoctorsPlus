@@ -133,7 +133,7 @@ def bloodbank(request):
 
 
 
-@login_required
+@login_required(login_url='patientlogin')
 def create_donation_request(request):
     if request.method == 'POST':
         form = DonationRequestForm(request.POST)

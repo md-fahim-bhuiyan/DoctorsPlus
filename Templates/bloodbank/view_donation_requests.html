@@ -1,0 +1,58 @@
+{% extends "patient/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h2 class="text-center">Donation Requests</h2>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Blood Type</th>
+                <th scope="col">Quantity (ml)</th>
+                <th scope="col">Requested on</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for request in requests %}
+              <tr>
+                <td>{{ request.patient_name }}</td>
+                <td>{{ request.blood_type }}</td>
+                <td>{{ request.quantity }}</td>
+                <td>{{ request.requested_on }}</td>
+                <td>{{ request.get_status_display }}</td>
+                <td>
+                  {% if request.status == 'pending' %}
+                  <form action="{% url 'patient:request_action' request.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="approve">
+                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                  </form>
+                  <form action="{% url 'patient:request_action' request.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="reject">
+                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                  </form>
+                  {% endif %}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6">No donation requests found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
