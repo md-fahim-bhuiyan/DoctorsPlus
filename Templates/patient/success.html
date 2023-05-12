@@ -21,6 +21,12 @@
         window.location.href = "{% url 'docProfile' %}";
     }, 100);
 </script>
+{%else%}
+<script>
+    setTimeout(function () {
+        window.location.href = "{% url 'admin_dashboard' %}";
+    }, 100);
+</script>
 {% endif %}
 
 </body>
