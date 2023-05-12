@@ -1,0 +1,13 @@
+{% extends "patient/base.html" %}
+{% block title %} Donate Blood {% endblock %}
+{% block content %}
+
+{% if request.user.patient %}
+
+{% include "bloodbank/navbar.html" %}
+<!-- <h1 style="text-align: center;">Blood Bank System</h1> -->
+<h1 style="text-align: center;">Welcome Doctor'sPlush Blood Bank</h1>
+{% else %}
+{% include "patient/404.html" %}
+{% endif %}
+{% endblock %}

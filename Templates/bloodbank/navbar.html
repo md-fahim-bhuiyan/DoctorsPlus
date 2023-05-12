@@ -68,9 +68,10 @@
       <h1 class="title">Doctor'SPlus</h1>
       <ul class="nav-menu">
         <li class="nav-item"><a href="{% url 'patient-dashboard' %}">Dashboard</a></li>
-        <li class="nav-item"><a href="#">About</a></li>
-        <li class="nav-item"><a href="#">Services</a></li>
-        <li class="nav-item"><a href="#">Contact</a></li>
+        <li class="nav-item"><a href="{% url 'doner_dashboard' %}">Doner</a></li>
+        <li class="nav-item"><a href="{% url 'create_donation_request' %}">Blood Donate</a></li>
+        <li class="nav-item"><a href="{% url 'view_donation_requests' %}">History</a></li>
+        <li class="nav-item"><a href="#">Receive</a></li>
       </ul>
     </nav>
   </div>

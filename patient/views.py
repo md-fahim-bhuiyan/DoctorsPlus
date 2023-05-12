@@ -167,3 +167,7 @@ def reject_donation_request(request, pk):
     donation_request.delete()
     messages.success(request, 'Donation request has been rejected.')
     return redirect('view_donation_requests')
+
+@login_required
+def doner_dashboard(request):
+    return render(request, 'bloodbank/doner_dashboard.html')

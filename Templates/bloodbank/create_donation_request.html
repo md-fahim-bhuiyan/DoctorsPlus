@@ -1,5 +1,5 @@
 {% extends "patient/base.html" %}
-{% block title %} Doner Request Form {% endblock %}
+{% block title %} Donate Blood {% endblock %}
 {% block content %}
 
 {% if request.user.patient %}
@@ -11,14 +11,14 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header bg-danger text-white">
-          <h2 class="text-center">Donation Request Form</h2>
+          <h2 class="text-center">Donate Blood</h2>
         </div>
         <div class="card-body">
           <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
 
-            <button type="submit" class="btn btn-danger btn-block mt-3">Submit Request</button>
+            <button type="submit" class="btn btn-danger btn-block mt-3">Donate</button>
           </form>
         </div>
       </div>

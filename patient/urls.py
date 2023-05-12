@@ -17,5 +17,5 @@ urlpatterns = [
     path('donation/requests/', views.view_donation_requests, name='view_donation_requests'),
     path('donation/requests/<int:pk>/approve/', views.approve_donation_request, name='approve_donation_request'),
     path('donation/requests/<int:pk>/reject/', views.reject_donation_request, name='reject_donation_request'),
-
+    path('doner_dashboard',views.doner_dashboard, name='doner_dashboard'),
 ]
