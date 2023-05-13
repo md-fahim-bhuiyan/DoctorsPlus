@@ -132,6 +132,18 @@ def bloodbank(request):
     return render(request, 'bloodbank/index.html')
 
 
+@login_required
+def doner_dashboard(request):
+    
+    requestmade = DonationRequest.objects.filter(user=request.user).count()
+    requestpending = DonationRequest.objects.filter(is_approved='PANDING').count()
+    requestrejected = DonationRequest.objects.filter(is_approved='REJECT').count()
+    requestapproved = DonationRequest.objects.filter(is_approved='APPROVED').count()
+
+    return render(request, 'bloodbank/doner_dashboard.html', {'requestpending': requestpending,
+                                                              'requestmade': requestmade,
+                                                              'requestrejected': requestrejected,
+                                                              'requestapproved': requestapproved})
 
 @login_required(login_url='patientlogin')
 def create_donation_request(request):
@@ -142,7 +154,7 @@ def create_donation_request(request):
             donation_request.user = request.user
             donation_request.save()
             messages.success(request, 'Your donation request has been submitted.')
-            return redirect('home')
+            return redirect('view_donation_requests')
     else:
         form = DonationRequestForm()
     return render(request, 'bloodbank/create_donation_request.html', {'form': form})
@@ -167,7 +179,3 @@ def reject_donation_request(request, pk):
     donation_request.delete()
     messages.success(request, 'Donation request has been rejected.')
     return redirect('view_donation_requests')
-
-@login_required
-def doner_dashboard(request):
-    return render(request, 'bloodbank/doner_dashboard.html')

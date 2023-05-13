@@ -1,39 +1,45 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <script src="https://kit.fontawesome.com/7c81212c94.js" crossorigin="anonymous"></script>
-    <style>
-        .row{
-            padding: 5px;
-        }
-        .fa-tint{     
-            color: #d41010   
-        }
-        .blood{
-            float: right;
-        }
-        .fa-users{     
-            color: blue; 
-            font-size: 3ex;   
-        }
-        .fa-spinner{     
-            color: blue; 
-            font-size: 3ex;   
-        }
-        .fa-check-circle{     
-            color: blue; 
-            font-size: 3ex;   
-        }
-        .xyz{     
-            color: blue; 
-            font-size: 3ex;   
-        }
-    
-    *{
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <script src="https://kit.fontawesome.com/7c81212c94.js" crossorigin="anonymous"></script>
+  <style>
+    .row {
+      padding: 5px;
+    }
+
+    .fa-tint {
+      color: #d41010
+    }
+
+    .blood {
+      float: right;
+    }
+
+    .fa-users {
+      color: blue;
+      font-size: 3ex;
+    }
+
+    .fa-spinner {
+      color: blue;
+      font-size: 3ex;
+    }
+
+    .fa-check-circle {
+      color: blue;
+      font-size: 3ex;
+    }
+
+    .xyz {
+      color: blue;
+      font-size: 3ex;
+    }
+
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -41,67 +47,68 @@
       text-decoration: none;
       font-family: 'Josefin Sans', sans-serif;
     }
-    
-    body{
-       background-color: #f3f5f9;
+
+    body {
+      background-color: #f3f5f9;
     }
+
     .bg-danger {
-        background-color: #c32d22!important;
+      background-color: #c32d22 !important;
     }
-    
-    .wrapper{
+
+    .wrapper {
       display: flex;
       position: relative;
     }
-    
-    .wrapper .sidebar{
+
+    .wrapper .sidebar {
       width: 200px;
       height: 100%;
-      background: 	#343a40;
+      background: #343a40;
       padding: 30px 0px;
       position: fixed;
     }
-    
-    .wrapper .sidebar h2{
+
+    .wrapper .sidebar h2 {
       color: #fff;
       text-transform: uppercase;
       text-align: center;
       margin-bottom: 30px;
     }
-    
-    .wrapper .sidebar ul li{
+
+    .wrapper .sidebar ul li {
       padding: 15px;
       border-bottom: 1px solid #dedede;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }    
-    
-    .wrapper .sidebar ul li a{
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .wrapper .sidebar ul li a {
       color: #dedede;
       display: block;
     }
-    
-    .wrapper .sidebar ul li a .fas{
+
+    .wrapper .sidebar ul li a .fas {
       width: 25px;
     }
-    
-    .wrapper .sidebar ul li:hover{
+
+    .wrapper .sidebar ul li:hover {
       background-color: #7a7a7a;
     }
-        
-    .wrapper .sidebar ul li:hover a{
+
+    .wrapper .sidebar ul li:hover a {
       color: #fff;
     }
-     
-    .wrapper .sidebar .social_media{
+
+    .wrapper .sidebar .social_media {
       position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
     }
-    
-    .wrapper .sidebar .social_media a{
+
+    .wrapper .sidebar .social_media a {
       display: block;
       width: 40px;
       background: #594f8d;
@@ -113,208 +120,210 @@
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
     }
-    
-    .wrapper .main_content{
+
+    .wrapper .main_content {
       width: 100%;
       margin-left: 200px;
     }
-    
-    .wrapper .main_content .header{
+
+    .wrapper .main_content .header {
       padding: 20px;
       background: #fff;
       color: #717171;
       border-bottom: 1px solid #e0e4e8;
     }
-    
-    .wrapper .main_content .info{
+
+    .wrapper .main_content .info {
       margin: 20px;
       color: #717171;
       line-height: 25px;
     }
-    
-    .wrapper .main_content .info div{
+
+    .wrapper .main_content .info div {
       margin-bottom: 20px;
     }
-    
-    @media (max-height: 500px){
-      .social_media{
+
+    @media (max-height: 500px) {
+      .social_media {
         display: none !important;
       }
     }
-    .fa-sign-out-alt{
-        color: white;
-        font-size: 2ex;
+
+    .fa-sign-out-alt {
+      color: white;
+      font-size: 2ex;
     }
-    
-        </style>
+  </style>
 </head>
 {% include "admin/side_nav_bar.html" %}
-<body>
-    
-    <div class="container">
-        <div class="container">
 
-            <div class="row">
-                <div class="col-sm-3">
-                  <div class="card bg-light">
-                    <div class="card-body">
-                        <div class="blood">
-                            <h2>A+ <i class="fas fa-tint" ></i></h2>
-                        </div><br><br>
-                        <div>
-                            {{A1.unit}}ml
-                        </div>                            
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="blood">
-                                <h2>B+ <i class="fas fa-tint"></i></h2>
-                            </div><br><br>
-                            <div>
-                              {{B1.unit}}ml
-                            </div>                            
-                        </div>
-                      </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="blood">
-                                <h2>O+ <i class="fas fa-tint"></i></h2>
-                            </div><br><br>
-                            <div>
-                              {{O1.unit}}ml
-                            </div>                            
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="blood">
-                                <h2>AB+ <i class="fas fa-tint"></i></h2>
-                            </div><br><br>
-                            <div>
-                              {{AB1.unit}}ml
-                            </div>                            
-                        </div>
-                      </div>
-                  </div>
+<body>
+
+  <div class="container">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>A+ <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{A1.unit}}ml
               </div>
-          
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="card bg-light">
-                    <div class="card-body">
-                        <div class="blood">
-                            <h2>A- <i class="fas fa-tint"></i></h2>
-                        </div><br><br>
-                        <div>
-                          {{A2.unit}}ml
-                        </div>                            
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="blood">
-                                <h2>B- <i class="fas fa-tint"></i></h2>
-                            </div><br><br>
-                            <div>
-                              {{B2.unit}}ml
-                            </div>                            
-                        </div>
-                      </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="blood">
-                                <h2>O- <i class="fas fa-tint"></i></h2>
-                            </div><br><br>
-                            <div>
-                              {{O2.unit}}ml
-                            </div>                            
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="blood">
-                                <h2>AB- <i class="fas fa-tint"></i></h2>
-                            </div><br><br>
-                            <div>
-                              {{AB2.unit}}ml
-                            </div>                            
-                        </div>
-                      </div>
-                  </div>
-              </div>
-        <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="card bg-light">
-                  <div class="card-body">
-                      <div class="blood">
-                          <i class="fas fa-users" style="color: #1e88e5;"></i>
-                      </div><br>
-                      <div>
-                          Available Donors <br>
-                          {{totaldonors}}
-                      </div>                            
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                  <div class="card bg-light">
-                      <div class="card-body">
-                          <div class="blood">
-                              <i class="fas fa-spinner" style="color:#efb000;"></i>
-                          </div><br>
-                          <div>
-                              Total Requests <br>
-                             {{totalrequest}}
-                          </div>                            
-                      </div>
-                    </div>
-              </div>
-             
-                <div class="col-sm-3">
-                  <div class="card bg-light">
-                      <div class="card-body">
-                          <div class="blood">
-                              <i class="fas fa-tint xyz" style="color:#d41010;"></i>
-                          </div><br>
-                          <div>
-                              Total Blood Unit (ml) <br>
-                              {{totalbloodunit}}
-                          </div>                            
-                      </div>
-                    </div>
-                </div>
-        
-                <div class="col-sm-3">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="blood">
-                                <i class="far fa-check-circle" style="color:green;"></i>
-                            </div><br>
-                            <div>
-                                Approved Requests <br>
-                                {{totalapprovedrequest}}
-                            </div>                            
-                        </div>
-                      </div>
-                  </div>
             </div>
+          </div>
         </div>
-        
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>B+ <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{B1.unit}}ml
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>O+ <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{O1.unit}}ml
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>AB+ <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{AB1.unit}}ml
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>A- <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{A2.unit}}ml
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>B- <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{B2.unit}}ml
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>O- <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{O2.unit}}ml
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <h2>AB- <i class="fas fa-tint"></i></h2>
+              </div><br><br>
+              <div>
+                {{AB2.unit}}ml
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <i class="fas fa-users" style="color: #1e88e5;"></i>
+              </div><br>
+              <div>
+                Available Donors <br>
+                {{totaldonors}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <i class="fas fa-spinner" style="color:#efb000;"></i>
+              </div><br>
+              <div>
+                Total Requests <br>
+                {{totalrequest}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <i class="fas fa-tint xyz" style="color:#d41010;"></i>
+              </div><br>
+              <div>
+                Total Blood Unit (ml) <br>
+                {{totalbloodunit}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class="blood">
+                <i class="far fa-check-circle" style="color:green;"></i>
+              </div><br>
+              <div>
+                Approved Requests <br>
+                {{totalapprovedrequest}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
+  </div>
+
 </body>
+
 </html>

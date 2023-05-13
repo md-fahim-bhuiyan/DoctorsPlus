@@ -15,9 +15,9 @@ In this context, Doctor'sPlus aims to provide a solution to these problems by of
 
 ### Features:
 - Online Medical Consultations
-- Online Ordering Of Medicine
 - Diagnostic Services At Home
 - Blood Donations Bank 
+
 ### User:
 - Patient 
 - Doctor

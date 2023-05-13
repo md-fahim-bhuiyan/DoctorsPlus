@@ -19,7 +19,7 @@ class Patient(models.Model):
     
 
     @property
-    def get_name(self):
+    def full_name(self):
         return self.user.first_name+" "+self.user.last_name
     def __str__(self):
         return self.user.first_name+" "+self.user.last_name
@@ -33,9 +33,6 @@ class Appointment(models.Model):
     appointment_time = models.TimeField()
     # fee = models.IntegerField()
 
-
-
-
 BLOOD_GROUPS = [
     ('A+', 'A+'),
     ('A-', 'A-'),
@@ -47,6 +44,12 @@ BLOOD_GROUPS = [
     ('O-', 'O-')
 ]
 
+APPROVED = [
+    ('APPROVED', 'APPROVED'),
+    ('PANDING', 'PANDING'),
+    ('REJECT', 'REJECT')
+]
+
 class DonationRequest(models.Model):
     doner_name = models.CharField(max_length=50, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -54,5 +57,5 @@ class DonationRequest(models.Model):
     units_required = models.PositiveIntegerField()
     location = models.CharField(max_length=200)
     contact_number = models.CharField(max_length=20)
-    is_approved = models.BooleanField(default=False)
+    is_approved = models.CharField(default='PANDING', max_length=8, choices=APPROVED)
     created_at = models.DateTimeField(auto_now_add=True)

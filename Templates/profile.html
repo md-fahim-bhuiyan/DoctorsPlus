@@ -1,131 +1,150 @@
-
 {% load static %}
 {% load widget_tweaks %}
 <html lang="en" dir="ltr">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Patient Profile</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-      <style>
-        body {
-            background: #F0F0F0;
-          }
-          
-          .container {
-            margin-top: 100px;
-            margin-bottom:30px;
-            
-          }
-          
-          .card-header {
-            background-color: #2C3E50;
-            color: #FFF;
-            text-align: center;
-          }
-          
-          .card-body {
-            
-            padding: 20px;
-          }
-          
-          .card-title {
-            margin-bottom: 0;
-            color: red;
-          }
-          
-          .btn-primary {
-            background-color: #2C3E50;
-            border-color: #2C3E50;
-          }
-          
-          .btn-primary:hover {
-            background-color: #34495E;
-            border-color: #34495E;
-          }
-          
-          .checkbox label {
-            padding-left: 0;
-          }
-          
-          .float-right {
-            float: right;
-          }
-          
-          
-          .profile-photo {
-            text-align: center;
-            margin-bottom: 20px;
-          }
-          
-          .profile-photo img {
-            border-radius: 50%;
-            border: 5px solid #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          }
-          
-          .profile-info {
-            text-align: center;
-          }
-          
-          .profile-info h5 {
-            margin-bottom: 10px;
-          }
-          
-          .profile-info p {
-            margin-bottom: 5px;
-          }
-          
-      </style>
-    </head>
-    <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Patient Profile</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-{% include "patient/sidenav_bar.html" %}
+  <style>
+    body {
+      background: #F0F0F0;
+    }
 
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <div class="card">
-              <header class="card-header">
-                <h4 class="card-title mt-2">Patient Profile</h4>
-              </header>
-              <article class="card-body">
-                <div class="profile-photo">
-                  <img src="https://via.placeholder.com/150" alt="Profile Photo">
+    .container {
+      margin-top: 100px;
+      margin-bottom: 30px;
+
+    }
+
+    .card-header {
+      background-color: #2C3E50;
+      color: #FFF;
+      text-align: center;
+    }
+
+    .card-body {
+
+      padding: 20px;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+      color: red;
+    }
+
+    .btn-primary {
+      background-color: #2C3E50;
+      border-color: #2C3E50;
+    }
+
+    .btn-primary:hover {
+      background-color: #34495E;
+      border-color: #34495E;
+    }
+
+    .checkbox label {
+      padding-left: 0;
+    }
+
+    .float-right {
+      float: right;
+    }
+
+
+    .profile-photo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-photo img {
+      border-radius: 50%;
+      border: 5px solid #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info {
+      text-align: center;
+    }
+
+    .profile-info h5 {
+      margin-bottom: 10px;
+    }
+
+    .profile-info p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  {% include "patient/sidenav_bar.html" %}
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <header class="card-header">
+            <h4 class="card-title mt-2">Patient Profile</h4>
+          </header>
+          <article class="card-body">
+            <div class="profile-photo">
+              <img src="https://via.placeholder.com/150" alt="Profile Photo">
+            </div>
+            <div class="profile-info">
+              <h4>{{ user.first_name |upper }} {{ user.last_name |upper }}</h4>
+              <div class="row">
+                <div class="col-5 text-left">
+                  <h6>Age:</h6>
                 </div>
-                <div class="profile-info">
-                  <h4>{{ user.first_name |upper }} {{ user.last_name |upper }}</h4>
-                  <div class="row">
-                  <div class="col-5 text-left"> <h6>Age:</h6></div>
-                  <div class="col-7 text-left"> <h6>{{age}}</h6></div>
-                  </div>
-                  <div class="row">
-                  <div class="col-5 text-left"> <h6>Gender:</h6></div>
-                  <div class="col-7 text-left"> <h6>{{gender}}</h6></div>
-                  </div>
-                  <div class="row">
-                  <div class="col-5 text-left"> <h6>Email:</h6></div>
-                  <div class="col-7 text-left"> <h6>{{ user.email }}</h6></div>
-                  </div>
-                  <div class="row">
-                  <div class="col-5 text-left"> <h6>Phone:</h6></div>
-                  <div class="col-7 text-left"> <h6>{{ mobile }}</h6></div>
-                  </div>
-                  <div class="row">
-                  <div class="col-5 text-left"> <h6>Address:</h6></div>
-                  <div class="col-7 text-left"> <h6>{{address}}</h6></div>
-                  </div>
-                  <br>
-                  <a href="{% url 'patient_edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+                <div class="col-7 text-left">
+                  <h6>{{age}}</h6>
                 </div>
-              </article> <!-- card-body end .// -->
-            </div> <!-- card.// -->
-          </div> <!-- col.//-->
-        </div> <!-- row.//-->
-      </div>
+              </div>
+              <div class="row">
+                <div class="col-5 text-left">
+                  <h6>Gender:</h6>
+                </div>
+                <div class="col-7 text-left">
+                  <h6>{{gender}}</h6>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 text-left">
+                  <h6>Email:</h6>
+                </div>
+                <div class="col-7 text-left">
+                  <h6>{{ user.email }}</h6>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 text-left">
+                  <h6>Phone:</h6>
+                </div>
+                <div class="col-7 text-left">
+                  <h6>{{ mobile }}</h6>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 text-left">
+                  <h6>Address:</h6>
+                </div>
+                <div class="col-7 text-left">
+                  <h6>{{address}}</h6>
+                </div>
+              </div>
+              <br>
+              <a href="{% url 'patient_edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+            </div>
+          </article> 
+        </div> 
+      </div> 
+    </div> 
+  </div>
 
-    </body>
-    </html>
-    
+</body>
+</html>

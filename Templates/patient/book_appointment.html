@@ -22,14 +22,11 @@
                 {% render_field form.appointment_time|add_class:"form-control"|attr:"required:true" %}
               </div>
               <div class="row">
-                
-              
               <div class="form-group col-md-6">
                 <label for="{{ form.doctor.id_for_label }}">Doctor: {{ form.doctor.value }}</label>
                 {% render_field form.doctor|add_class:"form-control" %}
               </div>
                 </div>
-
               <div class="form-group">
                 <label for="{{ form.patient_name.id_for_label }}">Patient Name:</label>
                 {% render_field form.patient_name|add_class:"form-control" %}
@@ -40,7 +37,6 @@
         </div>
       </div>
     </div>
-
   </div>
 {% endblock %}
 

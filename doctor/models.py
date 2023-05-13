@@ -21,7 +21,7 @@ class Doctor(models.Model):
         max_length=6, choices=gender_choices, null=True, blank=True)
 
     @property
-    def get_name(self):
+    def full_name(self):
         return self.user.first_name+" "+self.user.last_name
     @property
     def get_instance(self):
