@@ -54,7 +54,7 @@ class DonationRequestForm(forms.ModelForm):
         self.fields['units_required'].widget.attrs.update({'class': 'form-control'})
         self.fields['location'].widget.attrs.update({'class': 'form-control'})
         self.fields['contact_number'].widget.attrs.update({'class': 'form-control'})
-
+        
 
 class ReceiverRequestForm(forms.ModelForm):
     class Meta:

@@ -30,11 +30,9 @@
         </div>
         <li><a href="{% url 'admin_dashboard' %}">DashBoard</a></li>
         <li><a href="{% url 'bloodbank_index' %}">Blood Bank Index</a></li>
-        <li><a href="">Edit Profile</a></li>
-        <li><a href="">Doctor</a></li>
-        <li><a href="">Diagnostic Services</a></li>
-        <li><a href="">Blood Bank</a></li>
-        <li><a href="">Madical History</a></li>
+        <li><a href="{% url 'admin_view_donation_requests' %}">Blood Donate</a></li>
+        <li><a href="">Blood Receive</a></li>
+        <li><a href="{% url 'admin-blood' %}">Blood Stock</a></li>
         <li><a href="">Contact</a></li>
         <li><a href="">About</a></li>
         <li><a href="{% url 'logout' %}"">Logout</a></li>
