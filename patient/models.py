@@ -59,3 +59,15 @@ class DonationRequest(models.Model):
     contact_number = models.CharField(max_length=20)
     is_approved = models.CharField(default='PANDING', max_length=8, choices=APPROVED)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class ReceiverRequest(models.Model):
+    receiver_name = models.CharField(max_length=50, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blood_group = models.CharField(max_length=3, choices=BLOOD_GROUPS)
+    units_required = models.PositiveIntegerField()
+    reason = models.CharField(max_length=200, blank=True)
+    age = models.PositiveIntegerField()
+    hospital = models.CharField(max_length=100)
+    contact_number = models.CharField(max_length=20)
+    is_approved = models.CharField(default='PENDING', max_length=8, choices=APPROVED)
+    created_at = models.DateTimeField(auto_now_add=True)

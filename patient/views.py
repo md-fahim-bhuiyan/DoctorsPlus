@@ -14,8 +14,8 @@ from django.http import HttpResponse
 from .forms import AppointmentForm
 from .models import Appointment
 from django.contrib import messages
-from .forms import DonationRequestForm
-from .models import DonationRequest
+from .forms import DonationRequestForm, ReceiverRequestForm
+from .models import DonationRequest, ReceiverRequest
 
 today = datetime.date.today()
 formatted_date = today.strftime('%Y-%m-%d')
@@ -103,8 +103,7 @@ def search_results(request):
 
 
 def patient_dashboard_view(request):
-   return render(request,'success.html')
-
+   return render(request,'patient/patient_dashboard.html')
 
 
 def book_appointment(request, doctor_pk, doctor_name):
@@ -179,3 +178,36 @@ def reject_donation_request(request, pk):
     donation_request.delete()
     messages.success(request, 'Donation request has been rejected.')
     return redirect('view_donation_requests')
+
+
+def blood_receiver_dashboard(request):
+    requestmade = ReceiverRequest.objects.filter(user=request.user).count()
+    requestpending = ReceiverRequest.objects.filter(is_approved='PENDING').count()
+    requestrejected = ReceiverRequest.objects.filter(is_approved='REJECT').count()
+    requestapproved = ReceiverRequest.objects.filter(is_approved='APPROVED').count()
+
+    return render(request, 'bloodbank/receiver_dashboard.html', {'requestpending': requestpending,
+                                                              'requestmade': requestmade,
+                                                              'requestrejected': requestrejected,
+                                                              'requestapproved': requestapproved})
+    
+
+
+
+def receiver_request_create_view(request):
+    form = ReceiverRequestForm()
+    if request.method == 'POST':
+        form = ReceiverRequestForm(request.POST)
+        if form.is_valid():
+            receiver_request = form.save(commit=False)
+            receiver_request.user = request.user
+            receiver_request.save()
+            return redirect('receiver_request_success')
+    return render(request, 'bloodbank/receiver_request_create.html', {'form': form})
+
+def receiver_request_success_view(request):
+    return render(request, 'bloodbank/receiver_request_success.html')
+
+def receiver_request_list_view(request):
+    receiver_requests = ReceiverRequest.objects.filter(user=request.user)
+    return render(request, 'bloodbank/receiver_request_list.html', {'receiver_requests': receiver_requests})

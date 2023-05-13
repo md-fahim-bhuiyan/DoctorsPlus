@@ -11,3 +11,12 @@ class CustomLoginView(LoginView):
 
 def admin_dashboard(request):
     return render(request, 'admin/dashboard.html')
+
+def bloodbank_index(request):
+    return render(request, 'admin/bloodbank_index.html')
+
+def admin_view_donation_requests(request):
+    return render (request ,'admin/admin_view_donation_requests.html')
+
+def admin_receiver_request_list(request):
+    return render (request ,'admin/admin_receiver_request_list.html')

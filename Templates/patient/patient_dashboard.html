@@ -1,0 +1,6 @@
+{% load static %}
+{% if request.user.patient %}
+{% include "patient/sidenav_bar.html" %}
+{% else %}
+{% include "patient/404.html" %}
+{% endif %}

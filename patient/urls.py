@@ -18,4 +18,9 @@ urlpatterns = [
     path('donation/requests/<int:pk>/approve/', views.approve_donation_request, name='approve_donation_request'),
     path('donation/requests/<int:pk>/reject/', views.reject_donation_request, name='reject_donation_request'),
     path('doner_dashboard',views.doner_dashboard, name='doner_dashboard'),
+    path('blood_receiver_dashboard', views.blood_receiver_dashboard, name='blood_receiver_dashboard'),
+    path('receiver-request/create/', views.receiver_request_create_view, name='receiver_request_create'),
+    path('receiver-request/success/', views.receiver_request_success_view, name='receiver_request_success'),
+    path('receiver-request/list/', views.receiver_request_list_view, name='receiver_request_list'),
+
 ]

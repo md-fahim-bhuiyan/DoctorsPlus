@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
-from .models import DonationRequest
+from .models import DonationRequest, ReceiverRequest
 
 
 class PatientUserForm(forms.ModelForm):
@@ -53,4 +53,20 @@ class DonationRequestForm(forms.ModelForm):
         self.fields['blood_group'].widget.attrs.update({'class': 'form-control'})
         self.fields['units_required'].widget.attrs.update({'class': 'form-control'})
         self.fields['location'].widget.attrs.update({'class': 'form-control'})
+        self.fields['contact_number'].widget.attrs.update({'class': 'form-control'})
+
+
+class ReceiverRequestForm(forms.ModelForm):
+    class Meta:
+        model = ReceiverRequest
+        fields = ['receiver_name', 'blood_group', 'units_required', 'reason', 'age', 'hospital', 'contact_number']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['receiver_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['blood_group'].widget.attrs.update({'class': 'form-control'})
+        self.fields['units_required'].widget.attrs.update({'class': 'form-control'})
+        self.fields['reason'].widget.attrs.update({'class': 'form-control'})
+        self.fields['age'].widget.attrs.update({'class': 'form-control'})
+        self.fields['hospital'].widget.attrs.update({'class': 'form-control'})
         self.fields['contact_number'].widget.attrs.update({'class': 'form-control'})

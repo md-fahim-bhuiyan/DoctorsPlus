@@ -105,3 +105,5 @@ REST_FRAMEWORK = {
     ),
 
 }
+
+TIME_ZONE = 'Asia/Dhaka'

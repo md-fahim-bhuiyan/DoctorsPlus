@@ -1,10 +1,48 @@
-{% extends 'patient/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
 
-{% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-{% endblock %}
+<html lang="en"  dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Admin Login || Doctor'SPlus</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'CSS/patientlogin.css'%}">
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <header class="card-header">
+            <h4 class="card-title mt-2" style="color: white;">Admin Login</h4>
+          </header>
+          <article class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+              <div class="form-group">
+                <label>User Name</label>
+                {% render_field form.username|attr:'required:true'|add_class:"form-control" placeholder="@username"%}
+              </div>
+              <div class="form-group">
+                <a class="float-right" href="#">Forgot Password?</a>
+                <label>Password</label>
+                {% render_field form.password|attr:"required:true"|add_class:"form-control" placeholder="************" %}
+              </div>
+              <div class="form-group">
+                <div class="checkbox">
+                  <label> <input type="checkbox"> Save password </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+              </div>
+            </form>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div> 
+</body>
+</html>
