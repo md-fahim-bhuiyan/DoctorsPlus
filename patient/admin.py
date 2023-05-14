@@ -19,3 +19,4 @@ class DonationRequestAdmin(admin.ModelAdmin):
 
 admin.site.register(DonationRequest, DonationRequestAdmin)
 admin.site.register(ReceiverRequest)
+admin.site.register(ContactMessage)

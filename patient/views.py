@@ -1,12 +1,10 @@
-from .forms import SearchForm
 from django.shortcuts import render,redirect,reverse
 from . import forms,models
-from django.db.models import Sum,Q
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import date
 from .models import Patient, ContactMessage, DonationRequest, ReceiverRequest, Appointment
-from .forms import PatientForm, ContactForm, DonationRequestForm, ReceiverRequestForm, AppointmentForm
+from .forms import SearchForm, PatientForm, ContactForm, DonationRequestForm, ReceiverRequestForm, AppointmentForm
 import datetime
 from django.contrib.auth import authenticate, login
 from doctor.models import Doctor
@@ -69,8 +67,7 @@ def profile(request):
     patient = Patient.objects.get(user=user)
     age = calculate_age(patient.date_of_birth)
     context = {'mobile': patient.mobile, 'gender': patient.gender,'address':patient.address, 'age': age}
-    return render(request, 'profile.html', context)
-    # return render(request, 'profile.html')
+    return render(request, 'patient/profile.html', context)
 
 
 @login_required
@@ -196,8 +193,6 @@ def blood_receiver_dashboard(request):
                                                               'requestrejected': requestrejected,
                                                               'requestapproved': requestapproved})
     
-
-
 
 def receiver_request_create_view(request):
     form = ReceiverRequestForm()

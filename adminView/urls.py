@@ -12,4 +12,6 @@ urlpatterns = [
     path('receiver-request/edit/<int:request_id>/',views.admin_edit_receiver_request, name='admin_edit_receiver_request'),
 
     path('admin-blood', views.admin_blood_view,name='admin-blood'),
+        path('about/', views.about, name='admin_about'),
+
 ]

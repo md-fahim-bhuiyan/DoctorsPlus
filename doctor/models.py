@@ -28,3 +28,15 @@ class Doctor(models.Model):
         return self
     def __str__(self):
         return self.user.first_name + " "+self.user.last_name
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    bmdc = models.CharField(max_length=10)
+    subject = models.CharField(max_length=100)
+    message = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"

@@ -83,19 +83,6 @@ def admin_edit_donation_request(request, request_id):
     return render(request, 'admin/admin_edit_donation_request.html', {'form': form})
 
 
-# def admin_edit_receiver_request(request, request_id):
-#     receiver_request = get_object_or_404(ReceiverRequest, id=request_id)
-
-#     if request.method == 'POST':
-#         form = ReceiverRequestForm(request.POST, instance=receiver_request)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('admin_receiver_request_list')
-#     else:
-#         form = ReceiverRequestForm(instance=receiver_request)
-
-#     return render(request, 'admin/admin_edit_receiver_request.html', {'form': form})
-
 def admin_edit_receiver_request(request, request_id):
     receiver_request = get_object_or_404(ReceiverRequest, id=request_id)
 
@@ -145,3 +132,5 @@ def admin_blood_view(request):
         return HttpResponseRedirect('admin-blood')
     return render(request,'admin/admin_blood.html',context=dict)
 
+def about(request):
+    return render(request, 'patient/about.html')

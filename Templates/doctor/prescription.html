@@ -1,0 +1,217 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prescription</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+   <style>
+    
+    .remove-field {
+            color: red;
+            cursor: pointer;
+            margin-left: 90%;
+        }
+        .container
+        {
+            background:
+                linear-gradient(#F5F5F5,
+                    #dbdbe2);
+        }
+   </style>
+</head>
+
+<body>
+    <div class="container mt-3 mb-3 p-2" style="border-radius: 5px;">
+        <h1 style="text-align: center;">Prescription</h1>
+        
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="problem">Problem:</label>
+                        <input type="text" class="form-control" name="problem" required>
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" name="date" required>
+                    </div>
+                </div>
+
+            </div>
+            <h4>Patient Information:</h4>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <label for="patient-name">Name</label>
+                    <input type="text" class="form-control" id="patient-name" name="patient-name" required>
+                </div>
+                <div class="col-md-2">
+                    <label for="patient-age">Age(Years)</label>
+                    <input type="number" class="form-control" id="patient-age" name="patient-name" required>
+                </div>
+                <div class="col-md-2">
+                    <label for="patient-weight">Weight(KG)</label>
+                    <input type="number" class="form-control" id="patient-weight" name="patient-name" required>
+                </div>
+                <div class="col-md-1">
+                    <label for="gender">Gender </label> <br>
+                    <select id="gender" name="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                </div>
+                <div class="col-md-2">
+                    <label for="patient-blood">Blood Pressure</label>
+                    <input type="text" class="form-control" id="patient-blood" name="patient-blood" required>
+                </div>
+                <div class="col-md-2">
+                    <label for="patient-email">Email</label>
+                    <input type="email" class="form-control" id="patient-email" name="patient-email" required>
+                </div>
+
+            </div>
+
+
+            <h4>Doctor Information:</h4>
+            <div class="form-group row">
+                <div class="col-md-3">
+                  <label for="name">Name:</label>
+                  <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="col-md-3">
+                  <label for="registration-number">BBM&DC Registration Number:</label>
+                  <input type="text" class="form-control" id="registration-number" name="registration-number">
+              </div>
+                <div class="col-md-2">
+                  <label for="specialty">Specialty:</label>
+                  <input type="text" class="form-control" id="specialty" name="specialty" required disabled value="{{doctor.speciality}}">
+                </div>
+              <div class="col-md-2">
+                <label for="doctor-email">Email:</label>
+                <input type="email" class="form-control" id="doctor-email" name="doctor-email">
+              </div>
+              <div class="col-md-2">
+                <label for="doctor-phone">Phone:</label>
+                <input type="tel" class="form-control" id="doctor-phone" name="doctor-phone">
+              </div>
+            </div>
+            <h4>Medication:</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="medication1">Medication 1</label>
+                    <input type="text" class="form-control medication" id="medication1" name="medication[]" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="Dose">Frequency:</label> <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="morning" name="dose[]" value="morning">
+                        <label class="form-check-label" for="morning">Morning</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="afternoon" name="dose[]" value="afternoon">
+                        <label class="form-check-label" for="afternoon">Afternoon</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="evening" name="dose[]" value="evening">
+                        <label class="form-check-label" for="evening">Evening</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="duration">Duration:</label>
+                    <input type="text" id="duration" name="Duratione" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="eat-time">Before/After eat:</label>
+                    <select id="eat-time" name="eat-time" class="form-control" required>
+                        <option value="before">Before</option>
+                        <option value="after">After</option>
+                    </select>
+                </div>
+                <a class="remove-field " href="#" onclick="removeField(event)">Remove</a>
+            </div>
+
+            <div class="medication-fields"></div>
+            <div class="form-group">
+                <a href="#" class="add-medication btn btn-success">Add Medication</a>
+            </div>
+            <h4>Test:</h4>
+            <div class="form-group">
+                <label for="test1">Test 1</label>
+                <input type="text" class="form-control test" id="test1" name="test[]">
+                <a class="remove-field" href="#" onclick="removeField(event)">Remove</a>
+            </div>
+            <div class="test-fields"></div>
+            <div class="form-group">
+                <a href="#" class="add-test btn btn-success">Add Test</a>
+            </div>
+            <button type="submit"  class="btn btn-primary btn-block mb-3">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var medicationCount = 1;
+            $('.add-medication').click(function () {
+                medicationCount++;
+                var medicationHtml = '<div class="row">' +
+                    '<div class="col-md-3">' +
+                    '<label for="medication' + medicationCount + '">Medication ' + medicationCount + '</label>' +
+                    '<input type="text" class="form-control medication" id="medication' + medicationCount + '" name="medication[]" required>' +
+                    '</div>' +
+                    '<div class="col-md-4">' +
+                    '<label for="dose' + medicationCount + '">Frequency: </label>' + "<br>" +
+                    '<div class="form-check form-check-inline">' +
+                    '<input class="form-check-input" type="checkbox" id="morning' + medicationCount + '" name="morning[]" value="morning">' +
+                    '<label class="form-check-label" for="morning' + medicationCount + '"> Morning</label>' +
+                    '</div>' +
+                    '<div class="form-check form-check-inline">' +
+                    '<input class="form-check-input" type="checkbox" id="afternoon' + medicationCount + '" name="afternoon[]" value="afternoon">' +
+                    '<label class="form-check-label" for="afternoon' + medicationCount + '">Afternoon</label>' +
+                    '</div>' +
+                    '<div class="form-check form-check-inline">' +
+                    '<input class="form-check-input" type="checkbox" id="evening' + medicationCount + '" name="evening[]" value="evening">' +
+                    '<label class="form-check-label" for="evening' + medicationCount + '">Evening</label>' +
+                    '</div>' +
+                    '</div>' +
+
+                    '<div class="col-md-2">' +
+                    '<label for="duration' + medicationCount + '">Duration:</label>' +
+                    '<input type="text" id="duration' + medicationCount + '" name="duration[]" class="form-control">' +
+                    '</div>' +
+                    '<div class="col-md-3">' +
+                    '<label for="meal-time' + medicationCount + '">Before/After eat:</label>' +
+                    '<select id="meal-time' + medicationCount + '" name="meal-time[]" class="form-control">' +
+                    '<option value="before">Before</option>' +
+                    '<option value="after">After</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '<a class="remove-field" href="#" onclick="removeField(event)">Remove</a>' +
+                    '</div>';
+                $('.medication-fields').append(medicationHtml);
+            });
+
+            var testCount = 1;
+            $('.add-test').click(function () {
+                testCount++;
+                var testHtml = '<div class="form-group">' +
+                    '<label for="test' + testCount + '">Test ' + testCount + '</label>' +
+                    '<input type="text" class="form-control test" id="test' + testCount + '" name="test[]">' +
+                    '<a  class="remove-field" href="#" onclick="removeField(event)">Remove</a>' +
+                    '</div>';
+                $('.test-fields').append(testHtml);
+            });
+
+            $('body').on('click', '.remove-field', function (event) {
+                event.preventDefault();
+                $(this).parent().remove();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
