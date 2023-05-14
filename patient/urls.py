@@ -2,11 +2,13 @@ from django.urls import path
 
 from django.contrib.auth.views import LoginView
 from . import views
+from .views import MyPasswordChangeView
+
 
 urlpatterns = [
     path('patientlogin', LoginView.as_view(template_name='patient/patientlogin.html'),name='patientlogin'),
     path('patientsignup', views.patient_signup_view,name='patientsignup'),
-    path('accounts/profile/', views.profile, name='profile'),
+    path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.patient_edit_profile,name='patient_edit_profile'),
     path('search/', views.search_results, name='search_results'),
     path('book_appointment/<int:doctor_pk>/<str:doctor_name>/', views.book_appointment, name='book_appointment'),
@@ -22,5 +24,6 @@ urlpatterns = [
     path('receiver-request/create/', views.receiver_request_create_view, name='receiver_request_create'),
     path('receiver-request/success/', views.receiver_request_success_view, name='receiver_request_success'),
     path('receiver-request/list/', views.receiver_request_list_view, name='receiver_request_list'),
+    path('change-password/', MyPasswordChangeView.as_view(), name='change_password'),
 
 ]

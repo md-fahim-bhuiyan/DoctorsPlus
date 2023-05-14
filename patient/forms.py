@@ -70,3 +70,5 @@ class ReceiverRequestForm(forms.ModelForm):
         self.fields['age'].widget.attrs.update({'class': 'form-control'})
         self.fields['hospital'].widget.attrs.update({'class': 'form-control'})
         self.fields['contact_number'].widget.attrs.update({'class': 'form-control'})
+
+

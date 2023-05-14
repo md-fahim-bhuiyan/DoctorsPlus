@@ -16,6 +16,8 @@ from .models import Appointment
 from django.contrib import messages
 from .forms import DonationRequestForm, ReceiverRequestForm
 from .models import DonationRequest, ReceiverRequest
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 
 today = datetime.date.today()
 formatted_date = today.strftime('%Y-%m-%d')
@@ -46,6 +48,13 @@ def patient_signup_view(request):
     return render(request,'patient/patientsignup.html',context=mydict)
 
 
+
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = 'patient/password_change.html'
+    success_url = reverse_lazy('patient-dashboard') # change to your desired success url
+
+@login_required
 def patient(user):
     return user.is_authenticated and hasattr(user, 'patient')
 

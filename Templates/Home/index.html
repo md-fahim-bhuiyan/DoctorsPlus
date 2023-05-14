@@ -78,7 +78,7 @@
           <i class="fas fa-user" style="color:white">
           </i>
           {% if user.patient %}
-          <a href="{% url 'profile' %}">{{user.username |upper}}</a>
+          <a href="{% url 'patient-dashboard' %}">{{user.username |upper}}</a>
           {% elif user.doctor %}
           <a href="{% url 'docProfile' %}">{{user.username |upper}}</a>
           {% endif %}

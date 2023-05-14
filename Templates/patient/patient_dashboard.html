@@ -1,5 +1,6 @@
 {% load static %}
 {% if request.user.patient %}
+<title>Dashboard | Patient | Doctor'SPlus</title>
 {% include "patient/sidenav_bar.html" %}
 {% else %}
 {% include "patient/404.html" %}
