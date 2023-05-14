@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Doner Request</title>
+</head>
+{% include "admin/side_nav_bar.html" %}
+
+<body>
+    
+
+<div class="container mb-4">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header bg-danger text-white">
+          <h2 class="text-center">Blood Request History</h2>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Doner Name</th>
+                <th scope="col">Blood Type</th>
+                <th scope="col">Quantity (ml)</th>
+                <th scope="col">Hospital </th>
+                <th scope="col">Requested on</th>
+                <th scope="col">Status</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for request in requests %}
+              <tr>
+                <td>{{ request.receiver_name }}</td>
+                <td>{{ request.blood_group }}</td>
+                <td>{{ request.units_required }}</td>
+                <td>{{request.hospital}}</td>
+                <td>{{ request.created_at }}</td>
+                <td>{{ request.is_approved }}</td>
+                <td><a href="{% url 'admin_edit_receiver_request' request.id %}">Edit</a></td>
+
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6">No donation requests found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
