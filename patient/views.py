@@ -5,17 +5,13 @@ from django.db.models import Sum,Q
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import date
-from .models import Patient
-from .forms import PatientForm
+from .models import Patient, ContactMessage, DonationRequest, ReceiverRequest, Appointment
+from .forms import PatientForm, ContactForm, DonationRequestForm, ReceiverRequestForm, AppointmentForm
 import datetime
 from django.contrib.auth import authenticate, login
 from doctor.models import Doctor
 from django.http import HttpResponse
-from .forms import AppointmentForm
-from .models import Appointment
 from django.contrib import messages
-from .forms import DonationRequestForm, ReceiverRequestForm
-from .models import DonationRequest, ReceiverRequest
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 
@@ -220,3 +216,23 @@ def receiver_request_success_view(request):
 def receiver_request_list_view(request):
     receiver_requests = ReceiverRequest.objects.filter(user=request.user)
     return render(request, 'bloodbank/receiver_request_list.html', {'receiver_requests': receiver_requests})
+
+
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            ContactMessage.objects.create(name=name, email=email, message=message)
+            return redirect('contact_success')
+    else:
+        form = ContactForm()
+
+    return render(request, 'patient/contact.html', {'form': form})
+
+def contact_success(request):
+    return render(request, 'patient/contact_success.html')

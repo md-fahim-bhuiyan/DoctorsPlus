@@ -25,5 +25,7 @@ urlpatterns = [
     path('receiver-request/success/', views.receiver_request_success_view, name='receiver_request_success'),
     path('receiver-request/list/', views.receiver_request_list_view, name='receiver_request_list'),
     path('change-password/', MyPasswordChangeView.as_view(), name='change_password'),
+    path('contact/', views.contact, name='contact'),
+    path('contact/success/', views.contact_success, name='contact_success'),
 
 ]

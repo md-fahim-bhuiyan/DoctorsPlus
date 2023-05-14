@@ -71,3 +71,13 @@ class ReceiverRequest(models.Model):
     contact_number = models.CharField(max_length=20)
     is_approved = models.CharField(default='PENDING', max_length=8, choices=APPROVED)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=100)
+    message = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"
