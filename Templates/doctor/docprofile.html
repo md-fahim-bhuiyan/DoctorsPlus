@@ -8,18 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Doctor Profile</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'CSS/docprofile.css'%}">
 </head>
 {% include "doctor/sidenav_bar.html" %}
 
 <body>
-    <div class="container">
+    <div class="container"  style="margin-top: 20px; margin-bottom: 0px;">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <header class="card-header">
-                        <h4 class="card-title mt-2">Doctor Profile</h4>
+                        <h4 class="card-title">Doctor Profile</h4>
                     </header>
                     <article class="card-body">
                         <div class="profile-photo">
@@ -123,6 +122,9 @@
             </div> <!-- col.//-->
         </div> <!-- row.//-->
     </div>
+    <footer class="py-2">
+          <div class="small text-center text-muted">Doctor'sPlus &copy; 2023</div>
+      </footer>
 </body>
 
 </html>
