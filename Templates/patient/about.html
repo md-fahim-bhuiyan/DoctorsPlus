@@ -5,14 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Doctor'SPlus</title>
+    <title>About | Doctor'sPlus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@300&family=Kanit:ital,wght@1,100&display=swap" rel="stylesheet">
 </head>
 <body>
+    {% if user.patient %}
     {% include "patient/sidenav_bar.html" %}
+    {% elif user.doctor %}
+    {% include "doctor/sidenav_bar.html" %}
+    {%else%}
+    {% include "admin/side_nav_bar.html" %}
+    {% endif %}
+    
 <div class="container">
     <div class="container pl-5">
 
