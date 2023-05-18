@@ -12,7 +12,6 @@ urlpatterns = [
     path('profile/edit/', views.patient_edit_profile,name='patient_edit_profile'),
     path('search/', views.search_results, name='search_results'),
     path('book_appointment/<int:doctor_pk>/<str:doctor_name>/', views.book_appointment, name='book_appointment'),
-    path('payment', views.payment, name='payment'),
     path('patient-dashboard', views.patient_dashboard_view,name='patient-dashboard'),
     path('bloodbank', views.bloodbank, name='bloodbank'),
     path('donation/request/', views.create_donation_request, name='create_donation_request'),
@@ -28,5 +27,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('contact/success/', views.contact_success, name='contact_success'),
     path('about/', views.about, name='about'),
+    path('payment/', views.payment, name='payment'),
+
 
 ]

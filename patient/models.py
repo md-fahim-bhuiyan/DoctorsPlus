@@ -31,6 +31,7 @@ class Appointment(models.Model):
     patient_name = models.CharField(max_length=100)
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
+    consultation_fee = models.DecimalField(max_digits=8, decimal_places=2, default= 0)
     # fee = models.IntegerField()
 
 BLOOD_GROUPS = [

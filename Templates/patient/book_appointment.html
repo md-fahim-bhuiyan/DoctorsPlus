@@ -31,6 +31,10 @@
                 <label for="{{ form.patient_name.id_for_label }}">Patient Name:</label>
                 {% render_field form.patient_name|add_class:"form-control" %}
               </div>
+              <div class="form-group">
+                <label for="{{ form.consultation_fee.id_for_label }}">Consultation Fee: ৳{{ consultation_fee }}</label>
+                <input type="hidden" name="consultation_fee" value="{{ consultation_fee }}">
+              </div>
               <button type="submit" class="btn btn-primary btn-block">Payment Process</button>
             </form>
           </div>

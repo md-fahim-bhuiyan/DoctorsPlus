@@ -12,13 +12,13 @@
 {% if request.user.patient %}
 <script>
     setTimeout(function () {
-        window.location.href = "{% url 'profile' %}";
+        window.location.href = "{% url 'patient-dashboard' %}";
     }, 100);
 </script>
 {% elif request.user.doctor %}
 <script>
     setTimeout(function () {
-        window.location.href = "{% url 'docProfile' %}";
+        window.location.href = "{% url 'doctor-dashboard' %}";
     }, 100);
 </script>
 {%else%}

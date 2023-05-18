@@ -32,7 +32,7 @@
                 <h5 class="card-title">{{ doctor }}</h5>
                 <p class="card-text">{{ doctor.specialist }}</p>
                 <p class="card-text">{{ doctor.experience }} years of experience</p>
-                <p class="card-text">Consultation Fee(Include Tax): {{ doctor.consultation_fee|mul:1.10|floatformat:0 }}</p>
+                <p class="card-text">Consultation Fee(Include Tax): ৳ {{ doctor.consultation_fee|mul:1.10|floatformat:0 }}</p>
                 <a href="{% url 'book_appointment' doctor.pk doctor %}" class="btn btn-primary">Book Appointment</a>
 
             </div>

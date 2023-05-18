@@ -7,7 +7,7 @@ def home(request):
 
 @login_required
 def profile(request):
-    return render(request, 'patient/success.html')
+    return render(request, 'Home/after_login.html')
 
 
 @login_required

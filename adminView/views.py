@@ -49,19 +49,6 @@ def admin_view_donation_requests(request):
     return render(request, 'admin/admin_view_donation_requests.html', {'requests': donation_requests})
 
 
-# def admin_edit_donation_request(request, request_id):
-#     donation_request = get_object_or_404(DonationRequest, id=request_id)
-
-#     if request.method == 'POST':
-#         form = DonationRequestForm(request.POST, instance=donation_request)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('admin_view_donation_requests')
-#     else:
-#         form = DonationRequestForm(instance=donation_request)
-
-#     return render(request, 'admin/admin_edit_donation_request.html', {'form': form})
-
 def admin_edit_donation_request(request, request_id):
     donation_request = get_object_or_404(DonationRequest, id=request_id)
 

@@ -69,6 +69,10 @@ def profile(request):
     context = {'mobile': patient.mobile, 'gender': patient.gender,'address':patient.address, 'age': age}
     return render(request, 'patient/profile.html', context)
 
+@login_required
+def patient_dashboard_view(request):
+   return render(request,'patient/patient_dashboard.html')
+
 
 @login_required
 @user_passes_test(Patient)
@@ -104,29 +108,27 @@ def search_results(request):
     return render(request, 'patient/search.html', {'form': form})
 
 
-def patient_dashboard_view(request):
-   return render(request,'patient/patient_dashboard.html')
-
-
 def book_appointment(request, doctor_pk, doctor_name):
+    doctor = Doctor.objects.get(pk=doctor_pk)
+    consultation_fee = doctor.consultation_fee  # Get the consultation fee from the doctor object
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
             appointment_date = form.cleaned_data['appointment_date']
             appointment_time = form.cleaned_data['appointment_time']
             patient_name = form.cleaned_data['patient_name']
-            doctor = Doctor.objects.get(pk=doctor_pk)
             appointment = Appointment(appointment_date=appointment_date, appointment_time=appointment_time, doctor=doctor, patient_name=patient_name)
             appointment.save()
             messages.success(request, 'Appointment has been booked successfully!')
             return redirect('payment')
     else:
         form = AppointmentForm(initial={'doctor': doctor_name})
-    return render(request, 'patient/book_appointment.html', {'form': form})
+    return render(request, 'patient/book_appointment.html', {'form': form, 'consultation_fee': consultation_fee})
+
 
 
 def payment(request):
-    return render(request, 'patient/appointment.html')
+    return render(request, 'patient/payment_process.html')
 
 
 def bloodbank(request):
