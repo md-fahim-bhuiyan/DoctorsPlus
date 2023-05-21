@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Doctor(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bmdc = models.CharField(max_length=10, null=False, unique=True, default='')
     address = models.CharField(max_length=40, default='')
-    mobile = models.CharField(max_length=20, null=False, unique=True, default='')
+    mobile = models.CharField(
+        max_length=20, null=False, unique=True, default='')
     date_of_birth = models.DateField(null=True, blank=True)
     specialist = models.CharField(max_length=40, default='')
     experience = models.CharField(max_length=2, default='')
@@ -23,9 +25,11 @@ class Doctor(models.Model):
     @property
     def full_name(self):
         return self.user.first_name+" "+self.user.last_name
+
     @property
     def get_instance(self):
         return self
+
     def __str__(self):
         return self.user.first_name + " "+self.user.last_name
 

@@ -1,35 +1,36 @@
-from django.shortcuts import render,redirect,reverse
-from . import forms,models
+from django.shortcuts import render, redirect, reverse
+from . import forms, models
 from django.contrib.auth.models import Group
-from django.contrib.auth.decorators import login_required,user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import date
 from .models import Patient, ContactMessage, DonationRequest, ReceiverRequest, Appointment
 from .forms import SearchForm, PatientForm, ContactForm, DonationRequestForm, ReceiverRequestForm, AppointmentForm
-import datetime
 from django.contrib.auth import authenticate, login
 from doctor.models import Doctor
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+import datetime
+
 
 today = datetime.date.today()
 formatted_date = today.strftime('%Y-%m-%d')
 
 
 def patient_signup_view(request):
-    userForm=forms.PatientUserForm()
-    patientForm=forms.PatientForm()
-    mydict={'userForm':userForm,'patientForm':patientForm}
-    if request.method=='POST':
-        userForm=forms.PatientUserForm(request.POST)
-        patientForm=forms.PatientForm(request.POST,request.FILES)
+    userForm = forms.PatientUserForm()
+    patientForm = forms.PatientForm()
+    mydict = {'userForm': userForm, 'patientForm': patientForm}
+    if request.method == 'POST':
+        userForm = forms.PatientUserForm(request.POST)
+        patientForm = forms.PatientForm(request.POST, request.FILES)
         if userForm.is_valid() and patientForm.is_valid():
-            user=userForm.save()
+            user = userForm.save()
             user.set_password(user.password)
             user.save()
-            patient=patientForm.save(commit=False)
-            patient.user=user
+            patient = patientForm.save(commit=False)
+            patient.user = user
             patient.save()
             print("save")
             my_patient_group = Group.objects.get_or_create(name='PATIENT')
@@ -39,14 +40,14 @@ def patient_signup_view(request):
                                 password=userForm.cleaned_data['password'])
             login(request, user)
             return redirect('home')
-    return render(request,'patient/patientsignup.html',context=mydict)
-
-
+    return render(request, 'patient/patientsignup.html', context=mydict)
 
 
 class MyPasswordChangeView(PasswordChangeView):
     template_name = 'patient/password_change.html'
-    success_url = reverse_lazy('patient-dashboard') # change to your desired success url
+    # change to your desired success url
+    success_url = reverse_lazy('patient-dashboard')
+
 
 @login_required
 def patient(user):
@@ -66,12 +67,14 @@ def profile(request):
     user = request.user
     patient = Patient.objects.get(user=user)
     age = calculate_age(patient.date_of_birth)
-    context = {'mobile': patient.mobile, 'gender': patient.gender,'address':patient.address, 'age': age}
+    context = {'mobile': patient.mobile, 'gender': patient.gender,
+               'address': patient.address, 'age': age}
     return render(request, 'patient/profile.html', context)
+
 
 @login_required
 def patient_dashboard_view(request):
-   return render(request,'patient/patient_dashboard.html')
+    return render(request, 'patient/patient_dashboard.html')
 
 
 @login_required
@@ -93,8 +96,8 @@ def patient_edit_profile(request):
     context = {'patient_form': patient_form}
     return render(request, 'patient/edit_profile.html', context)
 
-@login_required
-@user_passes_test(Patient)
+
+# @login_required
 def search_results(request):
     if request.method == 'GET':
         form = SearchForm(request.GET)
@@ -110,21 +113,23 @@ def search_results(request):
 
 def book_appointment(request, doctor_pk, doctor_name):
     doctor = Doctor.objects.get(pk=doctor_pk)
-    consultation_fee = doctor.consultation_fee  # Get the consultation fee from the doctor object
+    # Get the consultation fee from the doctor object
+    consultation_fee = doctor.consultation_fee
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
             appointment_date = form.cleaned_data['appointment_date']
             appointment_time = form.cleaned_data['appointment_time']
             patient_name = form.cleaned_data['patient_name']
-            appointment = Appointment(appointment_date=appointment_date, appointment_time=appointment_time, doctor=doctor, patient_name=patient_name)
+            appointment = Appointment(appointment_date=appointment_date,
+                                      appointment_time=appointment_time, doctor=doctor, patient_name=patient_name)
             appointment.save()
-            messages.success(request, 'Appointment has been booked successfully!')
+            messages.success(
+                request, 'Appointment has been booked successfully!')
             return redirect('payment')
     else:
         form = AppointmentForm(initial={'doctor': doctor_name})
     return render(request, 'patient/book_appointment.html', {'form': form, 'consultation_fee': consultation_fee})
-
 
 
 def payment(request):
@@ -137,16 +142,20 @@ def bloodbank(request):
 
 @login_required
 def doner_dashboard(request):
-    
+
     requestmade = DonationRequest.objects.filter(user=request.user).count()
-    requestpending = DonationRequest.objects.filter(is_approved='PANDING').count()
-    requestrejected = DonationRequest.objects.filter(is_approved='REJECT').count()
-    requestapproved = DonationRequest.objects.filter(is_approved='APPROVED').count()
+    requestpending = DonationRequest.objects.filter(
+        is_approved='PANDING').count()
+    requestrejected = DonationRequest.objects.filter(
+        is_approved='REJECT').count()
+    requestapproved = DonationRequest.objects.filter(
+        is_approved='APPROVED').count()
 
     return render(request, 'bloodbank/doner_dashboard.html', {'requestpending': requestpending,
                                                               'requestmade': requestmade,
                                                               'requestrejected': requestrejected,
                                                               'requestapproved': requestapproved})
+
 
 @login_required(login_url='patientlogin')
 def create_donation_request(request):
@@ -156,7 +165,8 @@ def create_donation_request(request):
             donation_request = form.save(commit=False)
             donation_request.user = request.user
             donation_request.save()
-            messages.success(request, 'Your donation request has been submitted.')
+            messages.success(
+                request, 'Your donation request has been submitted.')
             return redirect('view_donation_requests')
     else:
         form = DonationRequestForm()
@@ -165,8 +175,10 @@ def create_donation_request(request):
 
 @login_required
 def view_donation_requests(request):
-    donation_requests = DonationRequest.objects.filter(user=request.user).order_by('-created_at')
+    donation_requests = DonationRequest.objects.filter(
+        user=request.user).order_by('-created_at')
     return render(request, 'bloodbank/view_donation_requests.html', {'requests': donation_requests})
+
 
 @login_required
 def approve_donation_request(request, pk):
@@ -175,6 +187,7 @@ def approve_donation_request(request, pk):
     donation_request.save()
     messages.success(request, 'Donation request has been approved.')
     return redirect('view_donation_requests')
+
 
 @login_required
 def reject_donation_request(request, pk):
@@ -186,15 +199,18 @@ def reject_donation_request(request, pk):
 
 def blood_receiver_dashboard(request):
     requestmade = ReceiverRequest.objects.filter(user=request.user).count()
-    requestpending = ReceiverRequest.objects.filter(is_approved='PENDING').count()
-    requestrejected = ReceiverRequest.objects.filter(is_approved='REJECT').count()
-    requestapproved = ReceiverRequest.objects.filter(is_approved='APPROVED').count()
+    requestpending = ReceiverRequest.objects.filter(
+        is_approved='PENDING').count()
+    requestrejected = ReceiverRequest.objects.filter(
+        is_approved='REJECT').count()
+    requestapproved = ReceiverRequest.objects.filter(
+        is_approved='APPROVED').count()
 
     return render(request, 'bloodbank/receiver_dashboard.html', {'requestpending': requestpending,
-                                                              'requestmade': requestmade,
-                                                              'requestrejected': requestrejected,
-                                                              'requestapproved': requestapproved})
-    
+                                                                 'requestmade': requestmade,
+                                                                 'requestrejected': requestrejected,
+                                                                 'requestapproved': requestapproved})
+
 
 def receiver_request_create_view(request):
     form = ReceiverRequestForm()
@@ -207,14 +223,14 @@ def receiver_request_create_view(request):
             return redirect('receiver_request_success')
     return render(request, 'bloodbank/receiver_request_create.html', {'form': form})
 
+
 def receiver_request_success_view(request):
     return render(request, 'bloodbank/receiver_request_success.html')
+
 
 def receiver_request_list_view(request):
     receiver_requests = ReceiverRequest.objects.filter(user=request.user)
     return render(request, 'bloodbank/receiver_request_list.html', {'receiver_requests': receiver_requests})
-
-
 
 
 def contact(request):
@@ -224,15 +240,18 @@ def contact(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
-            ContactMessage.objects.create(name=name, email=email, message=message)
+            ContactMessage.objects.create(
+                name=name, email=email, message=message)
             return redirect('contact_success')
     else:
         form = ContactForm()
 
     return render(request, 'patient/contact.html', {'form': form})
 
+
 def contact_success(request):
     return render(request, 'patient/contact_success.html')
+
 
 def about(request):
     return render(request, 'patient/about.html')
