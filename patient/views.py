@@ -113,8 +113,8 @@ def search_results(request):
 
 def book_appointment(request, doctor_pk, doctor_name):
     doctor = Doctor.objects.get(pk=doctor_pk)
-    # Get the consultation fee from the doctor object
     consultation_fee = doctor.consultation_fee
+
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
@@ -124,17 +124,36 @@ def book_appointment(request, doctor_pk, doctor_name):
             appointment = Appointment(appointment_date=appointment_date,
                                       appointment_time=appointment_time, doctor=doctor, patient_name=patient_name)
             appointment.save()
-            messages.success(
-                request, 'Appointment has been booked successfully!')
+            messages.success(request, 'Appointment has been booked successfully!')
             return redirect('payment')
     else:
         form = AppointmentForm(initial={'doctor': doctor_name})
-    return render(request, 'patient/book_appointment.html', {'form': form, 'consultation_fee': consultation_fee})
 
+    return render(request, 'patient/book_appointment.html', {'form': form, 'consultation_fee': consultation_fee})
 
 def payment(request):
     return render(request, 'patient/payment_process.html')
 
+def process_payment(request):
+    if request.method == 'POST':
+        # Retrieve the form data
+        credit_card_number = request.POST.get('number')
+        expiration_date = request.POST.get('expiry')
+        cardholder_name = request.POST.get('name')
+        cvv = request.POST.get('cvv')
+
+        # Perform payment processing logic here
+        # Add your custom payment processing code
+
+        # Assuming the payment is successful, you can display a success message
+        messages.success(request, 'Payment successful!')
+        return redirect('appointment-details')  # Redirect to the appointment details page or any other appropriate page
+
+    return render(request, 'patient/payment_process.html')
+
+def appointment_details(request):
+    appointment_list = Appointment.objects.all()  # Fetch all appointments from the database
+    return render(request, 'patient/appointment_details.html', {'appointment_list': appointment_list})
 
 
 def bloodbank(request):

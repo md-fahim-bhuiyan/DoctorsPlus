@@ -1,0 +1,36 @@
+<style>
+    .appointment-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  
+    .appointment-card h3 {
+      margin-top: 0;
+    }
+  
+    .appointment-card p {
+      margin: 5px 0;
+    }
+  
+    .no-appointments {
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+  
+  <h2>Appointment Details</h2>
+  
+  {% for appointment in appointment_list %}
+    <div class="appointment-card">
+      <h3>Date: {{ appointment.appointment_date }}</h3>
+      <p>Time: {{ appointment.appointment_time }}</p>
+      <p>Patient: {{ appointment.patient_name }}</p>
+      <p>Doctor: {{ appointment.doctor }}</p>
+    </div>
+  {% empty %}
+    <p class="no-appointments">No appointments available.</p>
+  {% endfor %}
+   

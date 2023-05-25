@@ -28,6 +28,9 @@ urlpatterns = [
     path('contact/success/', views.contact_success, name='contact_success'),
     path('about/', views.about, name='about'),
     path('payment/', views.payment, name='payment'),
+    path('process-payment/', views.process_payment, name='process-payment'),
+    path('appointment-details/', views.appointment_details, name='appointment-details'),
+
 
 
 ]
