@@ -136,6 +136,7 @@ def payment(request):
     return render(request, 'patient/payment_process.html')
 
 
+
 def bloodbank(request):
     return render(request, 'bloodbank/index.html')
 
