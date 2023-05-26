@@ -27,6 +27,7 @@ class Patient(models.Model):
 
 class Appointment(models.Model):
     appointment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     patient_name = models.CharField(max_length=100)
     appointment_date = models.DateField()

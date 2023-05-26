@@ -111,6 +111,7 @@ def search_results(request):
     return render(request, 'patient/search.html', {'form': form})
 
 
+@login_required
 def book_appointment(request, doctor_pk, doctor_name):
     doctor = Doctor.objects.get(pk=doctor_pk)
     consultation_fee = doctor.consultation_fee
@@ -121,8 +122,15 @@ def book_appointment(request, doctor_pk, doctor_name):
             appointment_date = form.cleaned_data['appointment_date']
             appointment_time = form.cleaned_data['appointment_time']
             patient_name = form.cleaned_data['patient_name']
-            appointment = Appointment(appointment_date=appointment_date,
-                                      appointment_time=appointment_time, doctor=doctor, patient_name=patient_name)
+
+            # Set the user field to the current authenticated user
+            appointment = Appointment(
+                appointment_date=appointment_date,
+                appointment_time=appointment_time,
+                doctor=doctor,
+                patient_name=patient_name,
+                user=request.user  # Set the user field to the current user
+            )
             appointment.save()
             messages.success(request, 'Appointment has been booked successfully!')
             return redirect('payment')
@@ -130,6 +138,7 @@ def book_appointment(request, doctor_pk, doctor_name):
         form = AppointmentForm(initial={'doctor': doctor_name})
 
     return render(request, 'patient/book_appointment.html', {'form': form, 'consultation_fee': consultation_fee})
+
 
 def payment(request):
     return render(request, 'patient/payment_process.html')
@@ -152,7 +161,7 @@ def process_payment(request):
     return render(request, 'patient/payment_process.html')
 
 def appointment_details(request):
-    appointment_list = Appointment.objects.all()  # Fetch all appointments from the database
+    appointment_list = Appointment.objects.filter(user=request.user)
     return render(request, 'patient/appointment_details.html', {'appointment_list': appointment_list})
 
 

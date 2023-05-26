@@ -30,7 +30,4 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('process-payment/', views.process_payment, name='process-payment'),
     path('appointment-details/', views.appointment_details, name='appointment-details'),
-
-
-
 ]

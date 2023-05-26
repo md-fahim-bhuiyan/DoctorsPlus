@@ -9,7 +9,7 @@ admin.site.register(Patient,patientview)
 
 
 class Appointmentview(admin.ModelAdmin):
-    list_display = ('patient_name','doctor', 'appointment_date', 'appointment_time')
+    list_display = ('patient_name', 'user', 'doctor', 'appointment_date', 'appointment_time')
 
 admin.site.register(Appointment, Appointmentview)
 
