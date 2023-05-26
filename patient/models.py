@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 import uuid
 from doctor.models import Doctor
 
+
+
+
 class Patient(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE, unique=True)
     #email = models.EmailField()

@@ -12,6 +12,45 @@ from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 import datetime
+import os
+
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+
+SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+def create_google_meet_link():
+    credentials = service_account.Credentials.from_service_account_file(
+        'path/to/your/credentials.json',
+        scopes=SCOPES
+    )
+
+    service = build('calendar', 'v3', credentials=credentials)
+
+    event = {
+        'summary': 'Appointment',
+        'start': {
+            'dateTime': datetime.datetime.now().isoformat(),
+            'timeZone': 'UTC',
+        },
+        'end': {
+            'dateTime': (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat(),
+            'timeZone': 'UTC',
+        },
+        'conferenceData': {
+            'createRequest': {
+                'requestId': 'random-string',
+                'conferenceSolutionKey': {
+                    'type': 'hangoutsMeet',
+                },
+            },
+        },
+    }
+
+    created_event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
+
+    return created_event.get('conferenceData').get('entryPoints')[0].get('uri')
+
 
 
 today = datetime.date.today()
