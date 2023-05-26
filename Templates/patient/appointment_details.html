@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment Details | Patient | Doctor'sPlus</title>
+    <script src="https://kit.fontawesome.com/7c81212c94.js" crossorigin="anonymous"></script>
     <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
     <style>
         body {
@@ -19,35 +20,33 @@
             margin: 0 auto;
         }
 
-        .appointment-card {
+        .appointment-table {
+            width: 100%;
+            border-collapse: collapse;
             background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
         }
 
-        .appointment-card:hover {
+        .appointment-table th,
+        .appointment-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .appointment-table th {
             background-color: #f0f0f0;
         }
 
-        .appointment-card.expired {
+        .appointment-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .expired {
             background-color: #f7f7f7;
             color: #888;
-        }
-
-        .appointment-card h3 {
-            margin-top: 0;
-            font-size: 18px;
-            color: #333;
-        }
-
-        .appointment-card p {
-            margin: 5px 0;
-            font-size: 14px;
-            color: #555;
         }
 
         .no-appointments {
@@ -77,16 +76,28 @@
         <h2 class="section-title">Appointment Details</h2>
         <div class="divider"></div>
 
-        {% for appointment in appointment_list|dictsortreversed:"appointment_date" %}
-          <div class="appointment-card {% if appointment.appointment_date < now %}expired{% endif %}">
-            <h3>Date: {{ appointment.appointment_date }}</h3>
-            <p>Time: {{ appointment.appointment_time }}</p>
-            <p>Patient: {{ appointment.patient_name }}</p>
-            <p>Doctor: {{ appointment.doctor }}</p>
-          </div>
-        {% empty %}
-          <p class="no-appointments">No appointments available.</p>
-        {% endfor %}
+        <table class="appointment-table">
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Google Meet</th>
+            </tr>
+            {% for appointment in appointment_list|dictsortreversed:"appointment_date" %}
+            <tr class="{% if appointment.appointment_date < now %}expired{% endif %}">
+                <td>{{ appointment.appointment_date }}</td>
+                <td>{{ appointment.appointment_time }}</td>
+                <td>{{ appointment.patient_name }}</td>
+                <td>{{ appointment.doctor }}</td>
+                <td><a href="{{ appointment.google_meet_link }}" style="text-decoration: none; color: black;"><i class="fa-solid fa-video"></i> Join On Time!!</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-appointments">No appointments available.</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 </body>
 </html>

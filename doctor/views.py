@@ -98,3 +98,6 @@ def contact(request):
 
 def contact_success(request):
     return render(request, 'doctor/contact_success.html')
+
+
+

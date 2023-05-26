@@ -2,7 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 import uuid
 from doctor.models import Doctor
-
+import random
+import uuid
+from django.db import models
+from django.contrib.auth.models import User
 
 
 
@@ -35,8 +38,35 @@ class Appointment(models.Model):
     patient_name = models.CharField(max_length=100)
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
-    consultation_fee = models.DecimalField(max_digits=8, decimal_places=2, default= 0)
-    # fee = models.IntegerField()
+    consultation_fee = models.DecimalField(max_digits=8, decimal_places=2)
+    google_meet_link = models.URLField(blank=True, null=True, default="")
+
+    def save(self, *args, **kwargs):
+        if not self.google_meet_link:
+            self.google_meet_link = self.create_google_meet_link()
+        super().save(*args, **kwargs)
+
+    def create_google_meet_link(self):
+        meet_links = [
+            "https://meet.google.com/hkf-hhuw-vkx",
+            "https://meet.google.com/txp-vsaa-owk",
+            "https://meet.google.com/ehp-jepq-sym",
+            "https://meet.google.com/kxz-siya-fqu",
+            "https://meet.google.com/aft-ugij-dtf",
+            "https://meet.google.com/hoq-avxu-neu",
+            "https://meet.google.com/cuv-bkpo-wai",
+            "https://meet.google.com/pqf-kqty-geu",
+            "https://meet.google.com/wmv-frdv-jor",
+            "https://meet.google.com/qjh-vrup-axy",
+            "https://meet.google.com/jah-oamw-fsm",
+            "https://meet.google.com/xyx-nyrb-git",
+            "https://meet.google.com/xfr-dokt-pjm",
+            "https://meet.google.com/zhy-opew-sdq",
+            "https://meet.google.com/qxk-xsgm-hks"
+        ]
+        meet_link = random.choice(meet_links)
+        return meet_link
+
 
 BLOOD_GROUPS = [
     ('A+', 'A+'),

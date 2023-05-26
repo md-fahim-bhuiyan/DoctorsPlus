@@ -11,45 +11,8 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+from .google_meet import create_google_meet_link
 import datetime
-import os
-
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-
-SCOPES = ['https://www.googleapis.com/auth/calendar']
-
-def create_google_meet_link():
-    credentials = service_account.Credentials.from_service_account_file(
-        'path/to/your/credentials.json',
-        scopes=SCOPES
-    )
-
-    service = build('calendar', 'v3', credentials=credentials)
-
-    event = {
-        'summary': 'Appointment',
-        'start': {
-            'dateTime': datetime.datetime.now().isoformat(),
-            'timeZone': 'UTC',
-        },
-        'end': {
-            'dateTime': (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat(),
-            'timeZone': 'UTC',
-        },
-        'conferenceData': {
-            'createRequest': {
-                'requestId': 'random-string',
-                'conferenceSolutionKey': {
-                    'type': 'hangoutsMeet',
-                },
-            },
-        },
-    }
-
-    created_event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
-
-    return created_event.get('conferenceData').get('entryPoints')[0].get('uri')
 
 
 
@@ -168,15 +131,23 @@ def book_appointment(request, doctor_pk, doctor_name):
                 appointment_time=appointment_time,
                 doctor=doctor,
                 patient_name=patient_name,
-                user=request.user  # Set the user field to the current user
+                user=request.user,  
+                consultation_fee=consultation_fee,
             )
             appointment.save()
+
+            # Call the create_google_meet_link() function with the appointment object
+            google_meet_link = create_google_meet_link(appointment)
+            appointment.google_meet_link = google_meet_link
+            appointment.save()
+
             messages.success(request, 'Appointment has been booked successfully!')
             return redirect('payment')
     else:
         form = AppointmentForm(initial={'doctor': doctor_name})
 
     return render(request, 'patient/book_appointment.html', {'form': form, 'consultation_fee': consultation_fee})
+
 
 
 def payment(request):
