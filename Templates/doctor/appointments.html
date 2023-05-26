@@ -1,0 +1,103 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Details | Patient | Doctor'sPlus</title>
+    <script src="https://kit.fontawesome.com/7c81212c94.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .appointment-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-table th,
+        .appointment-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .appointment-table th {
+            background-color: #f0f0f0;
+        }
+
+        .appointment-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .expired {
+            background-color: #f7f7f7;
+            color: #888;
+        }
+
+        .no-appointments {
+            font-style: italic;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+  {% include "doctor/sidenav_bar.html" %}
+
+    <div class="container">
+        <h2 class="section-title">Appointment Details</h2>
+        <div class="divider"></div>
+
+        <table class="appointment-table">
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Google Meet</th>
+                <th>Prescription</th>
+            </tr>
+            {% for appointment in appointments|dictsortreversed:"appointment_date" %}
+            <tr class="{% if appointment.appointment_date < now %}expired{% endif %}">
+                <td>{{ appointment.appointment_date }}</td>
+                <td>{{ appointment.appointment_time }}</td>
+                <td>{{ appointment.patient_name }}</td>
+                <td><a href="{{ appointment.google_meet_link }}" style="text-decoration: none; color: black;"><i class="fa-solid fa-video"></i> Join On Time!!</a></td>
+                <td></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-appointments">No appointments available.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

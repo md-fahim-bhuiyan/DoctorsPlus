@@ -101,3 +101,9 @@ def contact_success(request):
 
 
 
+from patient.models import Appointment
+
+def doctor_appointments(request):
+    doctor = request.user.doctor  # Assuming you have a OneToOneField relationship between User and Doctor models
+    appointments = Appointment.objects.filter(doctor=doctor)
+    return render(request, 'doctor/appointments.html', {'appointments': appointments})
