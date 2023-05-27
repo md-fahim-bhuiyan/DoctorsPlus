@@ -44,3 +44,39 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+
+
+from django.db import models
+
+class Prescription(models.Model):
+    problem = models.CharField(max_length=255)
+    date = models.DateField()
+    patient_name = models.CharField(max_length=255)
+    patient_age = models.IntegerField()
+    patient_weight = models.FloatField()
+    gender = models.CharField(max_length=10)
+    patient_blood_pressure = models.CharField(max_length=50)
+    patient_email = models.EmailField()
+    doctor_name = models.CharField(max_length=255, default='')
+    registration_number = models.CharField(max_length=50)
+    specialty = models.CharField(max_length=255)
+    doctor_email = models.EmailField()
+    doctor_phone = models.CharField(max_length=20)
+
+class Medication(models.Model):
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+    medication = models.CharField(max_length=255)
+    FREQUENCY_CHOICES = [
+        ('morning', 'Morning'),
+        ('afternoon', 'Afternoon'),
+        ('evening', 'Evening'),
+    ]
+    dose = models.CharField(max_length=20, choices=FREQUENCY_CHOICES)
+    duration = models.CharField(max_length=50)
+    eat_time = models.CharField(max_length=10)
+
+class Test(models.Model):
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+    test = models.CharField(max_length=255)
+
+

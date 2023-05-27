@@ -37,4 +37,30 @@ class ContactForm(forms.Form):
     bmdc = forms.CharField(label='BMDC', max_length=10)
     subject = forms.CharField(label='Subject', max_length=100)
     message = forms.CharField(label='Message', widget=forms.Textarea)
-        
+
+from django import forms
+
+class PrescriptionForm(forms.Form):
+    problem = forms.CharField(max_length=255)
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    patient_name = forms.CharField(max_length=255)
+    patient_age = forms.IntegerField()
+    patient_weight = forms.FloatField()
+    gender = forms.ChoiceField(choices=[('male', 'Male'), ('female', 'Female'), ('other', 'Other')])
+    patient_blood_pressure = forms.CharField(max_length=50)
+    patient_email = forms.EmailField()
+    doctor_name = forms.CharField(max_length=255)
+    registration_number = forms.CharField(max_length=50)
+    specialty = forms.CharField(max_length=255, disabled=True)
+    doctor_email = forms.EmailField()
+    doctor_phone = forms.CharField(max_length=20)
+
+class MedicationForm(forms.Form):
+    medication = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control medication', 'required': True}))
+    dose = forms.MultipleChoiceField(choices=[('morning', 'Morning'), ('afternoon', 'Afternoon'), ('evening', 'Evening')],
+                                     widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}))
+    duration = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control', 'required': True}))
+    eat_time = forms.ChoiceField(choices=[('before', 'Before'), ('after', 'After')], widget=forms.Select(attrs={'class': 'form-control', 'required': True}))
+
+class TestForm(forms.Form):
+    test = forms.CharField(max_length=255)

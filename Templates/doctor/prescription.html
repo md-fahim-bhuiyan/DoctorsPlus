@@ -25,6 +25,7 @@
         <h1 style="text-align: center;">Prescription</h1>
         
             <div class="form-group">
+                <form action="" method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="problem">Problem:</label>
@@ -41,16 +42,17 @@
             <h4>Patient Information:</h4>
             <div class="form-group row">
                 <div class="col-md-3">
-                    <label for="patient-name">Name</label>
-                    <input type="text" class="form-control" id="patient-name" name="patient-name" required>
+                    <label for="patient_name">Name</label>
+                    <input type="text" class="form-control" id="patient_name" name="patient_name" required>
                 </div>
                 <div class="col-md-2">
-                    <label for="patient-age">Age(Years)</label>
-                    <input type="number" class="form-control" id="patient-age" name="patient-name" required>
+                    <label for="patient_age">Age(Years)</label>
+                    <input type="number" class="form-control" id="patient-age" name="patient_age" required>
                 </div>
+
                 <div class="col-md-2">
-                    <label for="patient-weight">Weight(KG)</label>
-                    <input type="number" class="form-control" id="patient-weight" name="patient-name" required>
+                    <label for="patient_weight">Weight(KG)</label>
+                    <input type="number" class="form-control" id="patient_weight" name="patient_weight" required>
                 </div>
                 <div class="col-md-1">
                     <label for="gender">Gender </label> <br>
@@ -62,12 +64,12 @@
 
                 </div>
                 <div class="col-md-2">
-                    <label for="patient-blood">Blood Pressure</label>
-                    <input type="text" class="form-control" id="patient-blood" name="patient-blood" required>
+                    <label for="patient_blood_pressure">Blood Pressure</label>
+                    <input type="text" class="form-control" id="patient_blood_pressure" name="patient_blood_pressure" required>
                 </div>
                 <div class="col-md-2">
-                    <label for="patient-email">Email</label>
-                    <input type="email" class="form-control" id="patient-email" name="patient-email" required>
+                    <label for="patient_email">Email</label>
+                    <input type="email" class="form-control" id="patient_email" name="patient_email" required>
                 </div>
 
             </div>
@@ -76,24 +78,24 @@
             <h4>Doctor Information:</h4>
             <div class="form-group row">
                 <div class="col-md-3">
-                  <label for="name">Name:</label>
-                  <input type="text" class="form-control" id="name" name="name">
+                  <label for="doctor_name">Name:</label>
+                  <input type="text" class="form-control" id="doctor_name" value="DR. {{ user.first_name |upper }} {{ user.last_name |upper }}" name="doctor_name">
                 </div>
                 <div class="col-md-3">
-                  <label for="registration-number">BBM&DC Registration Number:</label>
-                  <input type="text" class="form-control" id="registration-number" name="registration-number">
+                  <label for="registration_number">BBM&DC Registration Number:</label>
+                  <input type="text" class="form-control" id="registration_number" name="registration_number">
               </div>
                 <div class="col-md-2">
                   <label for="specialty">Specialty:</label>
-                  <input type="text" class="form-control" id="specialty" name="specialty" required disabled value="{{doctor.speciality}}">
+                  <input type="text" class="form-control" id="specialty" name="specialty" required value="">
                 </div>
               <div class="col-md-2">
-                <label for="doctor-email">Email:</label>
-                <input type="email" class="form-control" id="doctor-email" name="doctor-email">
+                <label for="doctor_email">Email:</label>
+                <input type="email" class="form-control" id="doctor_email" name="doctor_email">
               </div>
               <div class="col-md-2">
-                <label for="doctor-phone">Phone:</label>
-                <input type="tel" class="form-control" id="doctor-phone" name="doctor-phone">
+                <label for="doctor_phone">Phone:</label>
+                <input type="tel" class="form-control" id="doctor_phone" name="doctor_phone">
               </div>
             </div>
             <h4>Medication:</h4>
@@ -120,11 +122,11 @@
 
                 <div class="col-md-2">
                     <label for="duration">Duration:</label>
-                    <input type="text" id="duration" name="Duratione" class="form-control" required>
+                    <input type="text" id="duration" name="duration" class="form-control" required>
                 </div>
                 <div class="col-md-3">
-                    <label for="eat-time">Before/After eat:</label>
-                    <select id="eat-time" name="eat-time" class="form-control" required>
+                    <label for="eat_time">Before/After eat:</label>
+                    <select id="eat_time" name="eat_time" class="form-control" required>
                         <option value="before">Before</option>
                         <option value="after">After</option>
                     </select>
@@ -165,15 +167,15 @@
                     '<div class="col-md-4">' +
                     '<label for="dose' + medicationCount + '">Frequency: </label>' + "<br>" +
                     '<div class="form-check form-check-inline">' +
-                    '<input class="form-check-input" type="checkbox" id="morning' + medicationCount + '" name="morning[]" value="morning">' +
+                    '<input class="form-check-input" type="checkbox" id="morning' + medicationCount + '" name="dose[]" value="morning">' +
                     '<label class="form-check-label" for="morning' + medicationCount + '"> Morning</label>' +
                     '</div>' +
                     '<div class="form-check form-check-inline">' +
-                    '<input class="form-check-input" type="checkbox" id="afternoon' + medicationCount + '" name="afternoon[]" value="afternoon">' +
+                    '<input class="form-check-input" type="checkbox" id="afternoon' + medicationCount + '" name="dose[]" value="afternoon">' +
                     '<label class="form-check-label" for="afternoon' + medicationCount + '">Afternoon</label>' +
                     '</div>' +
                     '<div class="form-check form-check-inline">' +
-                    '<input class="form-check-input" type="checkbox" id="evening' + medicationCount + '" name="evening[]" value="evening">' +
+                    '<input class="form-check-input" type="checkbox" id="evening' + medicationCount + '" name="dose[]" value="evening">' +
                     '<label class="form-check-label" for="evening' + medicationCount + '">Evening</label>' +
                     '</div>' +
                     '</div>' +
@@ -183,8 +185,8 @@
                     '<input type="text" id="duration' + medicationCount + '" name="duration[]" class="form-control">' +
                     '</div>' +
                     '<div class="col-md-3">' +
-                    '<label for="meal-time' + medicationCount + '">Before/After eat:</label>' +
-                    '<select id="meal-time' + medicationCount + '" name="meal-time[]" class="form-control">' +
+                    '<label for="eat_time' + medicationCount + '">Before/After eat:</label>' +
+                    '<select id="eat_time' + medicationCount + '" name="eat_time[]" class="form-control">' +
                     '<option value="before">Before</option>' +
                     '<option value="after">After</option>' +
                     '</select>' +
