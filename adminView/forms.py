@@ -47,11 +47,11 @@ class BloodForm(forms.ModelForm):
 class DiagnosticForm(forms.ModelForm):
     class Meta:
         model = Diagnostic
-        fields = ['test_name', 'description', 'price', 'category']
+        fields = ['test_name', 'price', 'category', 'description']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['test_name'].widget.attrs.update({'class': 'form-control'})
-        self.fields['description'].widget.attrs.update({'class': 'form-control'})
         self.fields['price'].widget.attrs.update({'class': 'form-control'})
         self.fields['category'].widget.attrs.update({'class': 'form-control'})
+        self.fields['description'].widget.attrs.update({'class': 'form-control'})

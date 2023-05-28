@@ -158,9 +158,10 @@ class DiagnosticDetailView(DetailView):
 class DiagnosticUpdateView(UpdateView):
     model = Diagnostic
     template_name = 'diagnostics/update.html'
-    fields = ['test_name', 'description', 'price', 'category']
+    form_class = DiagnosticForm
     context_object_name = 'diagnostic'
     success_url = reverse_lazy('list')
+
 
 class DiagnosticDeleteView(DeleteView):
     model = Diagnostic

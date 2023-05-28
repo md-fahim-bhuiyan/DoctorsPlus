@@ -1,85 +1,89 @@
 {% load static %}
 
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnostic List</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    .container {
-      margin: 30px auto;
-      max-width: 800px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin: 30px auto !important;
+            max-width: 800px !important;
+        }
 
-    .table {
-      width: 100%;
-      margin-bottom: 20px;
-      border: 1px solid #dee2e6;
-    }
+        .table {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
 
-    .table th {
-      font-weight: bold;
-    }
+        .table th {
+            font-weight: bold;
+        }
 
-    .table td, .table th {
-      padding: 12px;
-      vertical-align: middle;
-      border-top: 1px solid #dee2e6;
-    }
+        .table td,
+        .table th {
+            padding: 12px;
+            vertical-align: middle;
+            border-top: 1px solid #dee2e6;
+        }
 
-    .table .actions {
-      white-space: nowrap;
-    }
+        .table .actions {
+            white-space: nowrap;
+        }
 
-    .table .actions a {
-      margin-right: 10px;
-    }
-  </style>
+        .table .actions a {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 {% include "admin/side_nav_bar.html" %}
 
 <body>
-  <div class="container">
-    {% block content %}
-    <h1 class="mt-4 mb-4 text-center">Diagnostic List</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Test Name</th>
-          <th class="text-center">Price</th>
-          <th class="text-right" style="padding-right: 10%;">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for diagnostic in diagnostics %}
-          <tr>
-            <td>{{ diagnostic.test_name }}</td>
-            <td class="text-center"> ৳{{ diagnostic.price }}</td>
-            <td class="actions text-right">
-              <a href="{% url 'detail' diagnostic.pk %}" class="btn btn-primary">Details</a>
-              <a href="{% url 'edit' diagnostic.pk %}" class="btn btn-success">Edit</a>
-              <a href="{% url 'delete' diagnostic.pk %}" class="btn btn-danger">Delete</a>
-            </td>
-          </tr>
-          
-        {% empty %}
-          <tr>
-            <td colspan="3">No diagnostics available.</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% endblock %}
-    <div class="text-right mb-3">
-        <a href="{% url 'create' %}" class="btn btn-primary">Add New</a>
-      </div>  </div>
-      {% include "Home/footer.html" %}
+    <div class="container">
+        {% block content %}
+        <h1 class="mt-4 mb-4 text-center">Diagnostic List</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-right" style="padding-right: 14%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for diagnostic in diagnostics %}
+                <tr>
+                    <td>{{ diagnostic.test_name }}</td>
+                    <td class="text-center"> ৳{{ diagnostic.price }}</td>
+                    <td class="actions text-right">
+                        <a href="{% url 'detail' diagnostic.pk %}" class="btn btn-primary">Details</a>
+                        <a href="{% url 'edit' diagnostic.pk %}" class="btn btn-success">Edit</a>
+                        <a href="{% url 'delete' diagnostic.pk %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No diagnostics available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endblock %}
+        <div class="text-right mb-3">
+            <a href="{% url 'create' %}" class="btn btn-primary">Add New</a>
+        </div>
+    </div>
+    {% include "Home/footer.html" %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

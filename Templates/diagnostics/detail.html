@@ -1,9 +1,49 @@
 {% extends 'patient/base.html' %}
 
 {% block content %}
-  <h1>Diagnostic Detail</h1>
-  <h2>{{ diagnostic.test_name }}</h2>
-  <p><strong>Description:</strong> {{ diagnostic.description }}</p>
-  <p><strong>Price:</strong> ${{ diagnostic.price }}</p>
-  <p><strong>Category:</strong> {{ diagnostic.get_category_display }}</p>
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1 class="mb-0 text-center">{{ diagnostic.test_name }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="card-title">Description:</h5>
+
+                </div>
+                <div class="col-md-8">
+                    <p class="card-text">{{ diagnostic.description }}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="card-title">Category:</h5>
+
+                </div>
+                <div class="col-md-8">
+                    <p class="card-text">{{ diagnostic.get_category_display }}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="card-title">Price:</h5>
+
+                </div>
+                <div class="col-md-8">
+                    <p class="card-text">৳{{ diagnostic.price }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-right">
+            <a href="{% url 'list' %}" class="btn btn-primary">List</a>
+            <a href="{% url 'edit' diagnostic.pk %}" class="btn btn-success">Edit</a>
+            <a href="{% url 'delete' diagnostic.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</div>
+{% include "Home/footer.html" %}
+
 {% endblock %}

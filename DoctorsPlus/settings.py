@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'Home',
     'patient',
     'doctor',
-     'adminView',
+    'adminView',
     'mathfilters',
 ]
 
