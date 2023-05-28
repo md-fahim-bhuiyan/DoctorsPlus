@@ -6,3 +6,16 @@ class Stock(models.Model):
     unit=models.PositiveIntegerField(default=0)
     def __str__(self):
         return self.bloodgroup
+    
+
+class Diagnostic(models.Model):
+    CATEGORY_CHOICES = (
+        ('blood', 'Blood'),
+        ('urine', 'Urine'),
+        ('other', 'Other'),
+    )
+
+    test_name = models.CharField(max_length=50)
+    description = models.TextField(max_length=200)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
