@@ -1,0 +1,67 @@
+{% load static %}
+
+<html>
+<head>
+  <title>Create Diagnostic</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .container {
+      margin: 0 auto;
+      margin-top: 30px;
+      max-width: 500px;
+      padding: 20px; 
+      background:  linear-gradient(#F5F5F5,
+                    #dbdbe2);;
+                    border-radius: 5px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .form-control:focus {
+      border-color: #80bdff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mb-4">Create Diagnostic</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.test_name.id_for_label }}">Test Name:</label>
+        {{ form.test_name }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.description.id_for_label }}">Description:</label>
+        {{ form.description }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.price.id_for_label }}">Price:</label>
+        {{ form.price }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.category.id_for_label }}">Category:</label>
+        {{ form.category }}
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary" type="submit">Create</button>
+      </div>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

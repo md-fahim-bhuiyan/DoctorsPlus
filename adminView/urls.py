@@ -1,7 +1,10 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-
+from .views import (
+    DiagnosticUpdateView,
+    DiagnosticDeleteView,
+)
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='admin/login.html'), name='adminlogin'),
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
@@ -12,5 +15,9 @@ urlpatterns = [
     path('receiver-request/edit/<int:request_id>/',views.admin_edit_receiver_request, name='admin_edit_receiver_request'),
     path('admin-blood', views.admin_blood_view,name='admin-blood'),
     path('about/', views.about, name='admin_about'),
-
+    path('create/', views.create_diagnostic, name='create'),
+    path('list/', views.DiagnosticListView.as_view(), name='list'),
+    path('<int:pk>/', views.DiagnosticDetailView.as_view(), name='detail'),
+    path('<int:pk>/update/', DiagnosticUpdateView.as_view(), name='edit'),
+    path('<int:pk>/delete/', DiagnosticDeleteView.as_view(), name='delete'),
 ]

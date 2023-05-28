@@ -9,7 +9,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect
 from django.db.models import Sum
 from .models import Stock
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 class CustomLoginView(LoginView):
     template_name = 'admin/login.html'
@@ -128,3 +129,41 @@ def admin_blood_view(request):
 
 def about(request):
     return render(request, 'patient/about.html')
+
+
+from django.views.generic import ListView, DetailView
+from .models import Diagnostic
+from .forms import DiagnosticForm
+
+def create_diagnostic(request):
+    if request.method == 'POST':
+        form = DiagnosticForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list')
+    else:
+        form = DiagnosticForm()
+    return render(request, 'diagnostics/create.html', {'form': form})
+
+class DiagnosticListView(ListView):
+    model = Diagnostic
+    template_name = 'diagnostics/list.html'
+    context_object_name = 'diagnostics'
+
+class DiagnosticDetailView(DetailView):
+    model = Diagnostic
+    template_name = 'diagnostics/detail.html'
+    context_object_name = 'diagnostic'
+
+class DiagnosticUpdateView(UpdateView):
+    model = Diagnostic
+    template_name = 'diagnostics/update.html'
+    fields = ['test_name', 'description', 'price', 'category']
+    context_object_name = 'diagnostic'
+    success_url = reverse_lazy('list')
+
+class DiagnosticDeleteView(DeleteView):
+    model = Diagnostic
+    template_name = 'diagnostics/delete.html'
+    context_object_name = 'diagnostic'
+    success_url = reverse_lazy('list')
