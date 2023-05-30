@@ -8,7 +8,7 @@ body {
   }
   
   .card-header {
-    background-color: #2C3E50;
+    background-color: rgb(250, 56, 56);
     color: #FFF;
     text-align: center;
   }
@@ -23,13 +23,13 @@ body {
   }
   
   .btn-primary {
-    background-color: #2C3E50;
-    border-color: #2C3E50;
+    background-color: rgb(250, 56, 56);
+    border-color: rgb(250, 56, 56);
   }
   
   .btn-primary:hover {
-    background-color: #34495E;
-    border-color: #34495E;
+    background-color: red;
+    border-color: red;
   }
   
   .checkbox label {
