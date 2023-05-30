@@ -16,6 +16,9 @@ class Diagnostic(models.Model):
     )
 
     test_name = models.CharField(max_length=50)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     description = models.TextField(max_length=200)
+
+    def __str__(self):
+        return f"{self.test_name}"

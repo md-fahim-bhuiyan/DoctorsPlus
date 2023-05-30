@@ -6,6 +6,7 @@ import random
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from adminView.models import Diagnostic
 
 
 
@@ -116,3 +117,13 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+
+
+class DiagnosticOrder(models.Model):
+    patient = models.ForeignKey(User, on_delete=models.CASCADE)
+    test = models.ForeignKey(Diagnostic, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    Address = models.CharField(max_length=250)
+    additional_tests = models.ManyToManyField(Diagnostic, related_name='additional_orders')
+    payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
+    payment_status = models.BooleanField(default=False)

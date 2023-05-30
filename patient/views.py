@@ -294,3 +294,40 @@ def contact_success(request):
 
 def about(request):
     return render(request, 'patient/about.html')
+
+
+
+def diagnosticsServices(request):
+    return render(request, 'diagnostics/patientview.html')
+
+from django.views.generic import ListView
+from .models import Diagnostic
+
+class DiagnosticListView(ListView):
+    model = Diagnostic
+    template_name = 'diagnostics/patient_list.html'
+    context_object_name = 'diagnostics'
+
+
+from django.views.generic.edit import CreateView
+from .models import DiagnosticOrder
+
+class DiagnosticOrderCreateView(CreateView):
+    model = DiagnosticOrder
+    template_name = 'diagnostics/order.html'
+    fields = ['test', 'doctor', 'additional_tests', 'Address']
+    success_url = reverse_lazy('diagnostic-order-success')
+
+    def form_valid(self, form):
+        form.instance.patient = self.request.user
+        test = form.cleaned_data.get('test')
+        additional_tests = form.cleaned_data.get('additional_tests')
+        total_price = test.price
+        for additional_test in additional_tests:
+            total_price += additional_test.price
+        form.instance.payment_amount = total_price
+        return super().form_valid(form)
+
+
+def diagnostic_order_success_view(request):
+    return render(request, 'diagnostics/order_success.html')

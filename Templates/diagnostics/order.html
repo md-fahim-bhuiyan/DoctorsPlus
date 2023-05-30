@@ -1,0 +1,62 @@
+{% extends 'patient/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-4 mb-4">Order Diagnostic Service</h1>
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.test.id_for_label }}">Select Test:</label>
+        {{ form.test }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.doctor.id_for_label }}">Select Doctor:</label>
+        {{ form.doctor }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.additional_tests.id_for_label }}">Additional Test:</label>
+        {{ form.additional_tests }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.Address.id_for_label }}">Address:</label>
+        {{ form.Address }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.payment_amount.id_for_label }}">Payment Method:</label>
+        {{ form.payment_amount }}
+        <p id="total-price">Total Price: $0.00</p>
+      </div>
+      <button type="submit" class="btn btn-primary">Place Order</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Function to update the total amount when a test is selected
+      function updateTotalAmount() {
+        var testPrice = parseFloat($("#id_test option:selected").data("price"));
+        var additionalTestPrice = 0.0;
+        $("input[name='additional_tests']:checked").each(function() {
+          additionalTestPrice += parseFloat($(this).data("price"));
+        });
+        var totalAmount = testPrice + additionalTestPrice;
+        $("#total-price").text("Total Price: $" + totalAmount.toFixed(2));
+      }
+
+      // Event listener for test selection change
+      $("#id_test").change(function() {
+        updateTotalAmount();
+      });
+
+      // Event listener for additional test selection change
+      $("input[name='additional_tests']").change(function() {
+        updateTotalAmount();
+      });
+
+      // Initial update of the total amount
+      updateTotalAmount();
+    });
+  </script>
+{% endblock %}

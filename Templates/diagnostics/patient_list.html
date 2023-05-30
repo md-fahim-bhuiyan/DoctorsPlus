@@ -1,0 +1,104 @@
+{% extends 'patient/base.html' %}
+
+{% block content %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Diagnostic Test</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .table {
+      margin-bottom: 50px;
+      border: 1px solid #dee2e6;
+    }
+
+    .table th,
+    .table td {
+      vertical-align: middle;
+      border-top: 1px solid #dee2e6;
+      padding: 12px;
+    }
+
+    .select-button {
+      display: inline-block;
+      padding: 6px 12px;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.42857143;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+  </style>
+</head>
+{% include "patient/sidenav_bar.html" %}
+
+<body>
+  <div class="container">
+    <h1>Select Diagnostic Test</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Test Name</th>
+          
+          <th>Price</th>
+          <th>Category</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for diagnostic in diagnostics %}
+        <tr>
+          <td>{{ diagnostic.test_name }}</td>
+          
+          <td>{{ diagnostic.price }}</td>
+          <td>{{ diagnostic.category }}</td>
+          <td>
+            <form method="POST" action="{% url 'diagnostic-order-create' %}">
+              {% csrf_token %}
+              <input type="hidden" name="test" value="{{ diagnostic.id }}">
+              <input type="submit" value="Select" class="select-button">
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5">No diagnostics available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+{% endblock %}
