@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from . import models
 from .models import DonationRequest, ReceiverRequest
+from .models import DiagnosticOrder
 
 
 class PatientUserForm(forms.ModelForm):
@@ -77,3 +78,41 @@ class ContactForm(forms.Form):
     email = forms.EmailField(label='Your Email')
     subject = forms.CharField(label='Subject', max_length=100)
     message = forms.CharField(label='Message', widget=forms.Textarea)
+
+# class DiagnosticOrderForm(forms.ModelForm):
+#     class Meta:
+#         model = DiagnosticOrder
+#         fields = ['patient_name', 'doctor', 'additional_tests', 'Address']
+#         widgets = {
+#             'additional_tests': forms.CheckboxSelectMultiple(),
+#         }
+
+class DiagnosticOrderForm(forms.ModelForm):
+    class Meta:
+        model = DiagnosticOrder
+        fields = ['patient_name', 'patient_age', 'patient_mobile', 'patient_email', 'patient_gender', 'doctor', 'additional_tests', 'Address']
+        widgets = {
+                # 'additional_tests': forms.CheckboxSelectMultiple(attrs={'class': 'row'}),
+                'additional_tests': forms.CheckboxSelectMultiple(),
+
+        }
+        labels = {
+            'patient_name': 'Patient Name',
+            'patient_age': 'Patient Age',
+            'patient_mobile': 'Mobile',
+            'patient_email': 'Email',
+            'patient_gender': 'Gender',
+            'doctor': 'Doctor',
+            'additional_tests': 'Additional Tests',
+            'Address': 'Address',
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['patient_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['patient_age'].widget.attrs.update({'class': 'form-control'})
+        self.fields['patient_mobile'].widget.attrs.update({'class': 'form-control'})
+        self.fields['patient_email'].widget.attrs.update({'class': 'form-control'})
+        self.fields['patient_gender'].widget.attrs.update({'class': 'form-control'})
+        self.fields['doctor'].widget.attrs.update({'class': 'form-control'})
+        self.fields['Address'].widget.attrs.update({'class': 'form-control'})

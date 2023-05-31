@@ -1,9 +1,81 @@
-{% extends 'patient/base.html' %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Add custom CSS styles */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+    
+    .text-right {
+      text-align: right;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .mt-4 {
+      margin-top: 20px;
+    }
+    
+    .mb-4 {
+      margin-bottom: 20px;
+    }
+    
+    .text-align-right {
+      text-align: right;
+    }
+  </style>
+  <title>Diagnostic Order List</title>
+</head>
+<body>
+  
   <div class="container">
-    <h1 class="mt-4 mb-4">Diagnostic Order Success</h1>
-    <p>Your diagnostic order has been successfully placed.</p>
-    <p>Thank you for choosing our services. We will process your order and provide further instructions if necessary.</p>
+    <h1 class="mt-4 mb-4 text-center">Diagnostic Order List</h1>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Test</th>
+          <th>Category</th>
+          <th class="text-right">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for test in ordered_tests %}
+        <tr>
+          <td>{{ test.test_name }}</td>
+          <td>{{ test.category }}</td>
+          <td class="text-right">৳{{ test.price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  
+    <p class="text-align-right">Total Order Price: ৳{{ payment_amount }}</p>
+    <a class="btn btn-primary d-block mx-auto" href="{% url 'process-payment-dia' %}">Make Payment</a>
   </div>
-{% endblock %}
+
+  <!-- Add Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

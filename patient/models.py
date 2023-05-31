@@ -120,10 +120,25 @@ class ContactMessage(models.Model):
 
 
 class DiagnosticOrder(models.Model):
+    GENDER_CHOICES = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('Other', 'Other'),
+    )
+
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
-    test = models.ForeignKey(Diagnostic, on_delete=models.CASCADE)
+    patient_name = models.CharField(max_length=20, null=True)
+    patient_age = models.IntegerField(null=True)
+    patient_mobile = models.CharField(max_length=20, null=True)
+    patient_email = models.EmailField(null=True)
+    patient_gender = models.CharField(max_length=6, choices=GENDER_CHOICES, null=True)
+    
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     Address = models.CharField(max_length=250)
     additional_tests = models.ManyToManyField(Diagnostic, related_name='additional_orders')
     payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
-    payment_status = models.BooleanField(default=False)
+    payment_status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Diagnostic Order for {self.patient_name}"
+    

@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Diagnostic Test</title>
+  <title>Diagnostic</title>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -59,12 +59,11 @@
 
 <body>
   <div class="container">
-    <h1>Select Diagnostic Test</h1>
+    <h1>Diagnostic Test</h1>
     <table class="table">
       <thead>
         <tr>
           <th>Test Name</th>
-          
           <th>Price</th>
           <th>Category</th>
           <th>Action</th>
@@ -74,15 +73,10 @@
         {% for diagnostic in diagnostics %}
         <tr>
           <td>{{ diagnostic.test_name }}</td>
-          
           <td>{{ diagnostic.price }}</td>
           <td>{{ diagnostic.category }}</td>
           <td>
-            <form method="POST" action="{% url 'diagnostic-order-create' %}">
-              {% csrf_token %}
-              <input type="hidden" name="test" value="{{ diagnostic.id }}">
-              <input type="submit" value="Select" class="select-button">
-            </form>
+            <a href="{% url 'detail' diagnostic.pk %}" class="btn btn-primary">Details</a>
           </td>
         </tr>
         {% empty %}
@@ -92,6 +86,10 @@
         {% endfor %}
       </tbody>
     </table>
+    <div class="text-right mb-3">
+      <a href="{% url 'diagnostic-order-create' %}" class="btn btn-primary">Order Diagnostic</a>
+  </div>
+
   </div>
 
   <!-- Bootstrap JS -->

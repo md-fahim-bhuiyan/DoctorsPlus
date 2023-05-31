@@ -10,9 +10,9 @@ class Stock(models.Model):
 
 class Diagnostic(models.Model):
     CATEGORY_CHOICES = (
-        ('blood', 'Blood'),
-        ('urine', 'Urine'),
-        ('other', 'Other'),
+        ('Blood', 'Blood'),
+        ('Urine', 'Urine'),
+        ('Other', 'Other'),
     )
 
     test_name = models.CharField(max_length=50)
@@ -21,4 +21,5 @@ class Diagnostic(models.Model):
     description = models.TextField(max_length=200)
 
     def __str__(self):
-        return f"{self.test_name}"
+        return f"{self.test_name} - (Price: ৳{self.price})"
+

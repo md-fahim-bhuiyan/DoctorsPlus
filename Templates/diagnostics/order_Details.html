@@ -1,0 +1,42 @@
+{% extends 'patient/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1 class="mt-4 mb-4">Diagnostic Order Details</h1>
+
+  <h4>Patient Information:</h4>
+  <p><strong>Name:</strong> {{ order.patient_name }}</p>
+  <p><strong>Age:</strong> {{ order.patient_age }}</p>
+  <p><strong>Gender:</strong> {{ order.get_patient_gender_display }}</p>
+  <p><strong>Email:</strong> {{ order.patient_email }}</p>
+  <p><strong>Mobile:</strong> {{ order.patient_mobile }}</p>
+
+  <h4>Doctor Information:</h4>
+  <p><strong>Name:</strong> {{ order.doctor }}</p>
+  <p><strong>Address:</strong> {{ order.Address }}</p>
+
+  <h4>Additional Tests:</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Test</th>
+        <th>Category</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for test in order.additional_tests.all %}
+      <tr>
+        <td>{{ test.test_name }}</td>
+        <td>{{ test.category }}</td>
+        <td>{{ test.price }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4>Payment Information:</h4>
+  <p><strong>Payment Amount:</strong> ৳{{ order.payment_amount }}</p>
+  <p><strong>Payment Status:</strong> {% if order.payment_status %}Paid{% else %}Pending{% endif %}</p>
+</div>
+{% endblock %}

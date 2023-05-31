@@ -38,9 +38,19 @@
             </div>
         </div>
         <div class="card-footer text-muted text-right">
+            
+            {% if request.user.patient %}
+            <a href="{% url 'diagnostic-list' %}" class="btn btn-primary">List</a>
+
+            {% else %}
             <a href="{% url 'list' %}" class="btn btn-primary">List</a>
             <a href="{% url 'edit' diagnostic.pk %}" class="btn btn-success">Edit</a>
             <a href="{% url 'delete' diagnostic.pk %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+
+            
+
+
         </div>
     </div>
 </div>

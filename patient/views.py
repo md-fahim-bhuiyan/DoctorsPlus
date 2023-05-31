@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import date
 from .models import Patient, ContactMessage, DonationRequest, ReceiverRequest, Appointment
-from .forms import SearchForm, PatientForm, ContactForm, DonationRequestForm, ReceiverRequestForm, AppointmentForm
+from .forms import SearchForm, PatientForm, ContactForm, DonationRequestForm, ReceiverRequestForm, AppointmentForm, DiagnosticOrderForm
 from django.contrib.auth import authenticate, login
 from doctor.models import Doctor
 from django.http import HttpResponse
@@ -13,6 +13,8 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .google_meet import create_google_meet_link
 import datetime
+from django.db.models import Sum
+from django.views.generic import ListView, DetailView
 
 
 
@@ -315,19 +317,57 @@ from .models import DiagnosticOrder
 class DiagnosticOrderCreateView(CreateView):
     model = DiagnosticOrder
     template_name = 'diagnostics/order.html'
-    fields = ['test', 'doctor', 'additional_tests', 'Address']
+    form_class = DiagnosticOrderForm
     success_url = reverse_lazy('diagnostic-order-success')
 
     def form_valid(self, form):
         form.instance.patient = self.request.user
         test = form.cleaned_data.get('test')
         additional_tests = form.cleaned_data.get('additional_tests')
-        total_price = test.price
+        # total_price = test.price
+        total_price =0
         for additional_test in additional_tests:
             total_price += additional_test.price
         form.instance.payment_amount = total_price
         return super().form_valid(form)
 
 
+
 def diagnostic_order_success_view(request):
-    return render(request, 'diagnostics/order_success.html')
+    order = DiagnosticOrder.objects.last()  # Get the most recent order
+    payment_amount = order.payment_amount if order else 0  # Retrieve the payment_amount or set it to 0 if order is not found
+    
+    ordered_tests = order.additional_tests.all() if order else []  # Retrieve the ordered tests or set it to an empty list if order is not found
+    
+    context = {
+        'payment_amount': payment_amount,
+        'ordered_tests': ordered_tests,
+    }
+    return render(request, 'diagnostics/order_success.html', context)
+
+def process_payment_dia(request):
+    if request.method == 'POST':
+        # Retrieve the form data
+        credit_card_number = request.POST.get('number')
+        expiration_date = request.POST.get('expiry')
+        cardholder_name = request.POST.get('name')
+        cvv = request.POST.get('cvv')
+
+        # Perform payment processing logic here
+        # Add your custom payment processing code
+
+        # Assuming the payment is successful, you can display a success message
+        messages.success(request, 'Payment successful!')
+        return redirect('diagnostic_details')  # Redirect to the appointment details page or any other appropriate page
+
+    return render(request, 'patient/payment_process_dia.html')
+
+def diagnostic_details(request):
+    orders = DiagnosticOrder.objects.filter(patient=request.user)
+    return render(request, 'diagnostics/diagnostic_details.html', {'orders': orders})
+
+
+class DiagnosticOrderDetailView(DetailView):
+    model = DiagnosticOrder
+    template_name = 'diagnostics/order_Details.html'
+    context_object_name = 'order'

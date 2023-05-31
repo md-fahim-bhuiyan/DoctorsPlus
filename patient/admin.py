@@ -20,4 +20,8 @@ class DonationRequestAdmin(admin.ModelAdmin):
 admin.site.register(DonationRequest, DonationRequestAdmin)
 admin.site.register(ReceiverRequest)
 admin.site.register(ContactMessage)
-admin.site.register(DiagnosticOrder)
+
+class DiagnosticOrderView(admin.ModelAdmin):
+    list_display = ('patient_name', 'payment_amount')
+
+admin.site.register(DiagnosticOrder, DiagnosticOrderView)
