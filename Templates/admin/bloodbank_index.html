@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blood Bank | Admin | Doctor'sPlus</title>
+  <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
   <script src="https://kit.fontawesome.com/7c81212c94.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{% static 'CSS/admin.css'%}">
 
@@ -178,9 +180,7 @@
     </div>
 
   </div>
-  <footer class="py-2">
-    <div class="small text-center text-muted">Doctor'sPlus &copy; 2023</div>
-</footer>
+  {% include "Home/footer.html" %}
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 {% extends 'patient/base.html' %}
+<link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
 
 {% block content %}
 <div class="container">
@@ -10,4 +11,5 @@
         <a href="{% url 'detail' diagnostic.pk %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
+{% include "Home/footer.html" %}
 {% endblock %}

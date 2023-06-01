@@ -2,15 +2,15 @@
 <html>
 <head>
   <title>Diagnostic Order Form</title>
+  <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
   <style>
 
 
   </style>
 </head>
 <body>
-  {% extends 'patient/base.html' %}
 
-  {% block content %}
   {% include "patient/sidenav_bar.html" %}
 
   <div class="container mt-3">
@@ -86,7 +86,6 @@
 
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
-  {% endblock %}
+  {% include "Home/footer.html" %}
 </body>
 </html>

@@ -1,4 +1,6 @@
 {% extends 'patient/base.html' %}
+<link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
 {% block title %}Edit | Admin | Doctor'sPlus{% endblock %}
 
 {% block content %}
@@ -43,4 +45,5 @@
       </div>
     </div>
   </div>
+  {% include "Home/footer.html" %}
 {% endblock %}

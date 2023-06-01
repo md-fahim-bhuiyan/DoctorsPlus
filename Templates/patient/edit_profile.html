@@ -10,6 +10,8 @@
     <title>Edit Profile| Patient | Doctor'sPlus</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'CSS/patient_edit_profile.css'%}">
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
 </head>
 
 <body>
@@ -53,9 +55,7 @@
             </div> 
         </div> 
     </div>
-    <footer class="py-2">
-        <div class="small text-center text-muted">Doctor'sPlus &copy; 2023</div>
-    </footer>
+    {% include "Home/footer.html" %}
 </body>
 
 </html>

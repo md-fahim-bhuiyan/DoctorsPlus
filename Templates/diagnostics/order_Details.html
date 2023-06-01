@@ -1,4 +1,5 @@
 {% extends 'patient/base.html' %}
+<link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
 
 {% block content %}
 <div class="container">
@@ -39,4 +40,5 @@
   <p><strong>Payment Amount:</strong> ৳{{ order.payment_amount }}</p>
   <p><strong>Payment Status:</strong> {% if order.payment_status %}Paid{% else %}Pending{% endif %}</p>
 </div>
+{% include "Home/footer.html" %}
 {% endblock %}

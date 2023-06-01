@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
     <title>About | Doctor'sPlus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,11 +60,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="py-5">
-    <div class="container">
-      <div class="small text-center text-muted">Doctor'sPlus &copy; 2023</div>
-    </div>
-  </footer>
+  {% include "Home/footer.html" %}
 </div>
 </div>
    

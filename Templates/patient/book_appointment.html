@@ -1,5 +1,7 @@
 {% extends 'patient/base.html' %}
 {% block title %}Appointment | Patient | Doctor'sPlus{% endblock %}
+<link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
 {% load widget_tweaks %}
 
 {% block content %}
@@ -42,9 +44,7 @@
       </div>
     </div>
   </div>
-  <footer class="py-2">
-    <div class="small text-center text-muted">Doctor'sPlus &copy; 2023</div>
-</footer>
+  {% include "Home/footer.html" %}
 {% endblock %}
 
 <style>
