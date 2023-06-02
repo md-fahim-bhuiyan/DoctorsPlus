@@ -4,6 +4,7 @@ from . import views
 from .views import (
     DiagnosticUpdateView,
     DiagnosticDeleteView,
+    DiagnosticOrderDetailViewAdmin,
 )
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='admin/login.html'), name='adminlogin'),
@@ -20,4 +21,7 @@ urlpatterns = [
     path('<int:pk>/', views.DiagnosticDetailView.as_view(), name='detail'),
     path('<int:pk>/update/', DiagnosticUpdateView.as_view(), name='edit'),
     path('<int:pk>/delete/', DiagnosticDeleteView.as_view(), name='delete'),
+    path('diagnostic_details_admin/', views.diagnostic_details_admin, name='diagnostic_details_admin'),
+    path('details_admin/<int:pk>/', views.DiagnosticOrderDetailViewAdmin.as_view(), name='details_admin'),
+
 ]

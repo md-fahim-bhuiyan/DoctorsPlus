@@ -125,7 +125,6 @@ class DiagnosticOrder(models.Model):
         ('Female', 'Female'),
         ('Other', 'Other'),
     )
-
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
     patient_name = models.CharField(max_length=20, null=True)
     patient_age = models.IntegerField(null=True)
@@ -138,6 +137,9 @@ class DiagnosticOrder(models.Model):
     additional_tests = models.ManyToManyField(Diagnostic, related_name='additional_orders')
     payment_amount = models.DecimalField(max_digits=8, decimal_places=2)
     payment_status = models.BooleanField(default=True)
+
+
+    # order = models.AutoField(primary_key=True, default=' ')
 
     def __str__(self):
         return f"Diagnostic Order for {self.patient_name}"

@@ -1,16 +1,18 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CustomLoginForm
-from patient.models import DonationRequest, ReceiverRequest
+from .forms import CustomLoginForm, DiagnosticForm
+from patient.models import DonationRequest, ReceiverRequest, DiagnosticOrder
 from .forms import DonationRequestForm, ReceiverRequestForm
 from . import forms, models
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect
 from django.db.models import Sum
-from .models import Stock
+from .models import Stock, Diagnostic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView
+
 
 class CustomLoginView(LoginView):
     template_name = 'admin/login.html'
@@ -130,11 +132,6 @@ def admin_blood_view(request):
 def about(request):
     return render(request, 'patient/about.html')
 
-
-from django.views.generic import ListView, DetailView
-from .models import Diagnostic
-from .forms import DiagnosticForm
-
 def create_diagnostic(request):
     if request.method == 'POST':
         form = DiagnosticForm(request.POST)
@@ -168,3 +165,14 @@ class DiagnosticDeleteView(DeleteView):
     template_name = 'diagnostics/delete.html'
     context_object_name = 'diagnostic'
     success_url = reverse_lazy('list')
+
+def diagnostic_details_admin(request):
+    orders = DiagnosticOrder.objects.filter()
+    return render(request, 'diagnostics/diagnostic_details_admin.html', {'orders': orders})
+
+
+class DiagnosticOrderDetailViewAdmin(DetailView):
+    model = DiagnosticOrder
+    template_name = 'diagnostics/order_Details_admin.html'
+    context_object_name = 'order'
+

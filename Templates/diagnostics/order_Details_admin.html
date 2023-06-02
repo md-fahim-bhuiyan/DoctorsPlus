@@ -38,7 +38,7 @@
         }
     </style>
 </head>
-{% include "patient/sidenav_bar.html" %}
+{% include "admin/side_nav_bar.html" %}
 
 <body>
     <div class="container card-header " style="border-radius: 5px;">
@@ -81,7 +81,7 @@
                     <th>Test</th>
                     <th>Category</th>
                     <th>Price</th>
-                    
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,7 +90,8 @@
                     <td>{{ test.test_name }}</td>
                     <td>{{ test.category }}</td>
                     <td>{{ test.price }}</td>
-                  
+                    <td><a href="{% url 'create_result' order.pk %}" class="btn btn-primary btn-create-result">Create Result</a></td>
+
                 </tr>
                 {% endfor %}
             </tbody>

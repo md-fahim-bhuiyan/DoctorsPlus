@@ -1,0 +1,42 @@
+{% extends 'patient/base.html' %}
+{% load static %}
+<link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
+{% block content %}
+<style>
+    .container {
+        margin-top: 40px;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-submit {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container">
+    <h1 class="mt-4 mb-4">Create Test Result</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-submit">Save Result</button>
+        </div>
+    </form>
+</div>
+
+{% include "Home/footer.html" %}
+{% endblock %}

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
-    <title>Details | Patient | Doctor'sPlus</title>
+    <title>Details | Admin | Doctor'sPlus</title>
     <script src="https://kit.fontawesome.com/7c81212c94.js" crossorigin="anonymous"></script>
     <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
     <style>
@@ -71,7 +71,7 @@
 </head>
 
 <body>
-  {% include "patient/sidenav_bar.html" %}
+    {% include "admin/side_nav_bar.html" %}
 
     <div class="container">
         <h2 class="section-title">Diagnostic Details</h2>
@@ -89,7 +89,7 @@
                 <td>{{ order.patient_name }}</td>
                 <td>{{ order.doctor }}</td>
                 <td> ৳{{ order.payment_amount }}</td>
-                <td><a href="{% url 'details' order.pk %}" class="btn btn-primary">Details</a></td>
+                <td><a href="{% url 'details_admin' order.pk %}" class="btn btn-primary">Details</a></td>
             </tr>
             {% empty %}
             <tr>

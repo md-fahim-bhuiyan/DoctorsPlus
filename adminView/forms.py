@@ -55,3 +55,4 @@ class DiagnosticForm(forms.ModelForm):
         self.fields['price'].widget.attrs.update({'class': 'form-control'})
         self.fields['category'].widget.attrs.update({'class': 'form-control'})
         self.fields['description'].widget.attrs.update({'class': 'form-control'})
+
