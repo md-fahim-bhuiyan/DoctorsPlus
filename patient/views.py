@@ -3,7 +3,7 @@ from . import forms, models
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import date
-from .models import Patient, ContactMessage, DonationRequest, ReceiverRequest, Appointment
+from .models import Patient, ContactMessage, DonationRequest, ReceiverRequest, Appointment, DiagnosticOrder
 from .forms import SearchForm, PatientForm, ContactForm, DonationRequestForm, ReceiverRequestForm, AppointmentForm, DiagnosticOrderForm
 from django.contrib.auth import authenticate, login
 from doctor.models import Doctor
@@ -15,6 +15,7 @@ from .google_meet import create_google_meet_link
 import datetime
 from django.db.models import Sum
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 
 
 
@@ -311,8 +312,7 @@ class DiagnosticListView(ListView):
     context_object_name = 'diagnostics'
 
 
-from django.views.generic.edit import CreateView
-from .models import DiagnosticOrder
+
 
 class DiagnosticOrderCreateView(CreateView):
     model = DiagnosticOrder
@@ -347,16 +347,10 @@ def diagnostic_order_success_view(request):
 
 def process_payment_dia(request):
     if request.method == 'POST':
-        # Retrieve the form data
         credit_card_number = request.POST.get('number')
         expiration_date = request.POST.get('expiry')
         cardholder_name = request.POST.get('name')
         cvv = request.POST.get('cvv')
-
-        # Perform payment processing logic here
-        # Add your custom payment processing code
-
-        # Assuming the payment is successful, you can display a success message
         messages.success(request, 'Payment successful!')
         return redirect('diagnostic_details')  # Redirect to the appointment details page or any other appropriate page
 
@@ -371,3 +365,4 @@ class DiagnosticOrderDetailView(DetailView):
     model = DiagnosticOrder
     template_name = 'diagnostics/order_Details.html'
     context_object_name = 'order'
+

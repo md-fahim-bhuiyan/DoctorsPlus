@@ -81,7 +81,7 @@
                     <th>Test</th>
                     <th>Category</th>
                     <th>Price</th>
-                    <th>Action</th>
+                    <th class="text-right " style="padding-right: 5%;">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,7 +90,9 @@
                     <td>{{ test.test_name }}</td>
                     <td>{{ test.category }}</td>
                     <td>{{ test.price }}</td>
-                    <td><a href="{% url 'create_result' order.pk %}" class="btn btn-primary btn-create-result">Create Result</a></td>
+                    <td class="text-right">
+                        <a href="{% url 'create_result' order.pk %}" class="btn btn-primary btn-create-result">Create Result</a>
+                    </td>
 
                 </tr>
                 {% endfor %}
