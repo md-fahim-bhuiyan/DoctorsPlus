@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from . import views
 from .views import MyPasswordChangeView
 from .views import DiagnosticListView, DiagnosticOrderCreateView
-from .views import DiagnosticOrderDetailView
+from .views import DiagnosticOrderDetailView, TestResultListView
 
 
 urlpatterns = [
@@ -39,4 +39,6 @@ urlpatterns = [
     path('process-payment-dia/', views.process_payment_dia, name='process-payment-dia'),
     path('diagnostic_details/', views.diagnostic_details, name='diagnostic_details'),
     path('<int:pk>/', DiagnosticOrderDetailView.as_view(), name='details'),
+    path('test-results/', TestResultListView.as_view(), name='test-result-list'),
+
 ]

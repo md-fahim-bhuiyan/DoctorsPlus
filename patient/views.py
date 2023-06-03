@@ -366,3 +366,16 @@ class DiagnosticOrderDetailView(DetailView):
     template_name = 'diagnostics/order_Details.html'
     context_object_name = 'order'
 
+
+from django.views.generic import ListView
+from Home.models import TestResult
+
+class TestResultListView(ListView):
+    model = TestResult
+    template_name = 'diagnostics/test_result_list.html'
+    context_object_name = 'test_results'
+
+    def get_queryset(self):
+        # Filter test results by the current patient
+        return TestResult.objects.filter(order__patient=self.request.user)
+

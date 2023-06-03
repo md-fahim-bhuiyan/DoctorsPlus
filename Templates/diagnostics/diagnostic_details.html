@@ -1,5 +1,6 @@
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,22 +72,23 @@
 </head>
 
 <body>
-  {% include "patient/sidenav_bar.html" %}
+    {% include "patient/sidenav_bar.html" %}
 
     <div class="container">
-        <h2 class="section-title">Diagnostic Details</h2>
+        <h2 class="section-title text-center">Diagnostic Order List</h2>
         <div class="divider"></div>
 
         <table class="appointment-table">
             <tr>
-                <th>Patient Name</th>
+                <th>Patient Name(Order Id)</th>
                 <th>Doctor</th>
                 <th>Fees</th>
                 <th>Action</th>
             </tr>
             {% for order in orders%}
             <tr>
-                <td>{{ order.patient_name }}</td>
+                <td>{{ order.patient_name }} ({{order.id}})</td>
+
                 <td>{{ order.doctor }}</td>
                 <td> ৳{{ order.payment_amount }}</td>
                 <td><a href="{% url 'details' order.pk %}" class="btn btn-primary">Details</a></td>
@@ -97,7 +99,14 @@
             </tr>
             {% endfor %}
         </table>
+        <div class="buttuon pt-3 text-right">
+            <a href="{% url 'test-result-list' %}" class="btn btn-success">View All Test Results</a>
+            <a href="{% url 'diagnostic-list' %}" class="btn btn-success">Diagnostic Price List</a>
+            <a href="{% url 'diagnostic-order-create' %}" class="btn btn-primary">Order Diagnostic</a>
+        </div>
+
     </div>
     {% include "Home/footer.html" %}
 </body>
+
 </html>
