@@ -16,6 +16,6 @@ urlpatterns = [
     path('contact/success/', views.contact_success, name='doc_contact_success'),
     path('appointments/', views.doctor_appointments, name='doc_appointments'),
     # path('prescription/', views.prescription, name='prescription'),
-    path('create-prescription/', views.create_prescription, name='create_prescription'),
-    path('prescription-success/', views.prescription_success, name='prescription_success'),
+    # path('create-prescription/', views.create_prescription, name='create_prescription'),
+    # path('prescription-success/', views.prescription_success, name='prescription_success'),
 ]

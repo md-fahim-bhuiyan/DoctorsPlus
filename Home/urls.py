@@ -9,7 +9,9 @@ urlpatterns = [
     path('create_result/<int:pk>/', views.TestResultCreateView.as_view(), name='create_result'),
     # path('view_result/<int:pk>/', views.TestResultDetailView.as_view(), name='view_result'),
     # path('edit_result/<int:pk>/', views.TestResultUpdateView.as_view(), name='edit_result'),
-
+    path('appointments/<uuid:appointment_id>/create-prescription/', views.create_prescription, name='create-prescription'),
+    path('create-prescription/', views.create_prescription, name='create_prescription'),
+    path('prescription-success/', views.prescription_success, name='prescription_success'),
 
 ]
 

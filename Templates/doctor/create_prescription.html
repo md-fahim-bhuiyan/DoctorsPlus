@@ -1,0 +1,199 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+
+    <title>Create Prescription</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_problem">Problem:</label>
+                        {{ prescription_form.problem }}
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="id_date">Date:</label>
+                        {{ prescription_form.date }}
+                    </div>
+                </div>
+            </div>
+
+
+            <h4>Patient Information:</h4>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="id_patient_name">Patient Name:</label>
+                        {{ prescription_form.patient_name }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="id_patient_age">Age:</label>
+                        {{ prescription_form.patient_age }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="id_patient_age">Weight(KG):</label>
+                        {{ prescription_form.patient_weight }}
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label for="id_patient_age">Gender:</label>
+                        {{ prescription_form.gender }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="id_patient_age">Blood Pressure:</label>
+                        {{ prescription_form.patient_blood_pressure }}
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="id_patient_age">Email:</label>
+                        {{ prescription_form.patient_email }}
+                    </div>
+                </div>
+
+            </div>
+
+            <h4>Doctor Information:</h4>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <label for="id_doctor_name">Name:</label>
+                    <input type="text" class="form-control" id="id_doctor_name"
+                        value="DR. {{ user.first_name|upper }} {{ user.last_name|upper }}" name="doctor_name">
+                </div>
+                <div class="col-md-3">
+                    <label for="id_registration_number">BBM&DC Registration Number:</label>
+                    <input type="text" class="form-control" id="id_registration_number" value="{{doctor.bmdc}}"
+                        name="registration_number">
+                </div>
+                <div class="col-md-2">
+                    <label for="id_specialty">Specialty:</label>
+                    <input type="text" class="form-control" id="id_specialty" value="{{doctor.specialist}}"
+                        name="specialty" required>
+                </div>
+                <div class="col-md-2">
+                    <label for="id_doctor_email">Email:</label>
+                    <input type="email" class="form-control" id="id_doctor_email" value="{{user.email}}"
+                        name="doctor_email">
+                </div>
+                <div class="col-md-2">
+                    <label for="id_doctor_phone">Phone:</label>
+                    <input type="tel" class="form-control" id="id_doctor_phone" value="{{doctor.mobile}}"
+                        name="doctor_phone">
+                </div>
+            </div>
+
+
+            <h4>Medicines</h4>
+            {% for form in medicine_forms %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Medicine:</label>
+                        {{ form.name }}
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group" style="font-size: 10px; display: inline-block;">
+                    <label for="{{ form.id_for_label }}" style="font-size: 15px;">Dosage:</label>
+                    {{ form.dosage }}
+                </div>
+                </div>
+                
+                
+                
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Frequency(Days):</label>
+                        {{ form.frequency }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Before/After eat::</label>
+                        {{ form.eat_time }}
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+            <h4>Tests</h4>
+            {% for form in test_forms %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Test Name:</label>
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Description:</label>
+                        {{ form.description }}
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Create Prescription</button>
+        </form>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

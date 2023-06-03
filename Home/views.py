@@ -58,3 +58,52 @@ class TestResultCreateView(CreateView):
 #     def form_valid(self, form):
 #         form.instance.order_id = self.kwargs['pk']
 #         return super().form_valid(form)
+
+
+
+from django.shortcuts import render, redirect
+from .forms import PrescriptionForm, MedicineForm, TestForm
+from doctor.models import Doctor
+from patient.models import Appointment
+
+
+def create_prescription(request, appointment_id):
+    doctor = Doctor.objects.get(user_id=request.user)
+    appointment = Appointment.objects.get(appointment_id=appointment_id)
+    prescription_form = PrescriptionForm(request.POST or None)
+    medicine_forms = [MedicineForm(prefix=f'medicine_{i}') for i in range(5)]
+    test_forms = [TestForm(prefix=f'test_{i}') for i in range(5)]
+
+    if request.method == 'POST':
+        if prescription_form.is_valid():
+            prescription = prescription_form.save(commit=False)
+            prescription.patient = request.user
+            prescription.appointment_id = appointment.appointment_id
+            prescription.save()
+
+            for form in medicine_forms:
+                if form.is_valid():
+                    medicine = form.save(commit=False)
+                    medicine.prescription = prescription
+                    medicine.save()
+
+            for form in test_forms:
+                if form.is_valid():
+                    test = form.save(commit=False)
+                    test.prescription = prescription
+                    test.save()
+
+            return redirect('prescription_success')
+
+    context = {
+        'prescription_form': prescription_form,
+        'medicine_forms': medicine_forms,
+        'test_forms': test_forms,
+        'doctor': doctor, 
+    }
+
+    return render(request, 'doctor/create_prescription.html', context)
+
+
+def prescription_success(request):
+    return render(request, 'doctor/prescription_success.html')

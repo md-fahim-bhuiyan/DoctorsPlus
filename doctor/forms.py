@@ -64,3 +64,5 @@ class MedicationForm(forms.Form):
 
 class TestForm(forms.Form):
     test = forms.CharField(max_length=255)
+
+

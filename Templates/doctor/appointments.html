@@ -90,7 +90,8 @@
                 <td>{{ appointment.appointment_time }}</td>
                 <td>{{ appointment.patient_name }}</td>
                 <td><a href="{{ appointment.google_meet_link }}" style="text-decoration: none; color: black;"><i class="fa-solid fa-video"></i> Join On Time!!</a></td>
-                <td></td>
+                <td>   <a href="{% url 'create-prescription' appointment_id=appointment.appointment_id %}" class="btn btn-success">Create Prescription</a>
+                </td>
             </tr>
             {% empty %}
             <tr>
