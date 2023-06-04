@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <title>Page Not Found | Doctor'sPlus</title>
   <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 
   <style>
     body {
@@ -43,8 +45,6 @@
   <div class="container">
     <h1>Oops! The page you're looking for cannot be found.</h1>
     <p>Please check the URL and try again, or use the navigation menu above to find what you're looking for.</p>
-    <h3>Please Login!!!!!!</h3>
-    <a href="{% url 'home' %}">Go to the homepage</a>
   </div>
   {% include "Home/footer.html" %}
 </body>

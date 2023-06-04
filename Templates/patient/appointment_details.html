@@ -73,7 +73,7 @@
   {% include "patient/sidenav_bar.html" %}
 
     <div class="container">
-        <h2 class="section-title">Appointment Details</h2>
+        <h2 class="section-title text-center">Appointment Details</h2>
         <div class="divider"></div>
 
         <table class="appointment-table">
@@ -83,6 +83,7 @@
                 <th>Patient</th>
                 <th>Doctor</th>
                 <th>Google Meet</th>
+                <th>Prescription</th>
             </tr>
             {% for appointment in appointment_list|dictsortreversed:"appointment_date" %}
             <tr class="{% if appointment.appointment_date < now %}expired{% endif %}">
@@ -91,6 +92,7 @@
                 <td>{{ appointment.patient_name }}</td>
                 <td>{{ appointment.doctor }}</td>
                 <td><a href="{{ appointment.google_meet_link }}" style="text-decoration: none; color: black;"><i class="fa-solid fa-video"></i> Join On Time!!</a></td>
+                <td><a href="{% url 'prescription_detail' appointment.appointment_id %}" class="btn btn-primary btn-block">View</a></td>
             </tr>
             {% empty %}
             <tr>

@@ -106,16 +106,24 @@ class UpdatePrescriptionView(UpdateView):
 
 
 
+from django.shortcuts import get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
+
 class PrescriptionDetailView(DetailView):
     model = Prescription
     form_class = PrescriptionForm
     template_name = 'doctor/prescription_detail.html'
     context_object_name = 'prescription'
-    
+
     def get_object(self, queryset=None):
         appointment_id = self.kwargs['appointment_id']
-        prescription = Prescription.objects.get(appointment_id=UUID(appointment_id))
+        try:
+            prescription = Prescription.objects.get(appointment_id=UUID(appointment_id))
+        except Prescription.DoesNotExist:
+            prescription = None
+            # Prescription does not exist, handle the case here
         return prescription
+
 
 
 

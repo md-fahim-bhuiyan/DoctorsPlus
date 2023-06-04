@@ -1,4 +1,5 @@
 {% load static %}
+{% if prescription %}
 <html lang="en">
 
 <head>
@@ -234,3 +235,8 @@
 </body>
 
 </html>
+
+{% else %}
+{% include "patient/404.html" %}
+
+{% endif %}
