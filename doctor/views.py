@@ -101,8 +101,6 @@ def contact_success(request):
     return render(request, 'doctor/contact_success.html')
 
 
-
-
 def doctor_appointments(request):
     doctor = request.user.doctor  # Assuming you have a OneToOneField relationship between User and Doctor models
     appointments = Appointment.objects.filter(doctor=doctor)

@@ -35,7 +35,11 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container card">
+        <div class="">
+            <h2 class="card-title mt-2 text-center p-3 text-white" style="background-color: red; border-radius: 5px;">
+                Create Prescription</h2>
+        </div>
         <form method="POST" action="">
             {% csrf_token %}
             <div class="row">
@@ -129,63 +133,222 @@
             </div>
 
 
+            <!-- Medicines -->
             <h4>Medicines</h4>
-            {% for form in medicine_forms %}
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="{{ form.id_for_label }}">Medicine:</label>
-                        {{ form.name }}
+                        {{ prescription_form.medicine_name_1 }}
                     </div>
                 </div>
-
                 <div class="col-md-2">
                     <div class="form-group" style="font-size: 10px; display: inline-block;">
-                    <label for="{{ form.id_for_label }}" style="font-size: 15px;">Dosage:</label>
-                    {{ form.dosage }}
+                        <label for="{{ form.id_for_label }}" style="font-size: 15px;">Dosage:</label>
+                        {{ prescription_form.dosage_1 }}
+                    </div>
                 </div>
-                </div>
-                
-                
-                
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="{{ form.id_for_label }}">Frequency(Days):</label>
-                        {{ form.frequency }}
+                        {{ prescription_form.frequency_1 }}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="{{ form.id_for_label }}">Before/After eat::</label>
-                        {{ form.eat_time }}
+                        <label for="{{ form.id_for_label }}">Before/After eat:</label>
+                        {{ prescription_form.eat_time_1 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Medicine:</label>
+                        {{ prescription_form.medicine_name_2 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group" style="font-size: 10px; display: inline-block;">
+                        <label for="{{ form.id_for_label }}" style="font-size: 15px;">Dosage:</label>
+                        {{ prescription_form.dosage_2 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Frequency(Days):</label>
+                        {{ prescription_form.frequency_2 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Before/After eat:</label>
+                        {{ prescription_form.eat_time_2 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Medicine:</label>
+                        {{ prescription_form.medicine_name_3 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group" style="font-size: 10px; display: inline-block;">
+                        <label for="{{ form.id_for_label }}" style="font-size: 15px;">Dosage:</label>
+                        {{ prescription_form.dosage_3 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Frequency(Days):</label>
+                        {{ prescription_form.frequency_3 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Before/After eat:</label>
+                        {{ prescription_form.eat_time_3 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Medicine:</label>
+                        {{ prescription_form.medicine_name_4 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group" style="font-size: 10px; display: inline-block;">
+                        <label for="{{ form.id_for_label }}" style="font-size: 15px;">Dosage:</label>
+                        {{ prescription_form.dosage_4 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Frequency(Days):</label>
+                        {{ prescription_form.frequency_4 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Before/After eat:</label>
+                        {{ prescription_form.eat_time_4 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Medicine:</label>
+                        {{ prescription_form.medicine_name_5 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group" style="font-size: 10px; display: inline-block;">
+                        <label for="{{ form.id_for_label }}" style="font-size: 15px;">Dosage:</label>
+                        {{ prescription_form.dosage_5 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Frequency(Days):</label>
+                        {{ prescription_form.frequency_5 }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Before/After eat:</label>
+                        {{ prescription_form.eat_time_5 }}
                     </div>
                 </div>
             </div>
 
-
-            {% endfor %}
-
+            <!-- Tests -->
             <h4>Tests</h4>
-            {% for form in test_forms %}
+            <!-- 1 -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="{{ form.id_for_label }}">Test Name:</label>
-                        {{ form.name }}
+                        {{ prescription_form.test_name_1 }}
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="{{ form.id_for_label }}">Description:</label>
-                        {{ form.description }}
+                        {{ prescription_form.description_1 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Test Name:</label>
+                        {{ prescription_form.test_name_2 }}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Description:</label>
+                        {{ prescription_form.description_2 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Test Name:</label>
+                        {{ prescription_form.test_name_3 }}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Description:</label>
+                        {{ prescription_form.description_3 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Test Name:</label>
+                        {{ prescription_form.test_name_4 }}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Description:</label>
+                        {{ prescription_form.description_4 }}
+                    </div>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Test Name:</label>
+                        {{ prescription_form.test_name_5 }}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="{{ form.id_for_label }}">Description:</label>
+                        {{ prescription_form.description_5 }}
                     </div>
                 </div>
             </div>
 
-
-            {% endfor %}
-
-            <button type="submit" class="btn btn-primary">Create Prescription</button>
+            <button type="submit" class="btn btn-block" style="background-color: red; color: white;">Submit</button>
         </form>
     </div>
 

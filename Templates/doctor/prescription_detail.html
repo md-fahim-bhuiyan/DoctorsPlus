@@ -1,0 +1,236 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Prescription</title>
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .prescription-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .flex-item-left {
+            padding: 10px;
+            flex: 50%;
+        }
+
+        .flex-item-right {
+            padding: 10px;
+            flex: 50%;
+        }
+
+        .table-container {
+            display: flex;
+            padding-left: 15px;
+        }
+
+        .flex-table {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th {
+
+            background-color: #f2f2f2;
+            padding: 10px;
+            font-weight: bold;
+
+        }
+
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="prescription-header">Prescription Detail</h1>
+
+        <div class="flex-container">
+            <div class="flex-item-left">
+                <div class="table-container">
+                    <table class="flex-table">
+                        <tr>
+                            <th colspan="2">Patient Information</th>
+                        </tr>
+                        <tr>
+                            <td>Patient Name:</td>
+                            <td>{{ prescription.patient_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Age:</td>
+                            <td>{{ prescription.patient_age }}</td>
+                        </tr>
+                        <tr>
+                            <td>Weight (KG):</td>
+                            <td>{{ prescription.patient_weight }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender:</td>
+                            <td>{{ prescription.get_gender_display }}</td>
+                        </tr>
+                        <tr>
+                            <td>Blood Pressure:</td>
+                            <td>{{ prescription.patient_blood_pressure }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ prescription.patient_email }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="flex-item-right">
+                <div class="table-container">
+                    <table class="flex-table">
+                        <tr>
+                            <th colspan="2">Prescription Information</th>
+                        </tr>
+                        <tr>
+                            <td>Problem:</td>
+                            <td>{{ prescription.problem }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date:</td>
+                            <td>{{ prescription.date }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="table-container">
+                    <table class="flex-table">
+                        <tr>
+                            <th colspan="2">Doctor Information</th>
+                        </tr>
+                        <tr>
+                            <td>Doctor Name:</td>
+                            <td>{{ prescription.doctor_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>BBM&amp;DC Number:</td>
+                            <td>{{ prescription.registration_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Specialty:</td>
+                            <td>{{ prescription.specialty }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ prescription.doctor_email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{ prescription.doctor_phone }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <h2 style="text-align: center;">Medicines</h2>
+        <div class="table">
+            <table style="text-align: center;">
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Dosage</th>
+                    <th>Frequency(Days) </th>
+                    <th>Before/After eat</th>
+                </tr>
+                <tr>
+                    <td>{{ prescription.medicine_name_1 }}</td>
+                    <td>{{ prescription.dosage_1 }}</td>
+                    <td>{{ prescription.frequency_1 }}</td>
+                    <td>{{ prescription.eat_time_1 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.medicine_name_2 }}</td>
+                    <td>{{ prescription.dosage_2 }}</td>
+                    <td>{{ prescription.frequency_2 }}</td>
+                    <td>{{ prescription.eat_time_2 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.medicine_name_3 }}</td>
+                    <td>{{ prescription.dosage_3 }}</td>
+                    <td>{{ prescription.frequency_3 }}</td>
+                    <td>{{ prescription.eat_time_3 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.medicine_name_4 }}</td>
+                    <td>{{ prescription.dosage_4 }}</td>
+                    <td>{{ prescription.frequency_4 }}</td>
+                    <td>{{ prescription.eat_time_4 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.medicine_name_5 }}</td>
+                    <td>{{ prescription.dosage_5 }}</td>
+                    <td>{{ prescription.frequency_5 }}</td>
+                    <td>{{ prescription.eat_time_5 }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 style="text-align: center;">Test</h2>
+        <div class="table">
+            <table style="text-align: center;">
+                <tr>
+                    <th>Test Name</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>{{ prescription.test_name_1 }}</td>
+                    <td>{{ prescription.description_1 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.test_name_2 }}</td>
+                    <td>{{ prescription.description_2 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.test_name_3 }}</td>
+                    <td>{{ prescription.description_3 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.test_name_4 }}</td>
+                    <td>{{ prescription.description_4 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ prescription.test_name_5 }}</td>
+                    <td>{{ prescription.description_5 }}</td>
+                </tr>
+                </table>
+        </div>
+        {% include "Home/footer.html" %}
+        </div>
+        
+</body>
+
+</html>

@@ -18,7 +18,7 @@ class TestResult(models.Model):
 from patient.models import Appointment
 
 class Prescription(models.Model):
-    appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE)
+    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE, related_name='prescription')
     problem = models.CharField(max_length=255)
     date = models.DateField()
     patient_name = models.CharField(max_length=255)
@@ -38,34 +38,73 @@ class Prescription(models.Model):
     specialty = models.CharField(max_length=100)
     doctor_email = models.EmailField()
     doctor_phone = models.CharField(max_length=20)
+    medicine_name_1 = models.CharField(max_length=100, default="")
+    medicine_name_2 = models.CharField(max_length=100, default="")
+    medicine_name_3 = models.CharField(max_length=100, default="")
+    medicine_name_4 = models.CharField(max_length=100, default="")
+    medicine_name_5 = models.CharField(max_length=100, default="")
+    dosage_1 = models.CharField(max_length=9, blank=True, default="")
+    dosage_2 = models.CharField(max_length=9, blank=True, default="")
+    dosage_3 = models.CharField(max_length=9, blank=True, default="")
+    dosage_4 = models.CharField(max_length=9, blank=True, default="")
+    dosage_5 = models.CharField(max_length=9, blank=True, default="")
+
+    frequency_1 = models.CharField(max_length=10, default="")
+    frequency_2 = models.CharField(max_length=10, default="")
+    frequency_3 = models.CharField(max_length=10, default="")
+    frequency_4 = models.CharField(max_length=10, default="")
+    frequency_5 = models.CharField(max_length=10, default="")
+
+    eat_time_choose = (
+        ('Before Eat','Before Eat'),
+        ('After Eat','After Eat'),
+    )
+    eat_time_1 = models.CharField(max_length=10, choices=eat_time_choose, default="")
+    eat_time_2 = models.CharField(max_length=10, choices=eat_time_choose, default="")
+    eat_time_3 = models.CharField(max_length=10, choices=eat_time_choose, default="")
+    eat_time_4 = models.CharField(max_length=10, choices=eat_time_choose, default="")
+    eat_time_5 = models.CharField(max_length=10, choices=eat_time_choose, default="")
+
+    test_name_1 = models.CharField(max_length=100, default="")
+    test_name_2 = models.CharField(max_length=100, default="")
+    test_name_3 = models.CharField(max_length=100, default="")
+    test_name_4 = models.CharField(max_length=100, default="")
+    test_name_5 = models.CharField(max_length=100, default="")
+
+    description_1 = models.CharField(max_length=500,default="" )
+    description_2 = models.CharField(max_length=500,default="" )
+    description_3 = models.CharField(max_length=500,default="" )
+    description_4 = models.CharField(max_length=500,default="" )
+    description_5 = models.CharField(max_length=500,default="" )
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Prescription #{self.pk}"
 
 
-class Medicine(models.Model):
-    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    dosage_choose = (
-        ('Morning', 'Morning'),
-        ('Afternoon', 'Afternoon'),
-        ('Evening', 'Evening')
-    )
-    dosage = models.CharField(max_length=9, choices=dosage_choose, blank=True)
-    frequency = models.CharField(max_length=10)
-    eat_time_choose = (
-        ('Before Eat','Before Eat'),
-        ('After Eat','After Eat'),
-    )
-    eat_time = models.CharField(max_length=10, choices=eat_time_choose)
-    def __str__(self):
-        return self.name
+# class Medicine(models.Model):
+#     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=100, default="")
+#     dosage_choose = (
+#         ('Morning', 'Morning'),
+#         ('Afternoon', 'Afternoon'),
+#         ('Evening', 'Evening')
+#     )
+#     dosage = models.CharField(max_length=9, blank=True, default="")
+#     frequency = models.CharField(max_length=10, default="")
+#     eat_time_choose = (
+#         ('Before Eat','Before Eat'),
+#         ('After Eat','After Eat'),
+#     )
+#     eat_time = models.CharField(max_length=10, choices=eat_time_choose, default="")
+#     def __str__(self):
+#         return self.name
 
 
-class Test(models.Model):
-    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
-    def __str__(self):
-        return self.name
+# class Test(models.Model):
+#     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=100, default="")
+#     description = models.CharField(max_length=500,default="" )
+#     def __str__(self):
+#         return self.name

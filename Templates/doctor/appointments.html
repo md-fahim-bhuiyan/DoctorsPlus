@@ -82,7 +82,7 @@
                 <th>Time</th>
                 <th>Patient</th>
                 <th>Google Meet</th>
-                <th>Prescription</th>
+                <th style="padding-right: 0%;">Action</th>
             </tr>
             {% for appointment in appointments|dictsortreversed:"appointment_date" %}
             <tr class="{% if appointment.appointment_date < now %}expired{% endif %}">
@@ -90,7 +90,14 @@
                 <td>{{ appointment.appointment_time }}</td>
                 <td>{{ appointment.patient_name }}</td>
                 <td><a href="{{ appointment.google_meet_link }}" style="text-decoration: none; color: black;"><i class="fa-solid fa-video"></i> Join On Time!!</a></td>
-                <td>   <a href="{% url 'create-prescription' appointment_id=appointment.appointment_id %}" class="btn btn-success">Create Prescription</a>
+                <td><a href="{% url 'create-prescription' appointment_id=appointment.appointment_id %}" class="btn btn-success">Create Prescription</a>
+                    <a href="{% url 'edit_prescription' appointment.appointment_id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'prescription_detail' appointment.appointment_id %}" class="btn btn-primary">Details</a>
+
+
+
+
+
                 </td>
             </tr>
             {% empty %}

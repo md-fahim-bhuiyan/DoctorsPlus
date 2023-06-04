@@ -62,17 +62,17 @@ class TestResultCreateView(CreateView):
 
 
 from django.shortcuts import render, redirect
-from .forms import PrescriptionForm, MedicineForm, TestForm
+from .forms import PrescriptionForm
 from doctor.models import Doctor
 from patient.models import Appointment
-
+from .models import Prescription
 
 def create_prescription(request, appointment_id):
     doctor = Doctor.objects.get(user_id=request.user)
     appointment = Appointment.objects.get(appointment_id=appointment_id)
     prescription_form = PrescriptionForm(request.POST or None)
-    medicine_forms = [MedicineForm(prefix=f'medicine_{i}') for i in range(5)]
-    test_forms = [TestForm(prefix=f'test_{i}') for i in range(5)]
+    # medicine_forms = [MedicineForm(prefix=f'medicine_{i}') for i in range(5)]
+    # test_forms = [TestForm(prefix=f'test_{i}') for i in range(5)]
 
     if request.method == 'POST':
         if prescription_form.is_valid():
@@ -80,29 +80,43 @@ def create_prescription(request, appointment_id):
             prescription.patient = request.user
             prescription.appointment_id = appointment.appointment_id
             prescription.save()
-
-            for form in medicine_forms:
-                if form.is_valid():
-                    medicine = form.save(commit=False)
-                    medicine.prescription = prescription
-                    medicine.save()
-
-            for form in test_forms:
-                if form.is_valid():
-                    test = form.save(commit=False)
-                    test.prescription = prescription
-                    test.save()
-
             return redirect('prescription_success')
 
     context = {
         'prescription_form': prescription_form,
-        'medicine_forms': medicine_forms,
-        'test_forms': test_forms,
         'doctor': doctor, 
     }
 
     return render(request, 'doctor/create_prescription.html', context)
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from uuid import UUID
+
+
+class UpdatePrescriptionView(UpdateView):
+    model = Prescription
+    form_class = PrescriptionForm
+    template_name = 'doctor/update_prescription.html'
+    success_url = reverse_lazy('prescription_success')
+
+    def get_object(self, queryset=None):
+        appointment_id = self.kwargs['appointment_id']
+        prescription = Prescription.objects.get(appointment_id=UUID(appointment_id))
+        return prescription
+
+
+
+class PrescriptionDetailView(DetailView):
+    model = Prescription
+    form_class = PrescriptionForm
+    template_name = 'doctor/prescription_detail.html'
+    context_object_name = 'prescription'
+    
+    def get_object(self, queryset=None):
+        appointment_id = self.kwargs['appointment_id']
+        prescription = Prescription.objects.get(appointment_id=UUID(appointment_id))
+        return prescription
+
 
 
 def prescription_success(request):
