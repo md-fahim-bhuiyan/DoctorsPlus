@@ -1,0 +1,27 @@
+.container {
+    margin: 0 auto !important;
+    margin-top: 30px !important;
+    max-width: 500px !important;
+    padding: 20px !important;
+    background: linear-gradient(#F5F5F5, #dbdbe2) !important;
+    border-radius: 5px !important;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}

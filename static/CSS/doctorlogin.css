@@ -1,0 +1,41 @@
+body {
+    background: #F0F0F0;
+  }
+  
+  .container {
+    margin-top: 50px;
+  }
+  
+  .card-header {
+    background-color: rgb(250, 56, 56);
+    color: #FFF;
+    text-align: center;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    margin-bottom: 0;
+    color: red;
+  }
+  
+  .btn-primary {
+    background-color: rgb(250, 56, 56);
+    border-color: rgb(250, 56, 56);
+  }
+  
+  .btn-primary:hover {
+    background-color: red;
+    border-color: red;
+  }
+  
+  .checkbox label {
+    padding-left: 0;
+  }
+  
+  .float-right {
+    float: right;
+  }
+  

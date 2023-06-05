@@ -1,52 +1,49 @@
 {% load static %}
 <html>
+
 <head>
   <title>Diagnostic Order Form</title>
   <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
-
-  <style>
-
-
-  </style>
 </head>
+
 <body>
 
   {% include "patient/sidenav_bar.html" %}
 
   <div class="container mt-3">
     <div class="card-header  text-white" style="background-color: rgb(250, 56, 56);">
-      <h2 class="text-center">Order Diagnostic Service      </h2>
+      <h2 class="text-center">Order Diagnostic Service </h2>
     </div>
     <div class="card-body bg-white">
 
-    <form method="POST" action="">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="{{ form.patient_name.id_for_label }}">Patient Name:</label>
-        {{ form.patient_name }}
-      </div>
-      <div class="form-group">
-        <label for="{{ form.patient_age.id_for_label }}">Patient Age:</label>
-        {{ form.patient_age }}
-      </div>
-      <div class="form-group">
-        <label for="{{ form.patient_mobile.id_for_label }}">Mobile:</label>
-        {{ form.patient_mobile }}
-      </div>
-      <div class="form-group">
-        <label for="{{ form.patient_email.id_for_label }}">Email:</label>
-        {{ form.patient_email }}
-      </div>
-      <div class="form-group">
-        <label for="{{ form.patient_gender.id_for_label }}">Gender:</label>
-        {{ form.patient_gender }}
-      </div>
-      <div class="form-group">
-        <label for="{{ form.doctor.id_for_label }}">Select Doctor:</label>
-        {{ form.doctor }}
-      </div>
+      <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.patient_name.id_for_label }}">Patient Name:</label>
+          {{ form.patient_name }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.patient_age.id_for_label }}">Patient Age:</label>
+          {{ form.patient_age }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.patient_mobile.id_for_label }}">Mobile:</label>
+          {{ form.patient_mobile }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.patient_email.id_for_label }}">Email:</label>
+          {{ form.patient_email }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.patient_gender.id_for_label }}">Gender:</label>
+          {{ form.patient_gender }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.doctor.id_for_label }}">Select Doctor:</label>
+          {{ form.doctor }}
+        </div>
 
-<!-- 
+        <!-- 
       <div class="form-group">
         <label for="{{ form.additional_tests.id_for_label }}">Test:</label>
         <div class="row">
@@ -64,28 +61,30 @@
           {% endfor %}
         </div>
       </div> -->
-      
-      
-      
-      <div class="form-group">
-        <label for="{{ form.additional_tests.id_for_label }}">Test:</label>
-        {{ form.additional_tests }}
-      </div>
 
 
-      <div class="form-group">
-        <label for="{{ form.Address.id_for_label }}">Address:</label>
-        {{ form.Address }}
-      </div>
-      <!-- <div class="form-group">
+
+        <div class="form-group">
+          <label for="{{ form.additional_tests.id_for_label }}">Test:</label>
+          {{ form.additional_tests }}
+        </div>
+
+
+        <div class="form-group">
+          <label for="{{ form.Address.id_for_label }}">Address:</label>
+          {{ form.Address }}
+        </div>
+        <!-- <div class="form-group">
         <p id="total-price">Total Price:৳ 0.00</p>
       </div> -->
-      <button type="submit" class="btn btn-block text-white" style="background-color: rgb(250, 56, 56);"> Place Order</button>
-    </form>
-  </div>
+        <button type="submit" class="btn btn-block text-white" style="background-color: rgb(250, 56, 56);"> Place
+          Order</button>
+      </form>
+    </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  {% include "Home/footer.html" %}
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% include "Home/footer.html" %}
 </body>
+
 </html>

@@ -1,0 +1,29 @@
+.container {
+    margin: 30px auto !important;
+    max-width: 800px !important;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.table th {
+    font-weight: bold;
+}  
+
+.table td,
+.table th {
+    padding: 12px;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
+
+.table .actions {
+    white-space: nowrap;
+}
+
+.table .actions a {
+    margin-right: 10px;
+}
