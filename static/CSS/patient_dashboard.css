@@ -1,0 +1,12 @@
+
+body::after {
+    content: "";
+    background-image: url('{% static "Image/Background.png" %}');
+    opacity: 0.1; /* Set the opacity value between 0 and 1 */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;
+  }
