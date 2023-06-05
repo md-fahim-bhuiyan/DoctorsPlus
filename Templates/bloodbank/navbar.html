@@ -7,60 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
-  <style>
-    .container {
-      width: 90%
-    }
-
-    .navbar {
-      background-color: red;
-      color: #fff;
-      height: 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-      border-radius: 4px;
-    }
-
-    .nav-menu {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      width: 60%;
-      /* take up 60% of the width */
-      justify-content: flex-end;
-      /* align menu items to the right */
-    }
-
-    .nav-item {
-      margin-right: 20px;
-    }
-
-    .nav-item:last-child {
-      margin-right: 0;
-    }
-
-    .nav-item a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .nav-item a:hover {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .title {
-      width: 40%;
-      /* take up 40% of the width */
-      font-size: 24px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 
 <body>
