@@ -12,10 +12,11 @@
    
   </style>
 </head>
+{% include "patient/sidenav_bar.html" %}
 
 <body>
-  <div class="container">
-    <nav class="navbar">
+  <div class="container pt-3">
+    <nav class="navbar p-3">
       <h1 class="title">Doctor'SPlus</h1>
       <ul class="nav-menu">
         <li class="nav-item"><a href="{% url 'patient-dashboard' %}">Dashboard</a></li>

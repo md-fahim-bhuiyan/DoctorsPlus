@@ -9,12 +9,13 @@
   <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
   <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
+{% include "patient/sidenav_bar.html" %}
 
 <body>
-  <div class="container">
-    <nav class="navbar">
+  <div class="container pt-3">
+    <nav class="navbar p-3" >
       <h1 class="title">Doctor'SPlus</h1>
-      <ul class="nav-menu">
+      <ul class="nav-menu ">
         <li class="nav-item"><a href="{% url 'patient-dashboard' %}">Dashboard</a></li>
         <li class="nav-item"><a href="{% url 'doner_dashboard' %}">Doner</a></li>
         <li class="nav-item"><a href="{% url 'create_donation_request' %}">Donate</a></li>
