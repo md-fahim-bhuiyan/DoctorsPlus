@@ -19,6 +19,7 @@ def create_google_meet_link(appointment):
         f'D:\DoctorsPlus/credentials.json',
         scopes=['https://www.googleapis.com/auth/calendar']
     )
+    
 
     # Build the Google Calendar API service
     service = build('calendar', 'v3', credentials=credentials)
