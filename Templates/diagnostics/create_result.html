@@ -1,21 +1,39 @@
-{% extends 'patient/base.html' %}
 {% load static %}
-<link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
-<link rel="stylesheet" href="{% static 'css/create_result.css' %}">
-
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Test Result</title>
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'CSS/create_result.css' %}">
+</head>
+<body>
 
 <div class="container">
-    <h1 class="mt-4 mb-4">Create Test Result</h1>
-    <form method="post" enctype="multipart/form-data">
+    <h1 class="mt-4 mb-4" style="text-align: center;">Create Test Result</h1>
+    <form method="post" enctype="multipart/form-data" style="padding-right: 20px;">
         {% csrf_token %}
-        {{ form.as_p }}
-
+        <div class="form-group" >
+            <label for="{{ form.test_name.id_for_label }}">Test Name:</label>
+            {{ form.test_name }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.result.id_for_label }}">Result:</label>
+            {{ form.result }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.normal_result.id_for_label }}">Normal Result:</label>
+            {{ form.normal_result }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.remarks.id_for_label }}">Remarks:</label>
+            {{ form.remarks }}
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-submit">Save Result</button>
         </div>
     </form>
 </div>
 
-{% include "Home/footer.html" %}
-{% endblock %}
+</body>
+</html>
