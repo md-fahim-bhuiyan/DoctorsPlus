@@ -4,6 +4,16 @@
 <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
 
 {% include "doctor/sidenav_bar.html" %}
+<div class="container pt-5" style="height: 95vh;">
+    <h1 style="text-align: center; color: white;"> Welcome To Doctor'sPlus</h1>
+    <button  type="button" class="btn btn-primary "> <a href="{% url 'docProfile' %}" style="color: white; text-decoration: none;">Profile, Dr. {{ user.first_name |upper }} {{ user.last_name |upper }}</a> </button> 
+    <button type="button" class="btn btn-secondary"> <a href="{% url 'edit_profile' %}" style="color: white; text-decoration: none;">Edit Profile</a></button> <br> <br>
+    <button type="button" class="btn btn-danger"><a href="{% url 'doc_appointments' %}" style="color: white; text-decoration: none;">Appointment List</a></button> <br> <br>
+   <button type="button" class="btn btn-info"><a href="{% url 'doc_contact' %}" style="color: white; text-decoration: none;">Contact Us</a></button>
+    <button type="button" class="btn btn-dark"><a href="{% url 'doc_change_password' %}" style="color: white; text-decoration: none;">Change Password</a></button> <br> <br>
+    <button  type="button" class="btn btn-primary "> <a href="{% url 'logout' %}" style="color: white; text-decoration: none;">Logout</a> </button> 
+
+    </div>
 {% include "Home/footer.html" %}
 {% else %}
 {% include "patient/404.html" %}

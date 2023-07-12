@@ -3,13 +3,18 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
-from .models import TestResult
-from .forms import TestResultForm
+from .models import TestResult, Prescription
+from .forms import TestResultForm, PrescriptionForm
 from django.urls import reverse_lazy
 from patient.models import DiagnosticOrder
 from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
-
+from django.shortcuts import render, redirect
+from doctor.models import Doctor
+from patient.models import Appointment
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from uuid import UUID
 
 def home(request):
     return render(request, 'Home/index.html')
@@ -38,34 +43,7 @@ class TestResultCreateView(CreateView):
 
 
 
-# class TestResultDetailView(DetailView):
-#     model = TestResult
-#     template_name = 'diagnostics/view_result.html'
-#     context_object_name = 'test_result'
 
-
-
-# class TestResultUpdateView(UpdateView):
-#     model = TestResult
-#     form_class = TestResultForm
-#     template_name = 'diagnostics/edit_result.html'
-#     success_url = reverse_lazy('diagnostic_details_admin')
-
-#     def get_object(self, queryset=None):
-#         obj = super().get_object(queryset=queryset)
-#         return obj
-
-#     def form_valid(self, form):
-#         form.instance.order_id = self.kwargs['pk']
-#         return super().form_valid(form)
-
-
-
-from django.shortcuts import render, redirect
-from .forms import PrescriptionForm
-from doctor.models import Doctor
-from patient.models import Appointment
-from .models import Prescription
 
 def create_prescription(request, appointment_id):
     doctor = Doctor.objects.get(user_id=request.user)
@@ -88,9 +66,7 @@ def create_prescription(request, appointment_id):
     }
 
     return render(request, 'doctor/create_prescription.html', context)
-from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
-from uuid import UUID
+
 
 
 class UpdatePrescriptionView(UpdateView):

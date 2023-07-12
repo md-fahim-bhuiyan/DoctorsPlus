@@ -20,7 +20,31 @@ class CustomLoginView(LoginView):
 
 
 def admin_dashboard(request):
-    return render(request, 'admin/dashboard.html')
+    totaldonors = DonationRequest.objects.count()
+    totalrequest = ReceiverRequest.objects.count()
+    totalbloodunit = Stock.objects.aggregate(total=Sum('unit')).get('total', 0)
+    totalapprovedrequest = ReceiverRequest.objects.filter(
+        is_approved='APPROVED').count()
+
+    context = {
+        'totaldonors': totaldonors,
+        'totalrequest': totalrequest,
+        'totalbloodunit': totalbloodunit,
+        'totalapprovedrequest': totalapprovedrequest,
+    }
+
+    dict = {
+        'bloodForm': forms.BloodForm(),
+        'A1': models.Stock.objects.get(bloodgroup="A+"),
+        'A2': models.Stock.objects.get(bloodgroup="A-"),
+        'B1': models.Stock.objects.get(bloodgroup="B+"),
+        'B2': models.Stock.objects.get(bloodgroup="B-"),
+        'AB1': models.Stock.objects.get(bloodgroup="AB+"),
+        'AB2': models.Stock.objects.get(bloodgroup="AB-"),
+        'O1': models.Stock.objects.get(bloodgroup="O+"),
+        'O2': models.Stock.objects.get(bloodgroup="O-"),
+    }
+    return render(request, 'admin/bloodbank_index.html', context={**context, **dict})
 
 
 def bloodbank_index(request):

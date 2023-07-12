@@ -3,8 +3,22 @@
 <title>Dashboard | Patient | Doctor'sPlus</title>
 <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
 <link rel="stylesheet" href="{% static 'css/patient_dashboard.css' %}">
-
 {% include "patient/sidenav_bar.html" %}
+<div class="container pt-5" style="height: 95vh;">
+<h1 style="text-align: center; color: white;"> Welcome To Doctor'sPlus</h1>
+<button  type="button" class="btn btn-primary "> <a href="{% url 'profile' %}" style="color: white; text-decoration: none;">Profile,{{ user.first_name |upper }} {{ user.last_name |upper }}</a> </button> 
+<button type="button" class="btn btn-secondary"> <a href="{% url 'patient_edit_profile' %}" style="color: white; text-decoration: none;">Edit Profile</a></button> <br> <br>
+<button type="button" class="btn btn-success"><a href="{% url 'search_results' %}" style="color: white; text-decoration: none;">Search Doctor</a></button>
+<button type="button" class="btn btn-danger"><a href="{% url 'appointment-details' %}" style="color: white; text-decoration: none;">Madical History</a></button> <br> <br>
+<button type="button" class="btn btn-warning"><a href="{% url 'bloodbank' %}" style="color: white; text-decoration: none;">Blood Bank</a></button>
+<button type="button" class="btn btn-info"><a href="{% url 'diagnostic_details' %}" style="color: white; text-decoration: none;">Diagnostic Services</a></button> <br> <br>
+<button type="button" class="btn btn-info"><a href="{% url 'contact' %}" style="color: white; text-decoration: none;">Contact Us</a></button>
+<button type="button" class="btn btn-dark"><a href="{% url 'change_password' %}" style="color: white; text-decoration: none;">Change Password</a></button> <br> <br>
+<button  type="button" class="btn btn-primary "> <a href="{% url 'logout' %}" style="color: white; text-decoration: none;">Logout</a> </button> 
+
+</div>
+
+
 {% include "Home/footer.html" %}
 {% else %}
 {% include "patient/404.html" %}
