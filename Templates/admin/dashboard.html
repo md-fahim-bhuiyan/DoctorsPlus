@@ -3,4 +3,11 @@
 <title>Admin | Dashboard | Doctor'sPlus</title>
 <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon">
 {% include "admin/side_nav_bar.html" %}
+<div class="container pt-5" style="height: 95vh;">
+    <h1 style="text-align: center; color: white;"> Welcome To Doctor'sPlus</h1>
+    <button  type="button" class="btn btn-primary "> {{ user.first_name |upper }} {{ user.last_name |upper }} </button> <br> <br>
+    <button type="button" class="btn btn-secondary"> <a href="{% url 'admin_report' %}" style="color: white; text-decoration: none;">Admin Report</a></button> 
+    <br> <br>
+
+    </div>
 {% include "Home/footer.html" %}

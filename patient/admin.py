@@ -18,7 +18,9 @@ class DonationRequestAdmin(admin.ModelAdmin):
     list_display = ('user','doner_name', 'blood_group', 'units_required', 'location', 'contact_number', 'is_approved', 'created_at')
 
 admin.site.register(DonationRequest, DonationRequestAdmin)
-admin.site.register(ReceiverRequest)
+class ReceiverRequestAdmin(admin.ModelAdmin):
+    list_display = ('user','receiver_name', 'blood_group', 'units_required',  'contact_number', 'is_approved')
+admin.site.register(ReceiverRequest, ReceiverRequestAdmin)
 admin.site.register(ContactMessage)
 
 class DiagnosticOrderView(admin.ModelAdmin):

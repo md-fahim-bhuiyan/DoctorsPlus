@@ -20,31 +20,7 @@ class CustomLoginView(LoginView):
 
 
 def admin_dashboard(request):
-    totaldonors = DonationRequest.objects.count()
-    totalrequest = ReceiverRequest.objects.count()
-    totalbloodunit = Stock.objects.aggregate(total=Sum('unit')).get('total', 0)
-    totalapprovedrequest = ReceiverRequest.objects.filter(
-        is_approved='APPROVED').count()
-
-    context = {
-        'totaldonors': totaldonors,
-        'totalrequest': totalrequest,
-        'totalbloodunit': totalbloodunit,
-        'totalapprovedrequest': totalapprovedrequest,
-    }
-
-    dict = {
-        'bloodForm': forms.BloodForm(),
-        'A1': models.Stock.objects.get(bloodgroup="A+"),
-        'A2': models.Stock.objects.get(bloodgroup="A-"),
-        'B1': models.Stock.objects.get(bloodgroup="B+"),
-        'B2': models.Stock.objects.get(bloodgroup="B-"),
-        'AB1': models.Stock.objects.get(bloodgroup="AB+"),
-        'AB2': models.Stock.objects.get(bloodgroup="AB-"),
-        'O1': models.Stock.objects.get(bloodgroup="O+"),
-        'O2': models.Stock.objects.get(bloodgroup="O-"),
-    }
-    return render(request, 'admin/bloodbank_index.html', context={**context, **dict})
+    return render (request, "admin/dashboard.html")
 
 
 def bloodbank_index(request):
@@ -200,3 +176,83 @@ class DiagnosticOrderDetailViewAdmin(DetailView):
     template_name = 'diagnostics/order_Details_admin.html'
     context_object_name = 'order'
 
+# views.py
+
+# from django.shortcuts import render
+from django.http import HttpResponse
+# from patient.models import Appointment, User  # Import the necessary models
+
+# def generate_report(request):
+#     # Retrieve the data for the report
+#     total_appointments = Appointment.objects.count()
+#     total_users = User.objects.count()
+
+#     # Generate the report content
+#     report_content = f"Total Appointments: {total_appointments}\n"
+#     report_content += f"Total Users: {total_users}\n"
+
+#     # Create the HTTP response with the report content
+#     response = HttpResponse(report_content, content_type='text/plain')
+#     response['Content-Disposition'] = 'attachment; filename="admin_report.pdf"'
+
+#     return response
+
+from django.conf import settings
+from reportlab.pdfgen import canvas
+from io import BytesIO
+from patient.models import Appointment, User, DonationRequest, ReceiverRequest ,DiagnosticOrder
+from doctor.models import Doctor
+from django.contrib.auth import get_user_model
+
+def generate_report(request):
+    total_appointments = Appointment.objects.count()
+    total_users = User.objects.count()
+    total_admin = get_user_model().objects.filter(is_staff=True).count()
+    total_doctors = Doctor.objects.count()
+    total_patients = total_users - total_doctors - total_admin
+    total_diagnostic_order = DiagnosticOrder.objects.count()
+    total_donate_request = DonationRequest.objects.count()
+    total_donate_request_approve = DonationRequest.objects.filter(is_approved='APPROVED').count()
+    total_donate_request_reject = DonationRequest.objects.filter(is_approved='REJECT').count()
+    total_donate_request_pending = total_donate_request - total_donate_request_approve - total_donate_request_reject
+
+    total_receiver_request = ReceiverRequest.objects.count()
+    total_receiver_request_approve = ReceiverRequest.objects.filter(is_approved='APPROVED').count()
+    total_receiver_request_reject = ReceiverRequest.objects.filter(is_approved='REJECT').count()
+    total_receiver_request_pending = total_receiver_request - total_receiver_request_approve - total_receiver_request_reject
+
+    buffer = BytesIO()
+    report = canvas.Canvas(buffer, pagesize=(600, 800))  # Specify the page size here
+    report.setTitle("Admin Report")
+    report.setFont("Helvetica", 12)
+    report.drawString(50, 750, "Number of User:")
+    report.drawString(50, 730, "Total Users: " + str(total_users))
+    report.drawString(50, 710, "Total Admins: " + str(total_admin))
+    report.drawString(50, 690, "Total Doctors: " + str(total_doctors))
+    report.drawString(50, 670, "Total Patients: " + str(total_patients))
+
+    report.drawString(50, 630, "Total Appointments: " + str(total_appointments))
+    report.drawString(50, 600, "Total Diagnostic Order: " + str(total_diagnostic_order))
+
+    report.drawString(50, 500, "Blood Bank:")
+    report.drawString(50, 480, "Blood Bank Donate Info:")
+    report.drawString(50, 460, "Total Donate Request: " + str(total_donate_request))
+    report.drawString(50, 440, "APPROVE: " + str(total_donate_request_approve))
+    report.drawString(50, 420, "PENDING: " + str(total_donate_request_pending))
+    report.drawString(50, 400, "REJECT: " + str(total_donate_request_reject))
+
+    report.drawString(50, 380, "Blood Bank Receiver Info:")
+    report.drawString(50, 360, "Total Receiver Request: " + str(total_receiver_request))
+    report.drawString(50, 340, "APPROVE: " + str(total_receiver_request_approve))
+    report.drawString(50, 320, "PENDING: " + str(total_receiver_request_pending))
+    report.drawString(50, 300, "REJECT: " + str(total_receiver_request_reject))
+
+
+    report.showPage()
+    report.save()
+    buffer.seek(0)
+
+    response = HttpResponse(buffer, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="admin_report.pdf"'
+
+    return response

@@ -23,5 +23,5 @@ urlpatterns = [
     path('<int:pk>/delete/', DiagnosticDeleteView.as_view(), name='delete'),
     path('diagnostic_details_admin/', views.diagnostic_details_admin, name='diagnostic_details_admin'),
     path('details_admin/<int:pk>/', views.DiagnosticOrderDetailViewAdmin.as_view(), name='details_admin'),
-
+    path('report/', views.generate_report, name='admin_report'),
 ]
