@@ -16,7 +16,7 @@ def create_google_meet_link(appointment):
     # Load the service account credentials
     credentials = service_account.Credentials.from_service_account_file(
         
-        f'D:\DoctorsPlus/credentials.json',
+        f'F:\DoctorsPlus/credentials.json',
         scopes=['https://www.googleapis.com/auth/calendar']
     )
     

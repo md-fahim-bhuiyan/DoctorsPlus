@@ -185,13 +185,12 @@ def bloodbank(request):
 @login_required
 def doner_dashboard(request):
 
-    requestmade = DonationRequest.objects.filter(user=request.user).count()
-    requestpending = DonationRequest.objects.filter(
-        is_approved='PANDING').count()
-    requestrejected = DonationRequest.objects.filter(
-        is_approved='REJECT').count()
-    requestapproved = DonationRequest.objects.filter(
-        is_approved='APPROVED').count()
+    user = request.user
+    requestmade = DonationRequest.objects.filter(user=user).count()
+    requestpending = DonationRequest.objects.filter(user=user, is_approved='PENDING').count()
+    requestrejected = DonationRequest.objects.filter(user=user, is_approved='REJECT').count()
+    requestapproved = DonationRequest.objects.filter(user=user, is_approved='APPROVED').count()
+    
 
     return render(request, 'bloodbank/doner_dashboard.html', {'requestpending': requestpending,
                                                               'requestmade': requestmade,
@@ -240,13 +239,11 @@ def reject_donation_request(request, pk):
 
 
 def blood_receiver_dashboard(request):
-    requestmade = ReceiverRequest.objects.filter(user=request.user).count()
-    requestpending = ReceiverRequest.objects.filter(
-        is_approved='PENDING').count()
-    requestrejected = ReceiverRequest.objects.filter(
-        is_approved='REJECT').count()
-    requestapproved = ReceiverRequest.objects.filter(
-        is_approved='APPROVED').count()
+    user = request.user
+    requestmade = ReceiverRequest.objects.filter(user=user).count()
+    requestpending = ReceiverRequest.objects.filter(user=user, is_approved='PENDING').count()
+    requestrejected = ReceiverRequest.objects.filter(user=user, is_approved='REJECT').count()
+    requestapproved = ReceiverRequest.objects.filter(user=user, is_approved='APPROVED').count()
 
     return render(request, 'bloodbank/receiver_dashboard.html', {'requestpending': requestpending,
                                                                  'requestmade': requestmade,
