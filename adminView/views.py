@@ -231,6 +231,7 @@ def generate_report(request):
     report.drawString(50, 690, "Total Doctors: " + str(total_doctors))
     report.drawString(50, 670, "Total Patients: " + str(total_patients))
 
+
     report.drawString(50, 630, "Total Appointments: " + str(total_appointments))
     report.drawString(50, 600, "Total Diagnostic Order: " + str(total_diagnostic_order))
 
