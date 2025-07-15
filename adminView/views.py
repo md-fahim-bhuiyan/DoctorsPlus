@@ -12,6 +12,12 @@ from .models import Stock, Diagnostic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
+from django.conf import settings
+from reportlab.pdfgen import canvas
+from io import BytesIO
+from patient.models import Appointment, User, DonationRequest, ReceiverRequest ,DiagnosticOrder
+from doctor.models import Doctor
+from django.contrib.auth import get_user_model
 
 
 class CustomLoginView(LoginView):
@@ -197,12 +203,6 @@ from django.http import HttpResponse
 
 #     return response
 
-from django.conf import settings
-from reportlab.pdfgen import canvas
-from io import BytesIO
-from patient.models import Appointment, User, DonationRequest, ReceiverRequest ,DiagnosticOrder
-from doctor.models import Doctor
-from django.contrib.auth import get_user_model
 
 def generate_report(request):
     total_appointments = Appointment.objects.count()
