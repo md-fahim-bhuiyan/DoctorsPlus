@@ -7,7 +7,8 @@ SECRET_KEY = 'django-insecure-da=0ak$+zoew^xf^hbe^93=_erf9y&2+-0x-n3uz$qp5wfhb1v
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['doctorsplus.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 INSTALLED_APPS = [
